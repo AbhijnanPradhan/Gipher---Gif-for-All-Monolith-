@@ -1,0 +1,30 @@
+Login:
+	username, password, forgot_password
+	sign up:
+		email, username, password
+
+user story:
+
+	header: drop down with -> favs and logout
+		profile
+		search
+
+	3 Sections:
+		search result section
+		Recommendation  section(using buttotns to recom/unrecom)
+				also show count of users using that particual gif
+		favorites section
+
+	card details:
+		each gif on click show card details
+
+	comments:	with number of likes
+			Only user to delete comment
+
+	profile:	view/edit profile
+			redirectif clicked on profile(from header)
+	
+	other basics:	pagination, 404 page
+	
+Testing:
+	test cases

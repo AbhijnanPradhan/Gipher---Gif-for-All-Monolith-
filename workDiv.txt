@@ -1,0 +1,23 @@
+Sufiyan:
+	Login
+	Favorite section
+
+Sayan:
+	SignUp
+	Recommendation Section
+
+Abhijnan:
+	Header Page
+	Search Result Section
+	Card Details
+	Comment Section
+
+Abhijnan and Sayan(common part):
+	
+	
+
+Team Common:
+	Activity Log
+	
+
+Profile

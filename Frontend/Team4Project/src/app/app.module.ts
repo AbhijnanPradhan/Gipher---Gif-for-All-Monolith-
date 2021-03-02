@@ -3,10 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { RecommendedComponent } from './recommended/recommended.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
+import { FavoriteComponent } from './favorite/favorite.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { CardDetailsComponent } from './card-details/card-details.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    SignUpComponent,
+    PageNotFoundComponent,
+    FooterComponent,
+    HeaderComponent,
+    RecommendedComponent,
+    DashboardComponent,
+    ProfileComponent,
+    FavoriteComponent,
+    SearchResultComponent,
+    CardDetailsComponent
   ],
   imports: [
     BrowserModule,
