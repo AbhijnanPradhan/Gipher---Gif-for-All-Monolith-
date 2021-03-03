@@ -17,6 +17,8 @@ import { CardDetailsComponent } from './card-details/card-details.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 const routes: Routes = [
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'login', component:LoginComponent},
@@ -50,7 +52,8 @@ const routes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(routes,
       { enableTracing: false }
-    )
+    ),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
