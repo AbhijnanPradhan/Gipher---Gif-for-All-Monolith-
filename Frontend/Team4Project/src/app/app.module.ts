@@ -15,6 +15,21 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
 
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {path:'', redirectTo:'login', pathMatch:'full'},
+  {path:'login', component:LoginComponent},
+  {path:'signUp', component:SignUpComponent},
+  {path:'error', component:PageNotFoundComponent},
+  {
+    path:'home', component: DashboardComponent,
+    children:[
+      // all components like searchResult, recommended,etc
+    ]
+  }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +47,10 @@ import { CardDetailsComponent } from './card-details/card-details.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(routes,
+      { enableTracing: false }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
