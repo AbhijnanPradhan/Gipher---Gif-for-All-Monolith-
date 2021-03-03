@@ -1,0 +1,16 @@
+div{ 
+    padding : 1%;  
+    background-color: 009900; 
+    width: 30%; 
+    border: solid black; 
+    } 
+
+.leftdiv { 
+    float: left;
+    width: 70%; 
+    } 
+
+.rightdiv{
+    float: left;
+    width: 30%;
+    }

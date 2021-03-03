@@ -1,1 +1,26 @@
-<p>header works!</p>
+<ul>
+  <li style="float:inline-start"><a href="/home" class="logo"><img src='../../assets/Images/Logo.gif' alt="GIPHER LOGO" width="60px" />&nbsp;GIPHER-Gif for all</a></li>
+  
+  <li style="float:right">
+    <a href="/login" class="logout">Logout</a>
+  </li>
+  
+  <li style="float:right">
+      <a href="/home" class="content">
+        <fa-icon [icon]="faUser"></fa-icon>
+      </a>
+      <span class='hide'>View Profile</span>
+  </li>
+  
+  <li style="float:right">
+    <a class="active" href="/home" class="content">
+      <fa-icon [icon]="faBookmark"></fa-icon>
+    </a>
+    <span class='hide'>View Favs</span>
+  </li>
+
+</ul>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Search for gif here" aria-label="Recipient's username" aria-describedby="button-addon2">
+  <button class="btn btn-outline-dark" type="button" id="button-addon2"><fa-icon [icon]="faSearch"></fa-icon></button>
+</div>
