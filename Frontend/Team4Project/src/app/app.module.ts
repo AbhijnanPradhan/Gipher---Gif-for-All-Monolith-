@@ -14,13 +14,18 @@ import { ProfileComponent } from './profile/profile.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
+import { CardComponent } from './card/card.component';
 
-import { RouterModule, Routes } from '@angular/router';
+import { RouterService } from './services/router.service';
+import { CanActivateRouteGuard } from './can-activate-route.guard';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RouterService } from './services/router.service';
-import { CanActivateRouteGuard } from './can-activate-route.guard';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -35,14 +40,18 @@ import { CanActivateRouteGuard } from './can-activate-route.guard';
     ProfileComponent,
     FavoriteComponent,
     SearchResultComponent,
-    CardDetailsComponent
+    CardDetailsComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatGridListModule,
+    MatCardModule
   ],
   providers: [
     RouterService,
