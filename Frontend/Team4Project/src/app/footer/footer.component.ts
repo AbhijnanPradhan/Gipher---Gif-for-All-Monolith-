@@ -12,5 +12,17 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  creators = [
+    {
+      name: 'Abhijnan Pradhan',
+      email: 'abhijnan.pradhan@ibm.com'
+    },
+    {
+      name: 'Sufiyan Ali',
+      email: 'sufiyan.ali@ibm.com'},
+    {
+      name: 'Sayan Tapadar',
+      email: 'sayan.tapadar@ibm.com'
+    }
+  ]
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,8 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'signUp', component:SignUpComponent},
   {path:'error', component:PageNotFoundComponent},
+  {path:'profile', component: ProfileComponent},
+  {path:'favs', component: FavoriteComponent},
   {
     path:'home', component: DashboardComponent,
     children:[
@@ -50,10 +53,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes,
-      { enableTracing: false }
-    ),
-    FontAwesomeModule
+    RouterModule.forRoot(routes),
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

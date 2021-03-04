@@ -6,14 +6,14 @@
   </li>
   
   <li style="float:right">
-      <a href="/home" class="content">
+      <a href="/profile" class="content">
         <fa-icon [icon]="faUser"></fa-icon>
       </a>
       <span class='hide'>View Profile</span>
   </li>
   
   <li style="float:right">
-    <a class="active" href="/home" class="content">
+    <a class="active" href="/favs" class="content">
       <fa-icon [icon]="faBookmark"></fa-icon>
     </a>
     <span class='hide'>View Favs</span>
@@ -21,6 +21,7 @@
 
 </ul>
 <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Search for gif here" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <button class="btn btn-outline-dark" type="button" id="button-addon2"><fa-icon [icon]="faSearch"></fa-icon></button>
+  <input type="text" class="form-control" placeholder="Search for gif here" aria-label="Search"
+  name='searchString' [(ngModel)]='searchString'>
+  <button class="btn btn-outline-dark" type="button" id="button-addon2" (click)="searchClicked()"><fa-icon [icon]="faSearch"></fa-icon></button>
 </div>
