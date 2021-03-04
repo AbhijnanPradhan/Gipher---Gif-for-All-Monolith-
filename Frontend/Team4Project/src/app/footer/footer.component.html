@@ -1,23 +1,10 @@
-<ul>
-    <li style="float:right">
-        <a href="/home" class="content">
-          <fa-icon [icon]="faIdCard"></fa-icon>
-        </a>
-        <span class='hide'>Abhijnan Pradhan</span>
-    </li>
-    
-    <li style="float:right">
-        <a href="/home" class="content">
-          <fa-icon [icon]="faIdCard"></fa-icon>
-        </a>
-        <span class='hide'>Sufiyan Ali</span>
-    </li>
-    
-    <li style="float:right">
-      <a class="active" href="/home" class="content">
-        <fa-icon [icon]="faIdCard"></fa-icon>
-      </a>
-      <span class='hide'>Sayan Tapadar</span>
-    </li>
-  
-  </ul>
+<div class='footer'>
+  <table class='footerContent'>
+    <tr>
+      <th *ngFor='let creator of creators'>{{creator.name}}</th>
+    </tr>
+    <tr>
+      <td *ngFor='let creator of creators'>{{creator.email}}</td>
+    </tr>
+  </table>
+</div>
