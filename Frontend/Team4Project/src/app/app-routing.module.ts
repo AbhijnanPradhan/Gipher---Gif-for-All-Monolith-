@@ -20,7 +20,8 @@ const routes: Routes = [
       // all components like searchResult, recommended,etc
     ]
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'error'}
 ];
 
 @NgModule({

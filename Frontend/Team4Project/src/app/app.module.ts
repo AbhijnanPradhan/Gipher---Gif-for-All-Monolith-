@@ -19,6 +19,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterService } from './services/router.service';
+import { CanActivateRouteGuard } from './can-activate-route.guard';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    RouterService,
+    CanActivateRouteGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
