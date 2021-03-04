@@ -20,21 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-const routes: Routes = [
-  {path:'', redirectTo:'login', pathMatch:'full'},
-  {path:'login', component:LoginComponent},
-  {path:'signUp', component:SignUpComponent},
-  {path:'error', component:PageNotFoundComponent},
-  {path:'profile', component: ProfileComponent},
-  {path:'favs', component: FavoriteComponent},
-  {
-    path:'home', component: DashboardComponent,
-    children:[
-      // all components like searchResult, recommended,etc
-    ]
-  }
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +38,6 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
     FontAwesomeModule,
     FormsModule,
     HttpClientModule
