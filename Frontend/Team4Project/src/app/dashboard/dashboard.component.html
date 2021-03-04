@@ -1,8 +1,7 @@
-<app-header></app-header>
+<app-header (eventSearchButtonClicked)='searchString=$event'></app-header>
 <div class="leftdiv">
-    <app-search-result></app-search-result>
+    <app-search-result [searchString]='searchString'></app-search-result>
 </div>
 <div class="rightdiv">
     <app-recommended></app-recommended>
 </div>
-<app-footer></app-footer>
