@@ -12,10 +12,10 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignUpComponent},
   {path:'error', component:PageNotFoundComponent},
-  {path:'profile', component: ProfileComponent},
-  {path:'favs', component: FavoriteComponent},
+  {path:'profile', component: ProfileComponent, canActivate: [CanActivateRouteGuard]},
+  {path:'favs', component: FavoriteComponent, canActivate: [CanActivateRouteGuard]},
   {
-    path:'home', component: DashboardComponent,
+    path:'home', component: DashboardComponent, canActivate: [CanActivateRouteGuard],
     children:[
       // all components like searchResult, recommended,etc
     ]
