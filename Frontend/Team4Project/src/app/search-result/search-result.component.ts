@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from '../services/api/search.service';
+import { ApiDataInterface } from '../interfaces/ApiDataInterface';
 
 @Component({
   selector: 'app-search-result',
@@ -8,12 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchResultComponent implements OnInit {
   searchString : string = '';
-  constructor() { }
+  searchData = new ApiDataInterface();
+  gifLinks:Array<string> = [];
+
+  constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
   }
-  onSearchClick(searchStringrcv:string):void{
-    this.searchString = searchStringrcv;
-    console.log('Search boi:'+this.searchString);
+  checker(){
+    this.searchService.apiCaller().subscribe((data)=>{
+      console.log(data);
+      this.searchData = data;
+      this.gifer(this.searchData);
+    });
+  }
+  gifer(dataParam: ApiDataInterface){
+    for(let i = 0;i<dataParam.data.length;i++){
+      this.gifLinks.push(dataParam.data[i].images.downsized.url);
+    }
   }
 }

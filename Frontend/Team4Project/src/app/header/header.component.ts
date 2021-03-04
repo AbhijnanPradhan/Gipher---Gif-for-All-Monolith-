@@ -6,7 +6,7 @@ import { faSearch,faUser,faBookmark } from '@fortawesome/free-solid-svg-icons'
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  outputs:[`countSearchButtonClicked`]
+  outputs:[`eventSearchButtonClicked`]
 })
 export class HeaderComponent implements OnInit {
 
@@ -14,11 +14,11 @@ export class HeaderComponent implements OnInit {
   faUser = faUser;
   faBookmark = faBookmark;
   searchString: string = '';
-  @Output()
-  countSearchButtonClicked: EventEmitter<string> = new EventEmitter<string>();
+  
+  eventSearchButtonClicked = new EventEmitter<string>();
   searchClicked(){
     console.log('header boi:'+this.searchString);
-    this.countSearchButtonClicked.emit(this.searchString);
+    this.eventSearchButtonClicked.emit(this.searchString);
   }
   constructor() { }
 
