@@ -19,6 +19,6 @@ export class CanActivateRouteGuard implements CanActivate {
     //     return false;
     //   }
     // });
-    return false;
+    return true;
   }
 }
