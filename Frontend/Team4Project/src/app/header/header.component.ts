@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { faSearch,faUser,faBookmark } from '@fortawesome/free-solid-svg-icons'
+import { faSearch,faUser,faHeart } from '@fortawesome/free-solid-svg-icons'
 
 
 @Component({
@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   faSearch = faSearch;
   faUser = faUser;
-  faBookmark = faBookmark;
+  faFav = faHeart;
   searchString: string = '';
   
   eventSearchButtonClicked = new EventEmitter<string>();

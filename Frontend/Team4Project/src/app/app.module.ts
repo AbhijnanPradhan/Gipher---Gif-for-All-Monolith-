@@ -19,6 +19,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CardComponent } from './card/card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
 
 const routes: Routes = [
   {path:'', redirectTo:'login', pathMatch:'full'},
@@ -27,6 +31,7 @@ const routes: Routes = [
   {path:'error', component:PageNotFoundComponent},
   {path:'profile', component: ProfileComponent},
   {path:'favs', component: FavoriteComponent},
+  {path:'card',component: CardComponent},
   {
     path:'home', component: DashboardComponent,
     children:[
@@ -48,7 +53,8 @@ const routes: Routes = [
     ProfileComponent,
     FavoriteComponent,
     SearchResultComponent,
-    CardDetailsComponent
+    CardDetailsComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FontAwesomeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatGridListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
