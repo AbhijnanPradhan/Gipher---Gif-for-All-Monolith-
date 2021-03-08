@@ -33,12 +33,16 @@ export class SearchResultComponent implements OnInit,OnChanges {
     if(this.searchString!=''){
       this.numEnabler=true;
       this.changeBoi(this.limit.toString());
+    }else{
+      this.numEnabler=false;
+      this.checker('https://api.giphy.com/v1/gifs/trending?api_key=YIjy7FhdwY94RyTHx6qenE65qjGw49Tx&limit=6&rating=g');
     }
     // this.changeBoi(this.searchString);
     // this.url = 'https://api.giphy.com/v1/gifs/search?api_key=YIjy7FhdwY94RyTHx6qenE65qjGw49Tx&q='+this.searchString+'&limit=9&offset=0&rating=g&lang=en';
     // this.ngOnInit();
   }
   checker(urlParam:string){
+    // this.searchData = new ApiDataInterface();
     this.searchService.apiCaller(urlParam).subscribe((data)=>{
       console.log(data);
       console.log('url:'+ urlParam);
