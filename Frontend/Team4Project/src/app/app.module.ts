@@ -20,11 +20,17 @@ import { RouterService } from './services/router.service';
 import { CanActivateRouteGuard } from './can-activate-route.guard';
 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 @NgModule({
@@ -51,7 +57,13 @@ import { MatCardModule } from '@angular/material/card';
     HttpClientModule,
     BrowserAnimationsModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatTableModule,
+    MatInputModule,
   ],
   providers: [
     RouterService,
