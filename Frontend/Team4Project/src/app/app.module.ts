@@ -65,7 +65,8 @@ const routes: Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
