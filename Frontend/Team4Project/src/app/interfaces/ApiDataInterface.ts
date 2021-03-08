@@ -3,7 +3,7 @@ export class ApiDataInterface {
     public pagination: PaginationBlock = new PaginationBlock();
     public meta: MetaBlock = new MetaBlock();
 }
-class DataBlock{
+export class DataBlock{
     public type: string='';
     public id='';
     public url='';

@@ -1,5 +1,28 @@
-<h2>Search Results for {{searchString}}:</h2>
-<button (click)='checker()'>click here</button>
-<img [src]='link' *ngFor='let link of gifLinks'/>
+<h2 *ngIf="searchString==''">Trending Gifs</h2>
+<h2 *ngIf="searchString!=''">Search Results for {{searchString}}:</h2>
+<!-- <button (click)='checker()'>click here</button> -->
+<!-- <img [src]='link' *ngFor='let link of gifLinks'/> -->
+<input type="number" min="1" class="form-control" placeholder="Limit for gif here." aria-label="Limit"
+  name='limit' [ngModel]='limit' (ngModelChange)='changeBoi($event)' *ngIf='numEnabler' required> 
+<app-card [dataArray]='dataParts'></app-card>
+<br/><br/><br/><br/>
 
-
+<!-- --------------------------------------------------------------------------- -->
+<!-- <mat-grid-list cols="3" rowHeight="1:2">
+  <mat-grid-tile *ngFor='let data of dataParts'>&nbsp;
+    <mat-card class="card">
+        <mat-card-title>{{data.title}}</mat-card-title>
+        <img mat-card-image [src]="data.images.downsized.url"/>
+        <mat-card-subtitle>
+            <table class="cardTable">
+                <tr>
+                    <td>
+                        <a class="favorite"><fa-icon [icon]="faFav" class='fab fa-angular fa-2x'></fa-icon></a>&nbsp;&nbsp;&nbsp;
+                        <a class="recommend"><fa-icon [icon]="faRecommend" class='fab fa-angular fa-2x'></fa-icon></a>
+                    </td>
+                </tr>  
+        </table>
+        </mat-card-subtitle>
+    </mat-card>&nbsp;
+  </mat-grid-tile>
+</mat-grid-list> -->

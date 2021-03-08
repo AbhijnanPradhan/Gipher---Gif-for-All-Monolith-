@@ -1,41 +1,18 @@
-<mat-grid-list cols="3" rowHeight="1:2">
-    <mat-grid-tile>
-        <mat-card style="width: 100%; border: 2px solid rgba(224, 204, 204, 0.692);">
-            <mat-card-title>Simple card 1</mat-card-title>
-            <img mat-card-image src="../../assets/Images/Logo.gif"/>
+<mat-grid-list cols="3" rowHeight="2:3">
+    <mat-grid-tile *ngFor='let data of dataArray'>&nbsp;
+        <mat-card class="card">
+            <mat-card-title>{{data.title}}</mat-card-title>
+            <img mat-card-image [src]="data.images.downsized.url"/>
             <mat-card-subtitle>
-                <table style="width: 100%;">
+                <table class="cardTable">
                     <tr>
-                        <td style="text-align: right; padding: 5px;">
-                            <fa-icon [icon]="faFav"></fa-icon>&nbsp;
-                            <fa-icon [icon]="faRecommend"></fa-icon>
+                        <td>
+                            <a class="favorite"><fa-icon [icon]="faFav" class='fab fa-angular fa-2x'></fa-icon></a>&nbsp;&nbsp;&nbsp;
+                            <a class="recommend"><fa-icon [icon]="faRecommend" class='fab fa-angular fa-2x'></fa-icon></a>
                         </td>
-                    </tr>
-                    
+                    </tr>  
             </table>
             </mat-card-subtitle>
         </mat-card>&nbsp;
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-card style="width: 100%; border: 2px solid rgba(224, 204, 204, 0.692);">
-            <mat-card-title>Simple card 2</mat-card-title>
-            <img mat-card-image src="../../assets/Images/Logo.gif"/>
-            <mat-card-subtitle>
-                <table style="width: 100%;">
-                    <tr>
-                        <td style="text-align: right; padding: 5px;">
-                            <fa-icon [icon]="faFav"></fa-icon>&nbsp;
-                            <fa-icon [icon]="faRecommend"></fa-icon>
-                        </td>
-                    </tr>
-                    
-            </table>
-            </mat-card-subtitle>
-        </mat-card>&nbsp;
-    </mat-grid-tile>
-    <mat-grid-tile><mat-card>Simple card 3</mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card>Simple card 4</mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card>Simple card 5</mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card>Simple card 6</mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card>Simple card 7</mat-card></mat-grid-tile>
-</mat-grid-list>
+    </mat-grid-tile> 
+</mat-grid-list> 
