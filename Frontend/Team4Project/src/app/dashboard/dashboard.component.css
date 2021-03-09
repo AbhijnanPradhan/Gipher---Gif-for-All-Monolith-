@@ -2,12 +2,13 @@ div{
     padding : 1%;  
     background-color: 009900; 
     width: 30%; 
-    border: solid black; 
+    
     } 
 
 .leftdiv { 
     float: left;
-    width: 70%; 
+    width: 70%;
+    border-right: dotted rgba(214, 185, 185, 0.596) ; 
     } 
 
 .rightdiv{
