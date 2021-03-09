@@ -1,1 +1,32 @@
-<p>sign-up works!</p>
+<div class="container" fxLayout="column" fxFlexFill>
+    <mat-card class="example-card">
+        <mat-card-header class="center">
+            <mat-card-title class="center">Sign Up</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="center">
+            <div style="margin-top: 60px;">
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input class="username" matInput matInput [formControl]='username'>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput matInput [formControl]='password' type="password">
+                    </mat-form-field>
+                </p>
+            </div>
+        </mat-card-content>
+        <mat-card-actions class="button ">
+            <button mat-stroked-button class="center " (click)="register() ">SignUp</button>
+        </mat-card-actions>
+
+        <div class="center " style="margin-top: 80px; " *ngIf="errorText ">
+            <p style="color:red ">
+                {{errorText}}
+            </p>
+        </div>
+    </mat-card>
+</div>
