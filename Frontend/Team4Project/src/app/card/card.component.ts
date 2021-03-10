@@ -10,7 +10,7 @@ export class CardComponent implements OnInit,OnChanges{
   faFav = faHeart;
   faRecommend = faStar;
   @Input() dataArray: Array<DataBlock>=[];
-  
+  @Input() columnCount: Number=3;
 
   constructor() {
    }
@@ -22,6 +22,14 @@ export class CardComponent implements OnInit,OnChanges{
 
   ngOnInit(): void {
     
+  }
+
+  addFavourite(data:DataBlock) {
+    console.log("add favourite", data);
+  }
+
+  addRecommended(data:DataBlock) {
+    console.log("add recommended", data);
   }
 
 }
