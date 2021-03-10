@@ -10,7 +10,7 @@ export class RecommendedService {
 
   constructor(private http: HttpClient) { }
 
-  getRecommended(data: DataBlock): Observable<Array<DataBlock>> {
+  getRecommended(): Observable<Array<DataBlock>> {
     return this.http.get<Array<DataBlock>>('http://localhost:8080/recommended/get');
   }
 
