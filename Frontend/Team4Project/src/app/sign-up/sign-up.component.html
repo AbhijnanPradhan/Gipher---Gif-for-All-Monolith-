@@ -13,8 +13,26 @@
                 </p>
                 <p>
                     <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input class="username" matInput matInput [formControl]='name'>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date of Birth</mat-label>
+                        <input class="username" matInput matInput [formControl]='dob' type="date">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
                         <input matInput matInput [formControl]='password' type="password">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput matInput [formControl]='confirmPassword' type="password">
                     </mat-form-field>
                 </p>
             </div>
@@ -23,7 +41,7 @@
             <button mat-stroked-button class="center " (click)="register() ">SignUp</button>
         </mat-card-actions>
 
-        <div class="center " style="margin-top: 80px; " *ngIf="errorText ">
+        <div class="center " style="margin-top: 80px; margin-bottom: 60px;" *ngIf="errorText ">
             <p style="color:red ">
                 {{errorText}}
             </p>

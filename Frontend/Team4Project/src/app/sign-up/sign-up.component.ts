@@ -10,6 +10,9 @@ export class SignUpComponent implements OnInit {
 
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+  confirmPassword = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
+  dob = new FormControl('', [Validators.required]);
   errorText: string;
   constructor() {
     this.errorText = "";
@@ -25,7 +28,11 @@ export class SignUpComponent implements OnInit {
       this.errorText = "Username cannot be blank";
     else if (this.password.value === '')
       this.errorText = "Password cannot be blank";
-    else 
+    else if (this.name.value === '')
+      this.errorText = "Name cannot be blank";
+    else if (this.dob.value === '')
+      this.errorText = "Date of Birth cannot be blank";
+    else
       this.errorText = "Registered Successfully!";
   }
 }
