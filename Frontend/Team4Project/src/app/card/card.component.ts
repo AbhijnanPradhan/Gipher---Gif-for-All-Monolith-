@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { faHeart,faStar } from '@fortawesome/free-solid-svg-icons';
 import { ApiDataInterface, DataBlock } from '../interfaces/ApiDataInterface';
+import { RecommendedService } from '../services/recommended/recommended.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -12,8 +13,7 @@ export class CardComponent implements OnInit,OnChanges{
   @Input() dataArray: Array<DataBlock>=[];
   @Input() columnCount: Number=3;
 
-  constructor() {
-   }
+  constructor(private recommendedService:RecommendedService) {}
   
   ngOnChanges(): void {
     console.log('change in card');
@@ -30,6 +30,8 @@ export class CardComponent implements OnInit,OnChanges{
 
   addRecommended(data:DataBlock) {
     console.log("add recommended", data);
+    this.recommendedService.addRecommended(data)
+      .subscribe(data=>console.log("Reco add success", data));
   }
 
 }
