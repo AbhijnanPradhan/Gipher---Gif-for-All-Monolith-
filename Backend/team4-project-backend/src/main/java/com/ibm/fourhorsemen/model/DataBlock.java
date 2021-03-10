@@ -1,8 +1,12 @@
 package com.ibm.fourhorsemen.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class DataBlock {
 	private String type;
-	private String id;
+	@Id private String id;
 	private String url;
 	private String title;
 	private String rating;
