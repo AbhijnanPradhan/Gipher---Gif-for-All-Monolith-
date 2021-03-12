@@ -15,14 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ibm.fourhorsemen.model.DataBlock;
 import com.ibm.fourhorsemen.repository.DataRepository;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/recommended")
 public class RecommendedController {
 
-	@Autowired
 	private DataRepository dataRepository;
+	
+	@Autowired
+	public RecommendedController(DataRepository dataRepository) {
+		this.dataRepository = dataRepository;
+	}
 
-	@CrossOrigin(origins = "*")
 	@GetMapping("/get")
 	public ResponseEntity<List<DataBlock>> getRecommended() {
 		try {
@@ -33,7 +37,6 @@ public class RecommendedController {
 		}
 	}
 
-	@CrossOrigin(origins = "*")
 	@PostMapping("/add")
 	public ResponseEntity<DataBlock> addRecommended(@RequestBody DataBlock data) {
 		System.out.println(data);
