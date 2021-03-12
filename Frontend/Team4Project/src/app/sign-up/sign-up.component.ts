@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+  confirmPassword = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
+  dob = new FormControl('', [Validators.required]);
+  errorText: string;
+  constructor() {
+    this.errorText = "";
+  }
+
 
   ngOnInit(): void {
   }
 
+  register() {
+    console.log(this.username.value, this.password.value);
+    if (this.username.value === '')
+      this.errorText = "Username cannot be blank";
+    else if (this.password.value === '')
+      this.errorText = "Password cannot be blank";
+    else if (this.name.value === '')
+      this.errorText = "Name cannot be blank";
+    else if (this.dob.value === '')
+      this.errorText = "Date of Birth cannot be blank";
+    else
+      this.errorText = "Registered Successfully!";
+  }
 }

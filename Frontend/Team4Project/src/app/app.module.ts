@@ -14,31 +14,24 @@ import { ProfileComponent } from './profile/profile.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
-
-import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardComponent } from './card/card.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatGridListModule } from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
 
-const routes: Routes = [
-  {path:'', redirectTo:'login', pathMatch:'full'},
-  {path:'login', component:LoginComponent},
-  {path:'signUp', component:SignUpComponent},
-  {path:'error', component:PageNotFoundComponent},
-  {path:'profile', component: ProfileComponent},
-  {path:'favs', component: FavoriteComponent},
-  {path:'card',component: CardComponent},
-  {
-    path:'home', component: DashboardComponent,
-    children:[
-      // all components like searchResult, recommended,etc
-    ]
-  }
-];
+import { RouterService } from './services/router.service';
+import { CanActivateRouteGuard } from './can-activate-route.guard';
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -59,16 +52,24 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatGridListModule,
     MatCardModule,
-    
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatTableModule,
+    MatInputModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [
+    RouterService,
+    CanActivateRouteGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

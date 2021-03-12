@@ -1,18 +1,22 @@
-<mat-grid-list cols="3" rowHeight="2:3">
+<mat-grid-list cols={{columnCount}} rowHeight="2:3">
     <mat-grid-tile *ngFor='let data of dataArray'>&nbsp;
         <mat-card class="card">
             <mat-card-title>{{data.title}}</mat-card-title>
-            <img mat-card-image [src]="data.images.downsized.url"/>
+            <img mat-card-image [src]="data.images.downsized.url" />
             <mat-card-subtitle>
                 <table class="cardTable">
                     <tr>
                         <td>
-                            <a class="favorite"><fa-icon [icon]="faFav" class='fab fa-angular fa-2x'></fa-icon></a>&nbsp;&nbsp;&nbsp;
-                            <a class="recommend"><fa-icon [icon]="faRecommend" class='fab fa-angular fa-2x'></fa-icon></a>
+                            <a class="favorite" (click)="addFavourite(data)">
+                                <fa-icon [icon]="faFav" class='fab fa-angular fa-2x'></fa-icon>
+                            </a>&nbsp;&nbsp;&nbsp;
+                            <a class="recommend" (click)="addRecommended(data)">
+                                <fa-icon [icon]="faRecommend" class='fab fa-angular fa-2x'></fa-icon>
+                            </a>
                         </td>
-                    </tr>  
-            </table>
+                    </tr>
+                </table>
             </mat-card-subtitle>
         </mat-card>&nbsp;
-    </mat-grid-tile> 
-</mat-grid-list> 
+    </mat-grid-tile>
+</mat-grid-list>
