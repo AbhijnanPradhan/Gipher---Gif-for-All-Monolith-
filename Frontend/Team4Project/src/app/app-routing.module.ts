@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanActivateRouteGuard } from './can-activate-route.guard';
+import { CardDetailsComponent } from './card-details/card-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { LoginComponent } from './login/login.component';
@@ -14,12 +15,10 @@ const routes: Routes = [
   {path:'error', component:PageNotFoundComponent},
   {path:'profile', component: ProfileComponent, canActivate: [CanActivateRouteGuard]},
   {path:'favs', component: FavoriteComponent, canActivate: [CanActivateRouteGuard]},
-  {
-    path:'home', component: DashboardComponent, canActivate: [CanActivateRouteGuard],
-    children:[
-      // all components like searchResult, recommended,etc
-    ]
-  },
+  {path:'home', component: DashboardComponent, canActivate: [CanActivateRouteGuard]},
+
+  {path:'home/details/:id', component: CardDetailsComponent, canActivate: [CanActivateRouteGuard]},
+
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'error'}
 ];

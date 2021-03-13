@@ -20,8 +20,8 @@
   </li>
 
 </ul>
-<div class="input-group mb-3">
+<div class="input-group mb-3" *ngIf='searchEnabler'>
   <input type="text" class="form-control" placeholder="Search for gif here" aria-label="Search"
-  name='searchString' [(ngModel)]='searchString'>
+  name='searchString' [(ngModel)]='searchString' >
   <button class="btn btn-outline-dark" type="button" id="button-addon2" (click)="searchClicked()"><fa-icon [icon]="faSearch"></fa-icon></button>
 </div>

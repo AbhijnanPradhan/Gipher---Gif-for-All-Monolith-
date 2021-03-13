@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   public searchString: string = '';
-
+  public canShowSearchBar: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

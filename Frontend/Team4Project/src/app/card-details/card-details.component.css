@@ -1,0 +1,23 @@
+.imageBoi{
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+    text-align: center;
+}
+
+.imageBoi table{
+    width: 100%;
+}
+
+.commentBoi{
+    margin: auto;
+    width: 90%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+    text-align: center;
+}
+
+.fullWidth{
+    width: 90%;
+}
