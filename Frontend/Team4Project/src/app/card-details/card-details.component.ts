@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SearchService } from '../services/api/search.service';
 import {  DataBlocker } from '../interfaces/ApiDataInterface';
+import { CommentDataInterface } from "../interfaces/CommentDataInterface"
 
 @Component({
   selector: 'app-card-details',
@@ -13,6 +14,7 @@ export class CardDetailsComponent implements OnInit {
   gifId:string="";
   url:string="";
   gifDetails:DataBlocker = new DataBlocker();
+  comments:Array<CommentDataInterface>= [];
   constructor(private route:ActivatedRoute,private searchService:SearchService) { }
 
 
@@ -21,6 +23,8 @@ export class CardDetailsComponent implements OnInit {
     this.url = "https://api.giphy.com/v1/gifs/"+this.gifId+"?api_key=YIjy7FhdwY94RyTHx6qenE65qjGw49Tx";
     console.log("onInit ka url:"+this.url);
     this.datafiller(this.url);
+    this.scamCommentFiller(3);
+
   }
 
   datafiller(urlParam:string){
@@ -34,6 +38,11 @@ export class CardDetailsComponent implements OnInit {
   }
    logger(){
     console.log("img:"+this.gifDetails.data.images.downsized.url);
+   }
+   scamCommentFiller(num:number){
+     for(let i=0; i<num; i++){
+       this.comments.push(new CommentDataInterface());
+     }
    }
   
 }
