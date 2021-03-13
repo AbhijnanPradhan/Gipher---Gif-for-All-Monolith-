@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { faHeart,faStar,faInfo } from '@fortawesome/free-solid-svg-icons';
+import { faHeart,faStar } from '@fortawesome/free-solid-svg-icons';
 import { DataBlock } from '../interfaces/ApiDataInterface';
 import { RecommendedService } from '../services/database/recommended/recommended.service';
 import { RouterService } from "../services/router.service"
