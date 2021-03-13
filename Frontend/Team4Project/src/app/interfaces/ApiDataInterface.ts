@@ -1,7 +1,10 @@
 export class ApiDataInterface {
     public data: Array<DataBlock> = [];
-    public pagination: PaginationBlock = new PaginationBlock();
-    public meta: MetaBlock = new MetaBlock();
+    // public pagination: PaginationBlock = new PaginationBlock();
+    // public meta: MetaBlock = new MetaBlock();
+}
+export class DataBlocker{
+    public data: DataBlock = new DataBlock();
 }
 export class DataBlock{
     public type: string='';
@@ -11,22 +14,22 @@ export class DataBlock{
     public rating='';
     public import_datetime: Date = new Date('2018-08-22 08:24:58');
     public images = new ImagesBlock();
-    public user = new UserBlock();
+    public user = new UserBlock(); // creator info
 
     constructor(){}
 }
-class PaginationBlock{
-    public total_count: number = 357;
-    public count: number = 1;
-    public offset: number = 0;
-    constructor(){}
-}
-class MetaBlock{
-    public status: number = 200;
-    public msg: string = "OK";
-    public response_id: string = "acv2rz9fuvpmkbfnsmch09ckpom43c5j5ek9671z";
-    constructor(){}
-}
+// class PaginationBlock{
+//     public total_count: number = 357;
+//     public count: number = 1;
+//     public offset: number = 0;
+//     constructor(){}
+// }
+// class MetaBlock{
+//     public status: number = 200;
+//     public msg: string = "OK";
+//     public response_id: string = "acv2rz9fuvpmkbfnsmch09ckpom43c5j5ek9671z";
+//     constructor(){}
+// }
 
 class ImagesBlock{
     public original=new OriginalBlock();

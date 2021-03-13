@@ -16,4 +16,7 @@ export class RouterService {
   routeToError() {
     this.router.navigate(['error']);
   }
+  routeToCardDetails(idParam: string){
+    this.router.navigate(['home/details', idParam ]);
+  }
 }

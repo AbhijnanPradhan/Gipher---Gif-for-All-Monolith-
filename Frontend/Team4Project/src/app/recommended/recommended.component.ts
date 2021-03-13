@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataBlock } from '../interfaces/ApiDataInterface';
-import { RecommendedService } from '../services/recommended/recommended.service';
+import { RecommendedService } from '../services/database/recommended/recommended.service';
 
 @Component({
   selector: 'app-recommended',
