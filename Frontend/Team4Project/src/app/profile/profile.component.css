@@ -1,0 +1,32 @@
+.coverImg{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+.profileImg{
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 10%;
+    height: 15%;
+    border-radius: 50%;
+}
+.profileContent{
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+}
+.profileTable{
+    border: 2px solid red;
+    width: 100%;
+}
+.profileTable table{
+    text-align: center;
+    width: 100%;
+}
+.profileTable table tr td,th{
+    padding: 10px;
+}

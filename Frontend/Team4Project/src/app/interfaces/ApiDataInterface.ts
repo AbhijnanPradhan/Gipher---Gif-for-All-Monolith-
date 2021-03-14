@@ -53,7 +53,7 @@ class DownsizedBlock{
     public height: number = 480;
     public width: number = 480;
     public size: number = 26983;
-    public url: string = "https://media4.giphy.com/media/fVbicO2CLACoZzRWHa/giphy.gif?cid=af2b9d710whbyliv7nbs3covmvg16e3uztoae0st2ry5bqx4&rid=giphy.gif";
+    public url: string = "";
     constructor(){}
 }
 

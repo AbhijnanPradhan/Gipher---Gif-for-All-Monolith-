@@ -19,4 +19,13 @@ export class RouterService {
   routeToCardDetails(idParam: string){
     this.router.navigate(['home/details', idParam ]);
   }
+  routeToProfile(){
+    this.router.navigate(['profile']);
+  }
+  routeToFavorites(){ 
+    this.router.navigate(['favs']);
+  }
+  routeToHome(){
+    this.router.navigate(['home']);
+  }
 }

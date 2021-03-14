@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { UserInterface } from  '../interfaces/UserInterface';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,6 +14,7 @@ export class SignUpComponent implements OnInit {
   confirmPassword = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
   dob = new FormControl('', [Validators.required]);
+  user:any;
   errorText: string;
   constructor() {
     this.errorText = "";
@@ -32,7 +34,11 @@ export class SignUpComponent implements OnInit {
       this.errorText = "Name cannot be blank";
     else if (this.dob.value === '')
       this.errorText = "Date of Birth cannot be blank";
-    else
+    else if(this.password.value !== this.confirmPassword.value)
+      this.errorText = "Password and Confirm Password not matching."
+    else{
       this.errorText = "Registered Successfully!";
+      this.user = new UserInterface().maker(this.name.value,this.username.value,this.password.value,this.dob.value);
+    }
   }
 }
