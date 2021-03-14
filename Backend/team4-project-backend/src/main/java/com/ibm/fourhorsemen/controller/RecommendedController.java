@@ -2,6 +2,7 @@ package com.ibm.fourhorsemen.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,27 +11,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.fourhorsemen.controller.response.ExtendedDataBlockResponse;
+import com.ibm.fourhorsemen.controller.response.ResponseMessages;
 import com.ibm.fourhorsemen.model.DataBlock;
-import com.ibm.fourhorsemen.repository.DataRepository;
+import com.ibm.fourhorsemen.model.ExtendedDataBlock;
+import com.ibm.fourhorsemen.service.RecommendedService;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/recommended")
 public class RecommendedController {
 
-	private DataRepository dataRepository;
-	
+	private RecommendedService recommendedService;
+
 	@Autowired
-	public RecommendedController(DataRepository dataRepository) {
-		this.dataRepository = dataRepository;
+	public RecommendedController(RecommendedService recommendedService) {
+		this.recommendedService = recommendedService;
 	}
 
 	@GetMapping("/get")
-	public ResponseEntity<List<DataBlock>> getRecommended() {
+	public ResponseEntity<List<ExtendedDataBlock>> getRecommended() {
 		try {
-			List<DataBlock> list = dataRepository.findAll();
+			List<ExtendedDataBlock> list = recommendedService.getRecommends();
 			return ResponseEntity.ok(list);
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -38,12 +43,21 @@ public class RecommendedController {
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<DataBlock> addRecommended(@RequestBody DataBlock data) {
+	public ResponseEntity<?> addRecommended(@RequestParam String userId, @RequestBody DataBlock data) {
 		System.out.println(data);
 		try {
-			dataRepository.save(data);
-			return ResponseEntity.ok(data);
+			ExtendedDataBlockResponse response = new ExtendedDataBlockResponse();
+			ExtendedDataBlock resultBlock = recommendedService.addRecommend(userId, data);
+			
+			if (resultBlock != null) {
+				BeanUtils.copyProperties(resultBlock, response);
+				response.setMessage(ResponseMessages.SUCCESS);
+			} else {
+				response.setMessage(ResponseMessages.RECOMMENDATION_EXISTS);
+			}
+			return ResponseEntity.ok(response);
 		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
