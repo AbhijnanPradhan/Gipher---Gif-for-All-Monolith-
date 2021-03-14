@@ -14,11 +14,11 @@ export class RecommendedComponent implements OnInit {
   public dataParts: Array<DataBlock> = [];
 
   ngOnInit(): void {
-    this.recommendedService.getRecommended()
+    this.recommendedService.getBehaviourSubject()
       .subscribe(dataBlocks => {
-        console.log('get recommended', dataBlocks);
+        console.log('get recommended recommended component', dataBlocks);
         this.dataParts = dataBlocks;
-    });
+      });
+    this.recommendedService.getRecommended();
   }
-
 }

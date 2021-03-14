@@ -33,6 +33,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import {MatIconModule} from '@angular/material/icon';
 import { CommentsComponent } from './comments/comments.component';
+import { RecommendedService } from './services/database/recommended/recommended.service';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CommentsComponent } from './comments/comments.component';
   providers: [
     RouterService,
     CanActivateRouteGuard,
+    RecommendedService,
   ],
   bootstrap: [AppComponent]
 })

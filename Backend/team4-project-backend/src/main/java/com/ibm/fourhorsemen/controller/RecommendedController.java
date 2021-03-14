@@ -33,9 +33,9 @@ public class RecommendedController {
 	}
 
 	@GetMapping("/get")
-	public ResponseEntity<List<ExtendedDataBlock>> getRecommended() {
+	public ResponseEntity<List<ExtendedDataBlock>> getRecommended(@RequestParam String userId) {
 		try {
-			List<ExtendedDataBlock> list = recommendedService.getRecommends();
+			List<ExtendedDataBlock> list = recommendedService.getRecommends(userId);
 			return ResponseEntity.ok(list);
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -48,7 +48,7 @@ public class RecommendedController {
 		try {
 			ExtendedDataBlockResponse response = new ExtendedDataBlockResponse();
 			ExtendedDataBlock resultBlock = recommendedService.addRecommend(userId, data);
-			
+
 			if (resultBlock != null) {
 				BeanUtils.copyProperties(resultBlock, response);
 				response.setMessage(ResponseMessages.SUCCESS);

@@ -9,7 +9,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "UserDataMap")
+@Table(name = "UserDataBlockMap")
 @IdClass(UserDataBlockMapId.class)
 public class UserDataBlockMap implements Serializable {
 	private static final long serialVersionUID = 2103996086656741853L;
