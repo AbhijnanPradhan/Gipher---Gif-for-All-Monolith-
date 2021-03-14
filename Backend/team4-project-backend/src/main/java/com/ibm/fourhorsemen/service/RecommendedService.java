@@ -1,5 +1,6 @@
 package com.ibm.fourhorsemen.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -42,7 +43,7 @@ public class RecommendedService {
 				ExtendedDataBlock extendedBlock = new ExtendedDataBlock();
 				BeanUtils.copyProperties(dataBlock, extendedBlock);
 				extendedBlock.setRecommendCount(1);
-				extendedBlock = dataRepository.save(extendedBlock);
+				resultBlock = dataRepository.save(extendedBlock);
 			}
 
 			// adding the mapping of gifId and userId
@@ -61,17 +62,24 @@ public class RecommendedService {
 				ExtendedDataBlock block = dataRepository.findById(dataBlock.getId()).get();
 				block.setRecommendCount(block.getRecommendCount() - 1);
 				resultBlock = dataRepository.save(block);
-				
+
 				// adding the mapping of gifId and userId
 				userDataMapRepository.save(map);
 			} catch (NoSuchElementException e) {
-				
+
 			}
 		}
 		return resultBlock;
 	}
 
-	public List<ExtendedDataBlock> getRecommends() {
-		return dataRepository.findAll();
+	public List<ExtendedDataBlock> getRecommends(String userId) {
+		List<UserDataBlockMap> userDataBlockMaps = userDataMapRepository.findByUserId(userId);
+		List<String> gifIds = new ArrayList<>();
+		for (UserDataBlockMap map : userDataBlockMaps)
+			gifIds.add(map.getGifId());
+		Iterable<ExtendedDataBlock> blockIterable = dataRepository.findAllById(gifIds);
+		List<ExtendedDataBlock> result = new ArrayList<ExtendedDataBlock>();
+		blockIterable.forEach(result::add);
+		return result;
 	}
 }
