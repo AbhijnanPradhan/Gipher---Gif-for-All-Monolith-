@@ -1,22 +1,21 @@
 <ul>
-  <li style="float:inline-start"><a href="/home" class="logo"><img src='../../assets/Images/Logo.gif' alt="GIPHER LOGO" width="60px" />&nbsp;GIPHER-Gif for all</a></li>
+  <li style="float:inline-start"><a class="logo" (click)="nextPage('home')"><img src='../../assets/Images/Logo.gif' alt="GIPHER LOGO" width="60px" />&nbsp;GIPHER-Gif for all&nbsp;</a></li>
   
   <li style="float:right">
-    <a href="/login" class="logout">Logout</a>
+    <a class="logout" (click)="nextPage('logout')">Logout</a>
   </li>
   
-  <li style="float:right">
-      <a href="/profile" class="content">
+  <li style="float:right" *ngIf='profileEnabler'>
+      <a class="content" (click)="nextPage('user')" matTooltip="Your Profile page">
         <fa-icon [icon]="faUser"></fa-icon>
       </a>
-      <span class='hide'>View Profile</span>
+      <!-- <span class='hide'>View Profile</span> -->
   </li>
   
-  <li style="float:right">
-    <a class="active" href="/favs" class="content">
+  <li style="float:right" *ngIf='favoriteEnabler'>
+    <a class="active" class="content" (click)="nextPage('favs')" matTooltip="Your selected favorites">
       <fa-icon [icon]="faFav"></fa-icon>
     </a>
-    <span class='hide'>View Favs</span>
   </li>
 
 </ul>

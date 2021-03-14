@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { faSearch,faUser,faHeart } from '@fortawesome/free-solid-svg-icons'
-
+import { faSearch,faUser,faHeart } from '@fortawesome/free-solid-svg-icons';
+import { RouterService } from '../services/router.service';
 
 @Component({
   selector: 'app-header',
@@ -15,15 +15,33 @@ export class HeaderComponent implements OnInit {
   faFav = faHeart;
   searchString: string = '';
   @Input() searchEnabler: boolean = true;
-  
+  @Input() profileEnabler:boolean = true;
+  @Input() favoriteEnabler: boolean = true;
   eventSearchButtonClicked = new EventEmitter<string>();
   searchClicked(){
     console.log('header boi:'+this.searchString);
     this.eventSearchButtonClicked.emit(this.searchString);
   }
-  constructor() { }
+  constructor(private router:RouterService) { }
 
   ngOnInit(): void {
   }
-
+  nextPage(param:string){
+    switch (param) {
+      case 'logout':
+        this.router.routeToLogin();
+        break;
+      case 'user':
+        this.router.routeToProfile();
+        break;
+      case 'favs':
+        this.router.routeToFavorites();
+        break;
+      case 'home':
+        this.router.routeToHome();
+        break;
+      default:
+        break;
+    }
+  }
 }
