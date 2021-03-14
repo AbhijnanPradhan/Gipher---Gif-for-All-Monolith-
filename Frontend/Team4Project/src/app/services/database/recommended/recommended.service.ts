@@ -10,11 +10,11 @@ export class RecommendedService {
 
   constructor(private http: HttpClient) { }
 
-  getRecommended(): Observable<Array<DataBlock>> {
-    return this.http.get<Array<DataBlock>>('http://localhost:8080/recommended/get');
+  getRecommended(): Observable<Array<any>> {
+    return this.http.get<Array<any>>('http://localhost:8080/recommended/get');
   }
 
-  addRecommended(data: DataBlock): Observable<DataBlock> {
-    return this.http.post<DataBlock>('http://localhost:8080/recommended/add', data);
+  addRecommended(data: DataBlock): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/recommended/add?userId=sayan3', data);
   }
 }

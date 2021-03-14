@@ -12,7 +12,7 @@ public class DataBlock {
 	private String rating;
 	private String import_datetime;
 	private ImagesBlock images;
-	public UserBlock user;
+	public UserBlock user;  // creator of the gif
 
 	public DataBlock() {
 
@@ -44,7 +44,7 @@ public class DataBlock {
 		return type;
 	}
 
-	public String getId() {
+	public String getId() {  // implementation for UserItemModelInterface
 		return id;
 	}
 
