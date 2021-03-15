@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.innerWidth = Math.floor(window.innerWidth);
     this.innerHeight = Math.floor((window.innerHeight)/4) ;
-    this.coverImgUrl = "https://picsum.photos/"+this.innerWidth+"/"+this.innerHeight+"?random=1";
+    this.coverImgUrl = "https://picsum.photos/"+this.innerWidth+"/"+this.innerHeight+"";
     this.profileAvatar = '../../assets/Images/avatars/hacker.png';
   }
 }
