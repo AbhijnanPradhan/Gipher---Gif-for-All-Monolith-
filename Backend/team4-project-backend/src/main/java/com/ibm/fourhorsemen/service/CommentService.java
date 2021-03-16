@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ibm.fourhorsemen.model.CommentBlock;
+import com.ibm.fourhorsemen.model.ExtendedCommentBlock;
 import com.ibm.fourhorsemen.repository.CommentDataRepository;
 
 @Service
@@ -21,16 +21,14 @@ public class CommentService {
 		this.commentDataRepository = commentDataRepository;
 	}
 	
-	@Transactional
-	public CommentBlock addComment(CommentBlock commentBlock) {
+	public ExtendedCommentBlock addComment(ExtendedCommentBlock ExtendedCommentBlock) {
 		// expecting commentID to create automatically.
-		return commentDataRepository.insert(commentBlock);
-		
+		return commentDataRepository.save(ExtendedCommentBlock);
 	}
 	
 	@Transactional
 	public int removeComment(String commentID, String userID) {
-		Optional<CommentBlock> reqComment = commentDataRepository.findById(commentID);
+		Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(commentID);
 		
 		if (reqComment.isPresent()) {
 			if(reqComment.get().getUserID() == userID) {
@@ -50,14 +48,14 @@ public class CommentService {
 	
 	@Transactional
 	public int editComment(String commentID, String userID, String newComment) {
-Optional<CommentBlock> reqComment = commentDataRepository.findById(commentID);
+Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(commentID);
 		
 		if (reqComment.isPresent()) {
 			if(reqComment.get().getUserID() == userID) {
 				commentDataRepository.deleteById(commentID); // try not required as condition tested in before if
 				reqComment.get().setComment(newComment);
 				reqComment.get().setEdited();
-				commentDataRepository.insert(reqComment.get());
+				commentDataRepository.save(reqComment.get());
 				
 				//successful edit
 				return 1;
@@ -72,16 +70,15 @@ Optional<CommentBlock> reqComment = commentDataRepository.findById(commentID);
 		
 	}
 	
-	@Transactional
 	public int addLikeToComment(String commentID, String likerID) {
-		Optional<CommentBlock> reqComment = commentDataRepository.findById(commentID);
+		Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(commentID);
 		
 		if (reqComment.isPresent()) {
 			if(!reqComment.get().likerIDPresent(likerID)) {
-				commentDataRepository.deleteById(commentID); // try not required as condition tested in before if
+				// commentDataRepository.deleteById(commentID); // try not required as condition tested in before if
 				reqComment.get().addLike();
 				reqComment.get().addToLikerIds(likerID);
-				commentDataRepository.insert(reqComment.get());
+				commentDataRepository.save(reqComment.get());
 				
 				//successful edit
 				return 1;
@@ -97,14 +94,14 @@ Optional<CommentBlock> reqComment = commentDataRepository.findById(commentID);
 	
 	@Transactional
 	public int removeLikeFromComment(String commentID, String likerID) {
-Optional<CommentBlock> reqComment = commentDataRepository.findById(commentID);
+Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(commentID);
 		
 		if (reqComment.isPresent()) {
 			if(reqComment.get().likerIDPresent(likerID)) {
 				commentDataRepository.deleteById(commentID); // try not required as condition tested in before if
 				reqComment.get().removeLike(); // if likerId is present then no. of likes will be more than 0
 				reqComment.get().removeFromLikerIds(likerID);
-				commentDataRepository.insert(reqComment.get());
+				commentDataRepository.save(reqComment.get());
 				
 				//successful edit
 				return 1;
@@ -118,22 +115,24 @@ Optional<CommentBlock> reqComment = commentDataRepository.findById(commentID);
 		return -1;
 	}
 	
-	public List<CommentBlock> getCommentsByGifID(String gifID) {
-		List reqCommentBlock = new ArrayList<CommentBlock>();
-		for(CommentBlock item: commentDataRepository.findAll()) {
+	public List<ExtendedCommentBlock> getCommentsByGifID(String gifID) {
+		List reqExtendedCommentBlock = new ArrayList<ExtendedCommentBlock>();
+		for(ExtendedCommentBlock item: commentDataRepository.findAll()) {
 			if(item.getGifID() == gifID)
-				reqCommentBlock.add(item);
+				reqExtendedCommentBlock.add(item);
 		}
-		return reqCommentBlock;
+		return reqExtendedCommentBlock;
 	}
 	
-	public List<CommentBlock> getCommentsByUserID(String userID){
-		List reqCommentBlock = new ArrayList<CommentBlock>();
-		for(CommentBlock item: commentDataRepository.findAll()) {
-			if(item.getUserID() == userID)
-				reqCommentBlock.add(item);
-		}
-		return reqCommentBlock;
+	public List<ExtendedCommentBlock> getCommentsByUserID(String userID){
+		List<ExtendedCommentBlock> reqExtendedCommentBlock = commentDataRepository.findCommentsByUserId(userID);
+		
+//		List reqExtendedCommentBlock = new ArrayList<ExtendedCommentBlock>();
+//		for(ExtendedCommentBlock item: commentDataRepository.findAll()) {
+//			if(item.getUserID() == userID)
+//				reqExtendedCommentBlock.add(item);
+//		}
+		return reqExtendedCommentBlock;
 	}
 	
 	

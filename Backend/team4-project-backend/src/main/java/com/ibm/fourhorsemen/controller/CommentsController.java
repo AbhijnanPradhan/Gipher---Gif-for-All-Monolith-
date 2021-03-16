@@ -1,7 +1,9 @@
 package com.ibm.fourhorsemen.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.fourhorsemen.controller.response.MessageResponse;
 import com.ibm.fourhorsemen.controller.response.ResponseMessages;
 import com.ibm.fourhorsemen.model.CommentBlock;
-import com.ibm.fourhorsemen.model.DataBlock;
+import com.ibm.fourhorsemen.model.ExtendedCommentBlock;
 import com.ibm.fourhorsemen.service.CommentService;
 
 @CrossOrigin(origins = "*")
@@ -31,9 +34,9 @@ public class CommentsController {
 	}
 	
 	@GetMapping("/getByGifID")
-	public ResponseEntity<List<CommentBlock>> getCommentsByGif(@RequestParam String gifId) {
+	public ResponseEntity<List<ExtendedCommentBlock>> getCommentsByGif(@RequestParam String gifId) {
 		try {
-			List<CommentBlock> list = commentService.getCommentsByGifID(gifId);
+			List<ExtendedCommentBlock> list = commentService.getCommentsByGifID(gifId);
 			return ResponseEntity.ok(list);
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -41,9 +44,9 @@ public class CommentsController {
 	}
 	
 	@GetMapping("/getByUser")
-	public ResponseEntity<List<CommentBlock>> getCommentsByUser(@RequestParam String userId){
+	public ResponseEntity<List<ExtendedCommentBlock>> getCommentsByUser(@RequestParam String userId){
 		try {
-			List<CommentBlock> list = commentService.getCommentsByUserID(userId);
+			List<ExtendedCommentBlock> list = commentService.getCommentsByUserID(userId);
 			return ResponseEntity.ok(list);
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -53,8 +56,14 @@ public class CommentsController {
 	@PostMapping("/add")
 	public ResponseEntity<?> addComment(@RequestBody CommentBlock data){
 		try {
-			commentService.addComment(data); // check this
-			return ResponseEntity.ok(ResponseMessages.SUCCESS);
+			ExtendedCommentBlock extendedBlock = new ExtendedCommentBlock();
+			BeanUtils.copyProperties(data, extendedBlock);
+			
+			String commentId = data.getUserID()+"$"+data.getGifID()+"$"+(Calendar.getInstance().getTimeInMillis()/1000);
+			
+			extendedBlock.setCommentID(commentId);
+			commentService.addComment(extendedBlock);
+			return ResponseEntity.ok(new MessageResponse(ResponseMessages.SUCCESS));
 		}catch(IllegalArgumentException e){
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
