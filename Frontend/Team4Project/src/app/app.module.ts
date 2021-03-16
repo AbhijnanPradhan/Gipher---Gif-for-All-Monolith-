@@ -36,7 +36,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { CommentsComponent } from './comments/comments.component';
 import { RecommendedService } from './services/database/recommended/recommended.service';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +71,11 @@ import { RecommendedService } from './services/database/recommended/recommended.
     MatInputModule,
     MatIconModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    MatToolbarModule,
+    HttpClientModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [
     RouterService,

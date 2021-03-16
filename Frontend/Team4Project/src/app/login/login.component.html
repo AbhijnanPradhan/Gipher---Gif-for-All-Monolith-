@@ -1,29 +1,29 @@
+<mat-toolbar color="primary">Giphy App</mat-toolbar>
 <div class="bootstrap-wrapper">
     <div class="container">
-
         <div class="row">
-            <div class="col md-6 offeset-md-3">
+            <div class="col-md-6 offset-md-3">
                 <div class="container text-center">
-                    <img  src="/src/assets/Images/login.jpg" alt="login icon"/>
-
-                    <h1>Login Form</h1>
-                    <form (ngSubmit)="onSubmit()" >
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Username</mat-label>
-                            <input [(ngModel)]="login.username" required name="username" type="text" matInput />
-                        </mat-form-field><br>
-                        <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Password</mat-label>
-                            <input type="password" name="password" [(ngModel)]="login.password" required matInput />
-                        </mat-form-field>
-
-                        <div class="container text-center">
-                            <button type="submit" mat-raised-button color="primary">Login</button>
-                            <button type="reset" mat-raised-button color="warn">Reset</button>
-                        </div>
-                    </form>
-                </div>
+                <img src="/src/assets/Images/login.jpg"
+                class="img-fluid" alt="login icon"
+                style="width:100px"/>
+                <h1>Login Form</h1>
+                <form (ngSubmit)="onSubmit()">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input [(ngModel)]="login.username" required name="username" type="text" matInput/>
+                    </mat-form-field><br>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input [(ngModel)]="login.password" required name="password" type="password" matInput/>
+                    </mat-form-field>
+                    <div class="container text-center">
+                        <button type="submit" mat-raised-button color="primary">Login</button>
+                        <button type="signUp" mat-raised-button color="warn">Sign Up</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </div>
