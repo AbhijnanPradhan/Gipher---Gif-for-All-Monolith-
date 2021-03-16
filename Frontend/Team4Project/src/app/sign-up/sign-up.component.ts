@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { UserInterface } from  '../interfaces/UserInterface';
+import { UserInterface } from '../interfaces/UserInterface';
+import { LoginService } from '../services/database/login/login.service';
+import { RouterService } from '../services/router.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,9 +16,15 @@ export class SignUpComponent implements OnInit {
   confirmPassword = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
   dob = new FormControl('', [Validators.required]);
-  user:any;
+  email = new FormControl('', [Validators.required]);
+  phone = new FormControl('', [Validators.required]);
+  gender = new FormControl();
+
+  genderList: string[] = ['Female', 'Male', 'None', 'Rather not say'];
+
+  user: any;
   errorText: string;
-  constructor() {
+  constructor(private loginService: LoginService, private routerService: RouterService) {
     this.errorText = "";
   }
 
@@ -25,7 +33,7 @@ export class SignUpComponent implements OnInit {
   }
 
   register() {
-    console.log(this.username.value, this.password.value);
+    console.log(this.gender.value);
     if (this.username.value === '')
       this.errorText = "Username cannot be blank";
     else if (this.password.value === '')
@@ -34,11 +42,33 @@ export class SignUpComponent implements OnInit {
       this.errorText = "Name cannot be blank";
     else if (this.dob.value === '')
       this.errorText = "Date of Birth cannot be blank";
-    else if(this.password.value !== this.confirmPassword.value)
-      this.errorText = "Password and Confirm Password not matching."
-    else{
+    else if (this.password.value !== this.confirmPassword.value)
+      this.errorText = "Password and Confirm Password not matching.";
+    else if (this.email.value === '')
+      this.errorText = "Email cannot be blank";
+    else if (this.phone.value === '')
+      this.errorText = "Phone number cannot be blank";
+    if (this.gender.value === 'Gender' || this.gender.value === '' || !this.gender.value)
+      this.errorText = "Please select your gender"
+    else {
       this.errorText = "Registered Successfully!";
-      this.user = new UserInterface().maker(this.name.value,this.username.value,this.password.value,this.dob.value);
+      let today = new Date(Date.now());
+      this.user = new UserInterface()
+      this.user.maker(this.username.value, this.name.value, this.email.value, this.gender.value, this.phone.value, this.dob.value, today, this.password.value);
+      this.loginService.signUp(this.user).subscribe(
+        data => {
+          if (data.message == 'Success') {
+            window.alert("Registration is successful");
+            this.routerService.routeToLogin();
+          } else {
+            window.alert(data.message);
+            this.errorText = data.message;
+          }
+        }, error => {
+          window.alert("Please check your internet connection");
+          this.errorText = error;
+        }
+      );
     }
   }
 }
