@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   coverImgUrl:string = '';
   profileAvatar: string = '';
   user:UserInterface=new UserInterface();
-  userAge: number = Math.floor(((Date.now()-this.user.dob.getTime())/(1000*60*60*24))/365.25);
+  userAge: number = Math.floor(((Date.now()-this.user.dateOfBirth.getTime())/(1000*60*60*24))/365.25);
   months:Array<string> = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   constructor() { }
 

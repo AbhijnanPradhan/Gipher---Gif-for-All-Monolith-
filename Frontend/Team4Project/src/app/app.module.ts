@@ -31,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
 
 import {MatIconModule} from '@angular/material/icon';
 import { CommentsComponent } from './comments/comments.component';
@@ -69,7 +70,8 @@ import { RecommendedService } from './services/database/recommended/recommended.
     MatTableModule,
     MatInputModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
   ],
   providers: [
     RouterService,

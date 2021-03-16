@@ -3,48 +3,71 @@
         <mat-card-header class="center">
             <mat-card-title class="center">Sign Up</mat-card-title>
         </mat-card-header>
-        <mat-card-content class="center">
-            <div style="margin-top: 60px;">
-                <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Username</mat-label>
-                        <input class="username" matInput matInput [formControl]='username'>
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Name</mat-label>
-                        <input class="username" matInput matInput [formControl]='name'>
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Date of Birth</mat-label>
-                        <input class="username" matInput matInput [formControl]='dob' type="date">
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Password</mat-label>
-                        <input matInput matInput [formControl]='password' type="password">
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Confirm Password</mat-label>
-                        <input matInput matInput [formControl]='confirmPassword' type="password">
-                    </mat-form-field>
+        <div class="card-content">
+            <mat-card-content class="center">
+                <div>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input class="username" matInput matInput [formControl]='username'>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input class="username" matInput matInput [formControl]='name'>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input class="Email" matInput matInput [formControl]='email'>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Phone number</mat-label>
+                            <input class="Phone" matInput matInput [formControl]='phone'>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Date of Birth</mat-label>
+                            <input class="username" matInput matInput [formControl]='dob' type="date">
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Gender</mat-label>
+                            <mat-select [formControl]="gender">
+                                <mat-select-trigger>{{gender.value}}</mat-select-trigger>
+                                <mat-option *ngFor="let gender of genderList" [value]="gender">{{gender}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput matInput [formControl]='password' type="password">
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput matInput [formControl]='confirmPassword' type="password">
+                        </mat-form-field>
+                    </p>
+                </div>
+            </mat-card-content>
+            <mat-card-actions class="button ">
+                <button mat-stroked-button class="center " (click)="register()">SignUp</button>
+            </mat-card-actions>
+
+            <div class="center " style="margin-top: 40px; margin-bottom: 60px;" *ngIf="errorText ">
+                <p style="color:red ">
+                    {{errorText}}
                 </p>
             </div>
-        </mat-card-content>
-        <mat-card-actions class="button ">
-            <button mat-stroked-button class="center " (click)="register() ">SignUp</button>
-        </mat-card-actions>
-
-        <div class="center " style="margin-top: 80px; margin-bottom: 60px;" *ngIf="errorText ">
-            <p style="color:red ">
-                {{errorText}}
-            </p>
         </div>
     </mat-card>
 </div>
