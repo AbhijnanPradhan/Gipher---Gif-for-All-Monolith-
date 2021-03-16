@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.fourhorsemen.controller.response.MessageResponse;
 import com.ibm.fourhorsemen.controller.response.ResponseMessages;
 import com.ibm.fourhorsemen.model.CommentBlock;
-import com.ibm.fourhorsemen.model.DataBlock;
 import com.ibm.fourhorsemen.model.ExtendedCommentBlock;
-import com.ibm.fourhorsemen.model.ExtendedDataBlock;
 import com.ibm.fourhorsemen.service.CommentService;
 
 @CrossOrigin(origins = "*")
@@ -64,7 +63,7 @@ public class CommentsController {
 			
 			extendedBlock.setCommentID(commentId);
 			commentService.addComment(extendedBlock);
-			return ResponseEntity.ok(ResponseMessages.SUCCESS);
+			return ResponseEntity.ok(new MessageResponse(ResponseMessages.SUCCESS));
 		}catch(IllegalArgumentException e){
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
