@@ -1,7 +1,7 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DataBlock } from 'src/app/interfaces/ApiDataInterface';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { DataBlock } from '../../../interfaces/ApiDataInterface';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class RecommendedService {

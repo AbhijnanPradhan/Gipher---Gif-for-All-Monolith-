@@ -1,0 +1,20 @@
+<mat-card  class="commentMain">
+    <h4>{{comment.comment}}</h4>
+    <br/>
+    <table>
+        <tr>
+            <td class = "commentLikeCount">
+                {{comment.likes}} likes
+            </td>
+            <td class="commentLikeButton">
+                <button mat-mini-fab color="basic" aria-label="Example icon button with a menu icon" (click)="liked()" *ngIf="!likeStatus">
+                    <mat-icon>thumb_up</mat-icon>
+                </button>
+                <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon" (click)="liked()" *ngIf="likeStatus">
+                    <mat-icon>thumb_up</mat-icon>
+                </button>
+            </td>
+        </tr>
+    </table>
+    </mat-card>
+    &nbsp;

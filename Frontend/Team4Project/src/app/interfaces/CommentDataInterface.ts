@@ -1,6 +1,7 @@
 
 export class CommentDataInterface{
-    public comment: string =Math.random().toString(36).substring(2);
+    public commentId='';
+	public comment: string =Math.random().toString(36).substring(2);
     public likes:number = Math.floor((Math.random()*10)+1);
     public userID: string="";
 	public gifID: string="";
@@ -9,4 +10,5 @@ export class CommentDataInterface{
 	public likerIDs: Array<string> =[];
 	public edited:boolean = false;
     constructor(){}
+	
 }

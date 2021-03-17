@@ -1,10 +1,6 @@
 package com.ibm.fourhorsemen.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 public class CommentBlock {
-	private String commentID;
 	
 	private String userID;
 	private String gifID;
@@ -16,11 +12,9 @@ public class CommentBlock {
 	}
 	
 	/**
-	 * @param commentID
 	 * @param userID
 	 * @param gitID
 	 * @param comment
-	 * @param likes
 	 */
 	
 	public CommentBlock(String userID, String gifID, String comment) {
@@ -30,9 +24,6 @@ public class CommentBlock {
 		this.comment = comment;
 	}
 
-	public String getCommentID() {
-		return commentID;
-	}
 	public String getUserID() {
 		return userID;
 	}
@@ -43,9 +34,6 @@ public class CommentBlock {
 		return comment;
 	}
 
-	public void setCommentID(String commentID) {
-		this.commentID = commentID;
-	}
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}

@@ -29,11 +29,9 @@ public class CommentService {
 	@Transactional
 	public int removeComment(String commentID, String userID) {
 		Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(commentID);
-		
 		if (reqComment.isPresent()) {
 			if(reqComment.get().getUserID() == userID) {
 				commentDataRepository.deleteById(commentID); // try not required as condition tested in before if
-				
 				//successful removal
 				return 1;
 			}else {
@@ -116,23 +114,46 @@ Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(comme
 	}
 	
 	public List<ExtendedCommentBlock> getCommentsByGifID(String gifID) {
-		List reqExtendedCommentBlock = new ArrayList<ExtendedCommentBlock>();
-		for(ExtendedCommentBlock item: commentDataRepository.findAll()) {
-			if(item.getGifID() == gifID)
-				reqExtendedCommentBlock.add(item);
-		}
+		List<ExtendedCommentBlock> reqExtendedCommentBlock = commentDataRepository.findCommentsByGifId(gifID);
+//		List reqExtendedCommentBlock = new ArrayList<ExtendedCommentBlock>();
+//		for(ExtendedCommentBlock item: commentDataRepository.findAll()) {
+//			if(item.getGifID() == gifID)
+//				reqExtendedCommentBlock.add(item);
+//		}
 		return reqExtendedCommentBlock;
 	}
 	
 	public List<ExtendedCommentBlock> getCommentsByUserID(String userID){
 		List<ExtendedCommentBlock> reqExtendedCommentBlock = commentDataRepository.findCommentsByUserId(userID);
-		
-//		List reqExtendedCommentBlock = new ArrayList<ExtendedCommentBlock>();
-//		for(ExtendedCommentBlock item: commentDataRepository.findAll()) {
-//			if(item.getUserID() == userID)
-//				reqExtendedCommentBlock.add(item);
-//		}
 		return reqExtendedCommentBlock;
+	}
+	
+//	public int getCommentLikedStatusByUserIdAndCommentId(String userID,String commentID) {
+//		ExtendedCommentBlock res = getCommentByCommentID(commentID);
+//		if(res!=null) {
+//			if(res.likerIDPresent(userID)) {
+//				// userID found
+//				return 1;
+//				}
+//			// commentID found but userID not a liker
+//			return 0;
+//		}
+//		// commentID not found
+//		return -1;
+//	
+//	}
+	
+	public ExtendedCommentBlock getCommentByCommentID(String commentID) {
+		Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(commentID);
+
+		if(reqComment.isPresent()) {
+			ExtendedCommentBlock res = new ExtendedCommentBlock(reqComment.get().getUserID(),reqComment.get().getGifID(),reqComment.get().getComment(),
+					reqComment.get().getCommentID(),reqComment.get().getLikes(),reqComment.get().getLikerIDs(),reqComment.get().isEdited());
+			
+			return res;
+		}
+			
+		return null;	
 	}
 	
 	
