@@ -74,7 +74,7 @@ public class JwtUtil {
 		
 	}
 	
-	public List<SimpleGrantedAuthority> getRolesFromToke(String token){
+	public List<SimpleGrantedAuthority> getRolesFromToken(String token){
 		Claims claims=Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 		List<SimpleGrantedAuthority> roles= null;
 		Boolean isAdmin =claims.get("isAdmin",Boolean.class);
