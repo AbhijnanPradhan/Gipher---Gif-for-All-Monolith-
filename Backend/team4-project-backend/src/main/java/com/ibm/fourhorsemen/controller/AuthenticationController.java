@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ibm.fourhorsemen.configuration.CustomerUserDetailsService;
+import com.ibm.fourhorsemen.configuration.CustomUserDetailsService;
 import com.ibm.fourhorsemen.configuration.JwtUtil;
 import com.ibm.fourhorsemen.model.AuthenticationRequest;
 import com.ibm.fourhorsemen.model.AuthenticationResponse;
@@ -27,11 +27,12 @@ public class AuthenticationController {
 	private AuthenticationManager authenticationManager;
 	
 	@Autowired
-	private CustomerUserDetailsService userDetailsService;
+	private CustomUserDetailsService userDetailsService;
 	
 	@Autowired
 	private JwtUtil jwtTokenUtil;
 	
+	@RequestMapping(value="/authenticate" ,method =RequestMethod.POST )
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
 		
 		try {
