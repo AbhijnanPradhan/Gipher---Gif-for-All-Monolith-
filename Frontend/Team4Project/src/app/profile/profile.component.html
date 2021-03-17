@@ -1,12 +1,12 @@
 <app-header [searchEnabler]='showSearchBar' [profileEnabler]='showProfileLink'></app-header>
 <div>
-    <img [src]='coverImgUrl' class="coverImg"/>
+    <img [src]='coverImgUrl' class="coverImg" />
     <div>
-        <img [src]='profileAvatar' class="profileImg" /> 
+        <img [src]='profileAvatar' class="profileImg" />
     </div>
 </div>
 <div class="profileContent">
-    <h2>{{user.username}}</h2>
+    <h2>{{user.userId}}</h2>
     <div class="profileTable">
         <table>
             <tr>
@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <th>Date of Birth</th>
-                <td>{{user.dob.getDate()}}-{{months[user.dob.getMonth()]}}-{{user.dob.getFullYear()}}</td>
+                <td>{{user.dateOfBirth.getDate()}}-{{months[user.dateOfBirth.getMonth()]}}-{{user.dateOfBirth.getFullYear()}}</td>
             </tr>
             <tr>
                 <th>Age</th>
@@ -26,5 +26,5 @@
 </div>
 
 <div class="bottomDiv">
-    <p style="display: none;" >Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+    <p style="display: none;">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
 </div>

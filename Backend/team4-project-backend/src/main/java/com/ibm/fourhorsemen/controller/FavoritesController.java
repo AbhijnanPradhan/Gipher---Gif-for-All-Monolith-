@@ -19,7 +19,7 @@ import com.ibm.fourhorsemen.model.ExtendedDataBlock;
 import com.ibm.fourhorsemen.model.UserDataBlockMap;
 import com.ibm.fourhorsemen.service.FavoritesService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/favorites")
 public class FavoritesController {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { LoginService } from '../services/database/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
     username:'',
     password:''
   }
-  constructor() { }
+  constructor(private loginService :LoginService) { }
 
   ngOnInit(): void {
   }
@@ -20,10 +21,16 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     console.log("login");
     if(this.login.username!='' && this.login.password!=''){
-
+      this.loginService.tokenGenerator(this.login).subscribe(
+        (response:any)=>{
+          this.loginService.loginUser(response.token);
+        },error=>{
+          console.log('error '+error);
+        }
+      )
     }
     else{
-    
+      console.log('error ');
     }
 
   }

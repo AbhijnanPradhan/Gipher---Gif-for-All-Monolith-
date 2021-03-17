@@ -13,4 +13,6 @@ public class ResponseMessages {
 	public static String USERID_MISMATCH = "Not User's comment";
 	public static String COMMENT_NOT_EXISTS = "Comment does not exists";
 	public static String USER_ALREADY_LIKED = "User has already like this comment.";
+	
+	public static final String USER_EXISTS = "User exists";
 }

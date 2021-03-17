@@ -20,7 +20,7 @@ import com.ibm.fourhorsemen.model.DataBlock;
 import com.ibm.fourhorsemen.model.ExtendedDataBlock;
 import com.ibm.fourhorsemen.service.RecommendedService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/recommended")
 public class RecommendedController {

@@ -1,20 +1,22 @@
 package com.ibm.fourhorsemen.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.fourhorsemen.controller.response.MessageResponse;
+import com.ibm.fourhorsemen.controller.response.ResponseMessages;
+import com.ibm.fourhorsemen.controller.response.UserResponse;
 import com.ibm.fourhorsemen.model.User;
 import com.ibm.fourhorsemen.service.UserService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -26,25 +28,15 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<User> registerUser(@RequestBody User user) {
+	public ResponseEntity<?> registerUser(@RequestBody User user) {
 		try {
-			if (userService.registerUser(user))
-				return ResponseEntity.ok(user);
-			else
-				return ResponseEntity.status(HttpStatus.CONFLICT).build();
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
-	}
-
-	@PostMapping("/validate")
-	public ResponseEntity<Boolean> validateUser(@RequestParam("userId") String userId,
-			@RequestParam("password") String password) {
-		try {
-			if (userService.validateUser(userId, password))
-				return ResponseEntity.ok(true);
-			else
-				return ResponseEntity.ok(false);
+			if (userService.registerUser(user)) {
+				UserResponse response = new UserResponse();
+				BeanUtils.copyProperties(user, response);
+				response.setMessage(ResponseMessages.SUCCESS);
+				return ResponseEntity.ok(response);
+			} else
+				return ResponseEntity.ok(new MessageResponse(ResponseMessages.USER_EXISTS));
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
