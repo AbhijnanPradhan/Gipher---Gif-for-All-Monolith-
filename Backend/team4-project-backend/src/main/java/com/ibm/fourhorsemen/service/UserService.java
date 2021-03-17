@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ibm.fourhorsemen.model.User;
@@ -14,10 +14,10 @@ import com.ibm.fourhorsemen.repository.UserRepository;
 @Service
 public class UserService {
 	private UserRepository userRepository;
-	private BCryptPasswordEncoder encoder;
+	private PasswordEncoder encoder;
 
 	@Autowired
-	public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder) {
+	public UserService(UserRepository userRepository, PasswordEncoder encoder) {
 		this.userRepository = userRepository;
 		this.encoder = encoder;
 	}
@@ -56,12 +56,6 @@ public class UserService {
 		} catch (NoSuchElementException e) {
 			return null;
 		}
-	}
-
-	@Transactional
-	public boolean validateUser(String userId, String password) {
-		// TODO Sufian
-		return true;
 	}
 
 	@Transactional

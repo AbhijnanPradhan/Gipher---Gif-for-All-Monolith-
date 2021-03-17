@@ -1,15 +1,17 @@
 .center{
     margin:auto;
     border:2px solid #eeee;
-    padding: 10px;
-    width:50%;
+    padding:10px;
+    width:50%
 }
 .text-center{
-    text-align: center  ;
+    text-align:center;
+
 }
+
 .full-width{
-    width:50%;
+    width:50%
 }
 button{
-    margin: 5px;
+    margin:5px;
 }
