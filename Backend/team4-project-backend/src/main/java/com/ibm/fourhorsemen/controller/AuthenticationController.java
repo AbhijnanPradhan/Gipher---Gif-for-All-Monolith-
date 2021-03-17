@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ibm.fourhorsemen.configuration.CustomUserDetailsService;
 import com.ibm.fourhorsemen.configuration.JwtUtil;
+import com.ibm.fourhorsemen.controller.response.AuthenticationResponse;
+import com.ibm.fourhorsemen.controller.response.ResponseMessages;
 import com.ibm.fourhorsemen.model.AuthenticationRequest;
-import com.ibm.fourhorsemen.model.AuthenticationResponse;
-import com.ibm.fourhorsemen.model.UserDTO;
+import com.ibm.fourhorsemen.service.CustomUserDetailsService;
 
 
 
@@ -36,26 +36,15 @@ public class AuthenticationController {
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
 		
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));	
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserId(), authenticationRequest.getPassword()));	
 		}catch(DisabledException d) {
 			throw new Exception("USER_DISABLED",d);
 		}catch(BadCredentialsException d) {
 			throw new Exception("Bad credential",d);
 		}
 		
-		UserDetails userDetails=userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+		UserDetails userDetails=userDetailsService.loadUserByUsername(authenticationRequest.getUserId());
 		String token=jwtTokenUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new AuthenticationResponse(token));
+		return ResponseEntity.ok(new AuthenticationResponse(ResponseMessages.SUCCESS, authenticationRequest.getUserId(), token));
 	}
-	
-	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody UserDTO user){
-		return ResponseEntity.ok(userDetailsService.save(user));
-		
-		
-	}
-	
-	
-	
-	
 }
