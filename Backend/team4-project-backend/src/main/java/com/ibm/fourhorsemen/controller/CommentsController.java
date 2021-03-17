@@ -2,6 +2,7 @@ package com.ibm.fourhorsemen.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.fourhorsemen.controller.response.ExtendedCommentBlockResponse;
 import com.ibm.fourhorsemen.controller.response.MessageResponse;
 import com.ibm.fourhorsemen.controller.response.ResponseMessages;
 import com.ibm.fourhorsemen.model.CommentBlock;
@@ -53,6 +55,25 @@ public class CommentsController {
 		}
 	}
 	
+//	@GetMapping("/isLikedByUser")
+//	public ResponseEntity<String> getCommentLikedStatusByUserIdAndCommentId(@RequestParam String commentId,@RequestParam String userId){
+//		int response = commentService.getCommentLikedStatusByUserIdAndCommentId(userId, commentId);
+//		/** 
+//		 * response 0 - commentID found but userID not a liker
+//		 * response 1 - successful
+//		 * response -1 - commentID does not exist
+//		 */
+//		
+//		if(response == 0) {
+//			return ResponseEntity.ok(ResponseMessages.USERID_MISMATCH);
+//		}else if(response == 1) {
+//			return ResponseEntity.ok(ResponseMessages.SUCCESS);
+//		}else {
+//			return ResponseEntity.ok(ResponseMessages.COMMENT_NOT_EXISTS);
+//		}
+//		
+//	}
+	
 	@PostMapping("/add")
 	public ResponseEntity<?> addComment(@RequestBody CommentBlock data){
 		try {
@@ -63,7 +84,12 @@ public class CommentsController {
 			
 			extendedBlock.setCommentID(commentId);
 			commentService.addComment(extendedBlock);
-			return ResponseEntity.ok(new MessageResponse(ResponseMessages.SUCCESS));
+			ExtendedCommentBlockResponse res = new ExtendedCommentBlockResponse(extendedBlock);
+			res.setMessage(ResponseMessages.SUCCESS);
+			return ResponseEntity.ok(res);
+			
+//			return ResponseEntity.ok(ResponseMessages.SUCCESS);
+			
 		}catch(IllegalArgumentException e){
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
@@ -72,6 +98,7 @@ public class CommentsController {
 	@PostMapping("/remove")
 	public ResponseEntity<?> removeComment(@RequestParam String commentId,@RequestParam String userId){
 		try {
+			ExtendedCommentBlockResponse res = new ExtendedCommentBlockResponse(commentService.getCommentByCommentID(commentId)) ;
 			int response = commentService.removeComment(commentId,userId);
 			/** 
 			 * response 0 - userId not match
@@ -82,7 +109,8 @@ public class CommentsController {
 			if(response == 0) {
 				return ResponseEntity.ok(ResponseMessages.USERID_MISMATCH);
 			}else if(response == 1) {
-				return ResponseEntity.ok(ResponseMessages.SUCCESS);
+				res.setMessage(ResponseMessages.SUCCESS);
+				return ResponseEntity.ok(res);
 			}else {
 				return ResponseEntity.ok(ResponseMessages.COMMENT_NOT_EXISTS);
 			}
@@ -105,7 +133,9 @@ public class CommentsController {
 			if(response == 0) {
 				return ResponseEntity.ok(ResponseMessages.USERID_MISMATCH);
 			}else if(response == 1) {
-				return ResponseEntity.ok(ResponseMessages.SUCCESS);
+				ExtendedCommentBlockResponse res = new ExtendedCommentBlockResponse(commentService.getCommentByCommentID(commentId)) ;
+				res.setMessage(ResponseMessages.SUCCESS);
+				return ResponseEntity.ok(res);
 			}else {
 				return ResponseEntity.ok(ResponseMessages.COMMENT_NOT_EXISTS);
 			}
@@ -128,7 +158,9 @@ public class CommentsController {
 			if(response == 0) {
 				return ResponseEntity.ok(ResponseMessages.USER_ALREADY_LIKED);
 			}else if(response == 1) {
-				return ResponseEntity.ok(ResponseMessages.SUCCESS);
+				ExtendedCommentBlockResponse res = new ExtendedCommentBlockResponse(commentService.getCommentByCommentID(commentId)) ;
+				res.setMessage(ResponseMessages.SUCCESS);
+				return ResponseEntity.ok(res);
 			}else {
 				return ResponseEntity.ok(ResponseMessages.COMMENT_NOT_EXISTS);
 			}
@@ -151,7 +183,9 @@ public class CommentsController {
 			if(response == 0) {
 				return ResponseEntity.ok(ResponseMessages.USER_ALREADY_LIKED);
 			}else if(response == 1) {
-				return ResponseEntity.ok(ResponseMessages.SUCCESS);
+				ExtendedCommentBlockResponse res = new ExtendedCommentBlockResponse(commentService.getCommentByCommentID(commentId)) ;
+				res.setMessage(ResponseMessages.SUCCESS);
+				return ResponseEntity.ok(res);
 			}else {
 				return ResponseEntity.ok(ResponseMessages.COMMENT_NOT_EXISTS);
 			}

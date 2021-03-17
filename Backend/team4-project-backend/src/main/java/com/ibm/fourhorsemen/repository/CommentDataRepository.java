@@ -14,5 +14,7 @@ public interface CommentDataRepository extends MongoRepository<ExtendedCommentBl
 
 	@Query("{'userID' : ?0}")
 	List<ExtendedCommentBlock> findCommentsByUserId(String userId);
+	@Query("{'gifID' : ?0}")
+	List<ExtendedCommentBlock> findCommentsByGifId(String gifId);
 }
 
