@@ -8,7 +8,8 @@ import { RecommendedService } from '../services/database/recommended/recommended
   styleUrls: ['./recommended.component.css']
 })
 export class RecommendedComponent implements OnInit {
-
+  showSearchBar:boolean = false;
+  showRecommendedLink:boolean = false;
   constructor(private recommendedService: RecommendedService) { }
 
   public dataParts: Array<DataBlock> = [];

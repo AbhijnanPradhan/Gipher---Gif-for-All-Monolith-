@@ -8,7 +8,7 @@ import { LoginService } from '../services/database/login/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  headerFalseSetter:boolean = false;
   login={
     username:'',
     password:''

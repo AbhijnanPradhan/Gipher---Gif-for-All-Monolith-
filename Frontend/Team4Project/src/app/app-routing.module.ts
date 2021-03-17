@@ -7,6 +7,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RecommendedComponent } from './recommended/recommended.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:'error', component:PageNotFoundComponent},
   {path:'profile', component: ProfileComponent, canActivate: [CanActivateRouteGuard]},
   {path:'favs', component: FavoriteComponent, canActivate: [CanActivateRouteGuard]},
+  {path:'recommended', component: RecommendedComponent, canActivate: [CanActivateRouteGuard]},
   {path:'home', component: DashboardComponent, canActivate: [CanActivateRouteGuard]},
 
   {path:'home/details/:id', component: CardDetailsComponent, canActivate: [CanActivateRouteGuard]},

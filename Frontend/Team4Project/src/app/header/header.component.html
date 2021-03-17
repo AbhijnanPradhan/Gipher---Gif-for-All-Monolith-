@@ -1,8 +1,8 @@
 <ul>
   <li style="float:inline-start"><a class="logo" (click)="nextPage('home')"><img src='../../assets/Images/Logo.gif' alt="GIPHER LOGO" width="60px" />&nbsp;GIPHER-Gif for all&nbsp;</a></li>
   
-  <li style="float:right">
-    <a class="logout" (click)="nextPage('logout')">Logout</a>
+  <li style="float:right" *ngIf='homeEnabler'>
+    <a class="logout" (click)="nextPage('logout')" matTooltip="click here to logout">Logout</a>
   </li>
   
   <li style="float:right" *ngIf='profileEnabler'>
@@ -13,14 +13,20 @@
   </li>
   
   <li style="float:right" *ngIf='favoriteEnabler'>
-    <a class="active" class="content" (click)="nextPage('favs')" matTooltip="Your selected favorites">
+    <a class="content" (click)="nextPage('favs')" matTooltip="Your selected favorites">
       <fa-icon [icon]="faFav"></fa-icon>
     </a>
   </li>
 
+  <li style="float:right" *ngIf='recommendEnabler'>
+    <a class="content" (click)="nextPage('recom')" matTooltip="Your selected Recommended">
+      <fa-icon [icon]="faStar"></fa-icon>
+    </a>
+  </li>
 </ul>
 <div class="input-group mb-3" *ngIf='searchEnabler'>
   <input type="text" class="form-control" placeholder="Search for gif here" aria-label="Search"
-  name='searchString' [(ngModel)]='searchString' >
+  name='searchString' [(ngModel)]='searchString' matTooltip="Remember to click on search button(on the right) or press Enter to search" 
+  (keyup)="onKey($event)">
   <button class="btn btn-outline-dark" type="button" id="button-addon2" (click)="searchClicked()"><fa-icon [icon]="faSearch"></fa-icon></button>
 </div>

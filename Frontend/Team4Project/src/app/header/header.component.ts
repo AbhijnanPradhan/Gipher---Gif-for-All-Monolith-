@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { faSearch,faUser,faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faSearch,faUser,faHeart,faStar } from '@fortawesome/free-solid-svg-icons';
 import { RouterService } from '../services/router.service';
 
 @Component({
@@ -13,10 +13,13 @@ export class HeaderComponent implements OnInit {
   faSearch = faSearch;
   faUser = faUser;
   faFav = faHeart;
+  faStar = faStar;
   searchString: string = '';
   @Input() searchEnabler: boolean = true;
   @Input() profileEnabler:boolean = true;
   @Input() favoriteEnabler: boolean = true;
+  @Input() recommendEnabler:boolean = true;
+  @Input() homeEnabler:boolean = true;
   eventSearchButtonClicked = new EventEmitter<string>();
   searchClicked(){
     console.log('header boi:'+this.searchString);
@@ -38,10 +41,20 @@ export class HeaderComponent implements OnInit {
         this.router.routeToFavorites();
         break;
       case 'home':
-        this.router.routeToHome();
+        if(this.homeEnabler)
+          this.router.routeToHome();
+        else
+          this.router.routeToSignup();
+        break;
+      case 'recom':
+        this.router.routeToRecommended();
         break;
       default:
         break;
     }
+  }
+  onKey(event: any) { // without type info
+    if(event.key == 'Enter')
+      this.searchClicked();
   }
 }

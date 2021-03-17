@@ -13,11 +13,12 @@ export class SearchResultComponent implements OnInit,OnChanges {
   @Input() searchString : string='winne';
   searchData = new ApiDataInterface();
   dataParts: Array<DataBlock>=[];
-  limit:number = 3;
+  limit: number = 4;
   numEnabler:boolean = false;
-  url:string = 'https://api.giphy.com/v1/gifs/trending?api_key=YIjy7FhdwY94RyTHx6qenE65qjGw49Tx&limit=6&rating=g';
+  url:string = 'https://api.giphy.com/v1/gifs/trending?api_key=YIjy7FhdwY94RyTHx6qenE65qjGw49Tx&limit=12&rating=g';
   faFav = faHeart;
   faRecommend = faStar;
+  message:string = '';
   
   constructor(private searchService: SearchService) { }
 
@@ -45,8 +46,17 @@ export class SearchResultComponent implements OnInit,OnChanges {
     });
   }
   changeBoi(UpdatedLimit:string):void{
-    this.url = 'https://api.giphy.com/v1/gifs/search?api_key=YIjy7FhdwY94RyTHx6qenE65qjGw49Tx&q='+this.searchString+'&limit='+UpdatedLimit+'&offset=0&rating=g&lang=en';
-    this.checker(this.url);
+    if(UpdatedLimit!=null){
+      if(Number(UpdatedLimit)>0){
+        this.url = 'https://api.giphy.com/v1/gifs/search?api_key=YIjy7FhdwY94RyTHx6qenE65qjGw49Tx&q='+this.searchString+'&limit='+UpdatedLimit+'&offset=0&rating=g&lang=en';
+        this.checker(this.url);
+        this.message = "Will show "+UpdatedLimit+" results";
+      }else{
+        this.message = "Can not show negative results";
+      }
+    }else{
+      this.message = "showing last set values as field is empty";
+    }
   }
   gifer(dataParam: ApiDataInterface){
     this.dataParts = [];

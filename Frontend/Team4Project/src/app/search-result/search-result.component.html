@@ -2,8 +2,10 @@
 <h2 *ngIf="searchString!=''">Search Results for {{searchString}}:</h2>
 <!-- <button (click)='checker()'>click here</button> -->
 <!-- <img [src]='link' *ngFor='let link of gifLinks'/> -->
-<input type="number" min="1" class="form-control" placeholder="Limit for gif here." aria-label="Limit" name='limit' [ngModel]='limit' (ngModelChange)='changeBoi($event)' *ngIf='numEnabler' required>
-<app-card [dataArray]='dataParts' [columnCount]='3'></app-card>
+<input type="number" min="1" class="form-control" placeholder="Limit for gif here." 
+aria-label="Limit" name='limit' [ngModel]='limit' (ngModelChange)='changeBoi($event)' *ngIf='numEnabler' required
+[matTooltip]='message'>
+<app-card [dataArray]='dataParts' [columnCount]='4'></app-card>
 <br/><br/><br/><br/>
 
 <!-- --------------------------------------------------------------------------- -->
