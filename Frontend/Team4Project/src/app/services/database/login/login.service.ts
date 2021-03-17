@@ -8,35 +8,37 @@ import { UserInterface } from 'src/app/interfaces/UserInterface';
 })
 export class LoginService {
 
-  url="http://localhost:8080";
+  url = "http://localhost:8080";
   constructor(private httpClient: HttpClient) { }
 
   signUp(user: UserInterface): Observable<any> {
     return this.httpClient.post('http://localhost:8080/register', user, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+      }
     })
   }
 
-  loginUser(token:string){
-    localStorage.setItem("token",token);
+  loginUser(token: string) {
+    localStorage.setItem("token", token);
   }
-  loginStatus(){
-    let token=localStorage.getItem("token");
-    if(token!=null && token !==undefined)
-    return true;
+  loginStatus() {
+    let token = localStorage.getItem("token");
+    if (token != null && token !== undefined)
+      return true;
     else
-    return false;
+      return false;
   }
 
-  fetchToken(){
+  fetchToken() {
     return localStorage.getItem("token");
   }
 
-  tokenGenerator(login:any){
-    return this.httpClient.post(`${this.url}/token`,login);
+  tokenGenerator(login: any) {
+    return this.httpClient.post(`${this.url}/token`, login);
   }
 
-  logOut(){
+  logOut() {
     localStorage.removeItem("token");
     return true;
   }

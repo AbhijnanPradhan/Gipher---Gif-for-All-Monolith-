@@ -1,11 +1,11 @@
 export class UserInterface {
 
-    userId: string = '';
-    name: string = '';
-    email: string = '';
-    gender: string = '';
-    phone: string = '';
-    dateOfBirth: Date = new Date();
+    userId: string = 'abij1234';
+    name: string = 'Abhijnan Pradhan';
+    email: string = 'abhijnan@abc.com';
+    gender: string = 'male';
+    phone: string = '1234567890';
+    dateOfBirth: Date = new Date('1996-01-01');
     dateAdded: Date = new Date();
     password: string = '';
 

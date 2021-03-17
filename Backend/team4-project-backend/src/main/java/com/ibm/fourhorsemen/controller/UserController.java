@@ -16,7 +16,7 @@ import com.ibm.fourhorsemen.controller.response.UserResponse;
 import com.ibm.fourhorsemen.model.User;
 import com.ibm.fourhorsemen.service.UserService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 public class UserController {
