@@ -18,6 +18,7 @@ export class RecommendedComponent implements OnInit {
       .subscribe(dataBlocks => {
         console.log('get recommended recommended component', dataBlocks);
         this.dataParts = dataBlocks;
+        console.log('Data part', this.dataParts)
       });
     this.recommendedService.getRecommended();
   }

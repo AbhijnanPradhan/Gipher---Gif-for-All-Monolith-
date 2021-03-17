@@ -21,7 +21,7 @@ import com.ibm.fourhorsemen.model.CommentBlock;
 import com.ibm.fourhorsemen.model.ExtendedCommentBlock;
 import com.ibm.fourhorsemen.service.CommentService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/comment")
 public class CommentsController {
