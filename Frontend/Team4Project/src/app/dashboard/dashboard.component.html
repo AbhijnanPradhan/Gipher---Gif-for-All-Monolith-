@@ -1,7 +1,4 @@
-<app-header (eventSearchButtonClicked)='searchString=$event' [searchEnabler]='canShowSearchBar'></app-header>
-<div class="leftdiv">
-    <app-search-result [searchString]='searchString'></app-search-result>
-</div>
-<div class="rightdiv">
-    <app-recommended></app-recommended>
-</div>
+<app-header (eventSearchButtonClicked)='searchString=$event' [searchEnabler]='canShowSearchBar' ></app-header>
+<app-search-result [searchString]='searchString'></app-search-result>
+
+

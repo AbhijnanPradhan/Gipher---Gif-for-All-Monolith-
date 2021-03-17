@@ -7,7 +7,6 @@ public class ExtendedDataBlock extends DataBlock {
 	
 	private long recommendCount;
 	
-	//TODO comment things
 	
 	public ExtendedDataBlock() {
 		

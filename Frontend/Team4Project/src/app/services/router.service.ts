@@ -7,9 +7,7 @@ import { Location } from '@angular/common';
 })
 export class RouterService {
   constructor(private router: Router, private location: Location) { }
-  routeToDashboard() {
-    this.router.navigate(['home']);
-  }
+
   routeToLogin() {
     this.router.navigate(['login']);
   }
@@ -27,5 +25,12 @@ export class RouterService {
   }
   routeToHome(){
     this.router.navigate(['home']);
+  }
+  routeToRecommended(){
+    this.router.navigate(['recommended']);
+  }
+  routeToSignup(){
+    this.router.navigate(['signup']);
+
   }
 }

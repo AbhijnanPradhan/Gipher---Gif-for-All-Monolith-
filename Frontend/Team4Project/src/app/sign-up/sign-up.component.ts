@@ -10,7 +10,7 @@ import { RouterService } from '../services/router.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
+  headerFalseSetter:boolean = false;
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
   confirmPassword = new FormControl('', [Validators.required]);

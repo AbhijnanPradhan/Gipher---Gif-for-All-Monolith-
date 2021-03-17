@@ -10,14 +10,8 @@ export class RecommendedService {
   private messageSubject: BehaviorSubject<String> = new BehaviorSubject(new String());
   private recommends: Array<DataBlock> = [];
 
-  private bearerToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYXlhbjE2IiwiaXNBZG1pbiI6dHJ1ZSwiZXhwIjoxNjE1OTkyNzc2LCJpYXQiOjE2MTU5NzQ3NzZ9.8jxmxdp0d1XrzvqBpVZ3RibQOANmlyNS3TRgZVH_ZH0cPL_005bkPV0ZavG2xume1G4H1U0pzyExFL01XsH0Vg';
-
-  // private headers = {
-  //   headers: {
-  //     'Authorization': `Bearer ${this.bearerToken}`,
-  //     'Content-Type': 'application/json'
-  //   }
-  // };
+  private bearerToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBYmhpam5hbjMiLCJpc0FkbWluIjp0cnVlLCJleHAiOjE2MTYwMDYxNDMsImlhdCI6MTYxNTk4ODE0M30.HSWW67JyynnNuyQlZDNuuHbs_rTpWxt_yADnh6NWDExiOnBsfHnCaJFUoWYiIuy5k8zIsUa02FCIHbwS0NZq2A';
+  private userId:string = 'Abhijnan3';
   private headers = new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', 'http://localhost:8080')
@@ -26,8 +20,7 @@ export class RecommendedService {
   constructor(private http: HttpClient) { }
 
   getRecommended() {
-    console.log('Called');
-    this.http.get<Array<any>>('http://localhost:8080/recommended/get?userId=sayan16', { headers: this.headers })
+    this.http.get<Array<any>>(`http://localhost:8080/recommended/get?userId=${this.userId}`, { headers: this.headers })
       .subscribe(data => {
         console.log('GetRecommended response', data);
         this.recommends = data;
@@ -39,7 +32,7 @@ export class RecommendedService {
     const headers = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.bearerToken}`)
     };
-    this.http.post<any>('http://localhost:8080/recommended/add?userId=sayan16', data, { headers: this.headers })
+    this.http.post<any>('http://localhost:8080/recommended/add?userId=Abhijnan3', data, { headers: this.headers })
       .subscribe(data => {
         console.log('AddRecommended response', data);
         this.messageSubject.next(data.message);
@@ -59,4 +52,12 @@ export class RecommendedService {
   getMessageSubject(): BehaviorSubject<String> {
     return this.messageSubject;
   }
+
+  setToken(token:string){
+    this.bearerToken = token;
+  }
+  setUserId(userId:string){
+    this.userId = userId;
+  }
+
 }
