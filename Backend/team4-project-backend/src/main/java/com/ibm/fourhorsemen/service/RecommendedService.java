@@ -63,10 +63,10 @@ public class RecommendedService {
 				block.setRecommendCount(block.getRecommendCount() - 1);
 				resultBlock = dataRepository.save(block);
 
-				// adding the mapping of gifId and userId
-				userDataMapRepository.save(map);
+				// removing the mapping of gifId and userId
+				userDataMapRepository.delete(map);
 			} catch (NoSuchElementException e) {
-
+				System.out.println("No such element");
 			}
 		}
 		return resultBlock;
