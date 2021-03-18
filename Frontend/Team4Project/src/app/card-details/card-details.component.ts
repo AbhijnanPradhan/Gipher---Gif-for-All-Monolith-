@@ -4,6 +4,8 @@ import { SearchService } from '../services/api/search.service';
 import { DataBlocker } from '../interfaces/ApiDataInterface';
 import { GifDetailsService } from '../services/database/gif_details/gif-details.service';
 import { RecommendedService } from '../services/database/recommended/recommended.service';
+import { CommentService } from '../services/database/comment/comment.service';
+import { CommentDataInterface } from '../interfaces/CommentDataInterface';
 
 @Component({
   selector: 'app-card-details',
@@ -19,8 +21,12 @@ export class CardDetailsComponent implements OnInit {
   recommended: boolean = false;
   recommendedCount: number = 0;
 
+  commentString:string='';
+  commentMsg:string='';
+
   constructor(private route: ActivatedRoute, private searchService: SearchService,
-    private gifDetailsService: GifDetailsService, private recommendedService: RecommendedService) { }
+    private gifDetailsService: GifDetailsService, private recommendedService: RecommendedService,
+    private commentService: CommentService) { }
 
 
   ngOnInit(): void {
@@ -58,11 +64,26 @@ export class CardDetailsComponent implements OnInit {
   addFavourite() {
     //TODO Sufiyan
   }
+  removeFavorite(){
+    
+  }
 
   addRecommended() {
     this.recommendedService.addRecommended(this.gifDetails.data);
   }
   removeRecommended(){
     // TODO remove
+  }
+  addComment(){
+    if(this.commentString===''){
+      this.commentMsg = "Please type something before posting!";
+    }else{
+      let data : CommentDataInterface = new CommentDataInterface;
+        data.comment = this.commentString;
+        data.gifID = this.gifDetails.data.id;
+        //userId being given inside the service
+      this.commentService.addComment(data);
+      this.commentMsg = "";
+    }
   }
 }
