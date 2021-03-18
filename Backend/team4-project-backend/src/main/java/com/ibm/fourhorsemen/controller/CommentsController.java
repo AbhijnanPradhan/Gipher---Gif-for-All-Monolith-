@@ -98,7 +98,6 @@ public class CommentsController {
 	@PostMapping("/remove")
 	public ResponseEntity<?> removeComment(@RequestParam String commentId,@RequestParam String userId){
 		try {
-			ExtendedCommentBlockResponse res = new ExtendedCommentBlockResponse(commentService.getCommentByCommentID(commentId)) ;
 			int response = commentService.removeComment(commentId,userId);
 			/** 
 			 * response 0 - userId not match
@@ -109,6 +108,7 @@ public class CommentsController {
 			if(response == 0) {
 				return ResponseEntity.ok(ResponseMessages.USERID_MISMATCH);
 			}else if(response == 1) {
+				ExtendedCommentBlockResponse res = new ExtendedCommentBlockResponse(commentService.getCommentByCommentID(commentId)) ;
 				res.setMessage(ResponseMessages.SUCCESS);
 				return ResponseEntity.ok(res);
 			}else {
