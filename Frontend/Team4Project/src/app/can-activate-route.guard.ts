@@ -11,7 +11,10 @@ export class CanActivateRouteGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.loginService.loginStatus();
+    let res = this.loginService.loginStatus();
+    if (!res)
+      this.router.routeToLogin();
+    return res;
     // const promise = this.authService.isUserAuthenticated(this.authService.getBearerToken());
     // return promise.then(res => {
     //   if (res) {
