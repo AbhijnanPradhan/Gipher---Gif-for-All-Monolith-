@@ -10,6 +10,7 @@ import { RouterService } from '../services/router.service';
 })
 export class LoginComponent implements OnInit {
   headerFalseSetter: boolean = false;
+  errorMessage:string='';
   login = {
     username: '',
     password: ''
@@ -20,6 +21,8 @@ export class LoginComponent implements OnInit {
     this.loginService.getMessageSubject().subscribe(message => {
       if (message == "Success")
         this.routerService.routeToHome();
+      else
+          this.errorMessage=message.toString();
     })
   }
 
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit {
     console.log("login");
     if (this.login.username != '' && this.login.password != '') {
       this.loginService.loginUser(this.login.username, this.login.password);
+    
       // .subscribe(
       //   (response:any)=>{
       //     this.loginService.loginUser(response.token);

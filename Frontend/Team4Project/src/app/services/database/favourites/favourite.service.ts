@@ -10,7 +10,7 @@ import { LoginService } from '../login/login.service';
 })
 export class FavouriteService {
   private favouriteSubject :BehaviorSubject<Array<DataBlock>>= new BehaviorSubject(new Array<DataBlock>());
-  private messageSubject:BehaviorSubject<String> = new BehaviorSubject(new Subject());
+  private messageSubject:BehaviorSubject<String> = new BehaviorSubject(new String());
 private favourites:Array<DataBlock>=[];
 
 private bearerToken=this.loginService.fetchToken();
@@ -23,7 +23,7 @@ private headers = new HttpHeaders()
   constructor(private httpClient:HttpClient,private loginService:LoginService) { }
 
   getFavourites(){
-    this.httpClient.get<Array<any>>(`http://localhost:8080/recommended/get?userId=${this.userId}`, { headers: this.headers })
+    this.httpClient.get<Array<any>>(`http://localhost:8080/favourite/get?userId=${this.userId}`, { headers: this.headers })
     .subscribe(data=>{
       this.favourites=data;
       this.favouriteSubject.next(this.favourites);
@@ -34,7 +34,7 @@ private headers = new HttpHeaders()
     const headers={
       headers:new HttpHeaders().set('Authorization', `Bearer ${this.bearerToken}`)
     };
-    this.httpClient.post<any>(`http://localhost:8080/recommended/favorite?userId=${this.userId}`, data, { headers: this.headers })
+    this.httpClient.post<any>(`http://localhost:8080/favorite?userId=${this.userId}`, data, { headers: this.headers })
     .subscribe(data=>{
       this.messageSubject.next(data.message);
       if(data.message=="Success"){
