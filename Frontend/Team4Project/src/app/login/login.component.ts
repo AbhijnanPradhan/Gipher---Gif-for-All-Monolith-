@@ -39,4 +39,8 @@ export class LoginComponent implements OnInit {
       console.log('error ');
     }
   }
+  onSignUp(){
+    this.routerService.routeToSignup();
+
+  }
 }
