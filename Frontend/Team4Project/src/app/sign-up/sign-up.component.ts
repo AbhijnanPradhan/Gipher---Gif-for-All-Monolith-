@@ -33,27 +33,26 @@ export class SignUpComponent implements OnInit {
   }
 
   register() {
-    console.log(this.gender.value);
-    if (this.username.value == '')
+    if (this.username.value === "")
       this.errorText = "Username cannot be blank";
-    else if (this.password.value == '')
+    else if (this.password.value === '')
       this.errorText = "Password cannot be blank";
-    else if (this.name.value == '')
+    else if (this.name.value === '')
       this.errorText = "Name cannot be blank";
-    else if (this.dob.value == '')
+    else if (this.dob.value === '')
       this.errorText = "Date of Birth cannot be blank";
     else if (this.password.value !== this.confirmPassword.value)
       this.errorText = "Password and Confirm Password not matching.";
-    else if (this.email.value == '')
+    else if (this.email.value === '')
       this.errorText = "Email cannot be blank";
-    else if (this.phone.value == '')
+    else if (this.phone.value === '')
       this.errorText = "Phone number cannot be blank";
-    if (this.gender.value == 'Gender' || this.gender.value == '' || !this.gender.value)
+    else if (this.gender.value === 'Gender' || this.gender.value === '' || !this.gender.value)
       this.errorText = "Please select your gender"
     else {
       this.errorText = "Registered Successfully!";
       let today = new Date(Date.now());
-      this.user = new UserInterface()
+      this.user = new UserInterface();
       this.user.maker(this.username.value, this.name.value, this.email.value, this.gender.value, this.phone.value, this.dob.value, today, this.password.value);
       this.loginService.signUp(this.user).subscribe(
         data => {

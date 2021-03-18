@@ -8,6 +8,7 @@ export class UserInterface {
     dateOfBirth: Date = new Date('1996-01-01');
     dateAdded: Date = new Date();
     password: string = '';
+    role:string = 'ROLE_ADMIN';
 
     maker(userId: string, name: string, email: string, gender: string, phone: string, dateOfBirth: Date, dateAdded: Date, password: string) {
         this.userId = userId;
@@ -18,6 +19,7 @@ export class UserInterface {
         this.dateOfBirth = dateOfBirth;
         this.dateAdded = dateAdded;
         this.password = password;
+        this.role = 'ROLE_ADMIN';
     }
 
     getPassword():string{
