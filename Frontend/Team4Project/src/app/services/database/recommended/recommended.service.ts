@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataBlock } from '../../../interfaces/ApiDataInterface';
 import { BehaviorSubject } from 'rxjs';
+import { LoginService } from '../login/login.service';
 
 @Injectable()
 export class RecommendedService {
@@ -10,14 +11,14 @@ export class RecommendedService {
   private messageSubject: BehaviorSubject<String> = new BehaviorSubject(new String());
   private recommends: Array<DataBlock> = [];
 
-  private bearerToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYXlhbjE2IiwiaXNBZG1pbiI6dHJ1ZSwiZXhwIjoxNjE2MDM0NDU5LCJpYXQiOjE2MTYwMTY0NTl9.TrwTsnc9fh6iOps4Y0hMJ2If2qMuDbgPNs-CfxhJjL4r21wqy4KRoXUJdMTQpj4BvaB9TEM4K-YX4dN3vCo5hg';
-  private userId:string = 'Abhijnan3';
+  private bearerToken = this.loginService.fetchToken();
+  private userId: string | null = this.loginService.fetchUserId();
   private headers = new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', 'http://localhost:8080')
     .set('Authorization', `Bearer ${this.bearerToken}`);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loginService: LoginService) { }
 
   getRecommended() {
     this.http.get<Array<any>>(`http://localhost:8080/recommended/get?userId=${this.userId}`, { headers: this.headers })
@@ -32,7 +33,7 @@ export class RecommendedService {
     const headers = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.bearerToken}`)
     };
-    this.http.post<any>('http://localhost:8080/recommended/add?userId=Abhijnan3', data, { headers: this.headers })
+    this.http.post<any>(`http://localhost:8080/recommended/add?userId=${this.userId}`, data, { headers: this.headers })
       .subscribe(data => {
         console.log('AddRecommended response', data);
         this.messageSubject.next(data.message);
@@ -53,10 +54,10 @@ export class RecommendedService {
     return this.messageSubject;
   }
 
-  setToken(token:string){
+  setToken(token: string) {
     this.bearerToken = token;
   }
-  setUserId(userId:string){
+  setUserId(userId: string) {
     this.userId = userId;
   }
 
