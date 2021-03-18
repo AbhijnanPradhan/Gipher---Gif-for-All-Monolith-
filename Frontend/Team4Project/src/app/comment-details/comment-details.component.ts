@@ -28,11 +28,4 @@ export class CommentDetailsComponent implements OnInit {
       this.commentService.removeLikeFromComment(this.comment.commentId);
     }
   }
-  
-  getToken(){
-    return 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBYmhpam5hbjMiLCJpc0FkbWluIjp0cnVlLCJleHAiOjE2MTYwMDYxNDMsImlhdCI6MTYxNTk4ODE0M30.HSWW67JyynnNuyQlZDNuuHbs_rTpWxt_yADnh6NWDExiOnBsfHnCaJFUoWYiIuy5k8zIsUa02FCIHbwS0NZq2A';
-  }
-  getUserId(){
-    return 'Abhijnan3';
-  }
 }

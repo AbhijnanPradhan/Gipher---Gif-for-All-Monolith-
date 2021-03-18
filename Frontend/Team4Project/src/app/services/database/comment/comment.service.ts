@@ -49,6 +49,7 @@ export class CommentService {
   //@PostMapping("/add")
   addComment(dataParam : CommentDataInterface){
     // @RequestBody CommentBlock data ()
+    dataParam.userID = this.userId+'';
     this.http.post<any>('http://localhost:8080/comment/add', dataParam, { headers: this.headers })
       .subscribe(data => {
         console.log('AddComments response', data);
