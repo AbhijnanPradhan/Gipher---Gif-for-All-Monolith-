@@ -6,15 +6,16 @@
     <table>
         <tr>
             <td>
-                <button mat-raised-button color="accent" [disabled]="favourite" (click)="addFavourite()">Add to
+                <button mat-raised-button color="accent" *ngIf="!favourite" (click)="addFavourite()">Add to
                     Favorites</button>
-                    <button mat-raised-button color="warn" *ngIf="!favorite" (click)="removeFavorite()">Remove From Favourute</button>
+                <button mat-raised-button color="warn" *ngIf="favourite" (click)="removeFavorite()">Remove From
+                    Favorites</button>
             </td>
             <td>
-                <button mat-raised-button color="primary" *ngIf="recommended" (click)="addRecommended()">Add to
+                <button mat-raised-button color="primary" *ngIf="!recommended" (click)="addRecommended()">Add to
                     Recommended</button>
-                    <button mat-raised-button color="warn" *ngIf="!recommended" (click)="removeRecommended()">Remove From
-                        Recommended</button>
+                <button mat-raised-button color="warn" *ngIf="recommended" (click)="removeRecommended()">Remove From
+                    Recommended</button>
             </td>
         </tr>
     </table>
@@ -25,13 +26,12 @@
     <h3>{{gifDetails.data.user.username}}</h3>
     <a [href]="gifDetails.data.user.profile_url" target="_blank"><img [src]="gifDetails.data.user.avatar_url" width="100px" height="100px"></a>
     <br />
-    
+
     <hr />
-    
+
     <mat-form-field class="fullWidth">
         <mat-label><b>Leave a Comment</b></mat-label>
-        <textarea matInput placeholder="What ever you feel like!" aria-label="comment"
-        name='commentString' [(ngModel)]='commentString' matTooltip="Click and start typing!" ></textarea>
+        <textarea matInput placeholder="What ever you feel like!" aria-label="comment" name='commentString' [(ngModel)]='commentString' matTooltip="Click and start typing!"></textarea>
     </mat-form-field><br />
     <button mat-raised-button color="basic" (click)="addComment()">Post</button>
     <p style="color: rgba(230, 7, 63, 0.801); background-color: wheat;">{{commentMsg}}</p>
