@@ -22,6 +22,7 @@ public class UserDataBlockMap implements Serializable {
 	@Column(name = "gif_id", nullable = false)
 	String gifId;
 
+	@Id
 	@Column
 	String type;
 

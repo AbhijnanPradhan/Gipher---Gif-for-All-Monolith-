@@ -18,7 +18,7 @@ import com.ibm.fourhorsemen.repository.UserDataMapRepository;
 
 @Service
 public class RecommendedService {
-	private static final String TYPE_MAP_RECOMMEND = "recommend";
+	public static final String TYPE_MAP_RECOMMEND = "recommend";
 
 	private DataRepository dataRepository;
 	private UserDataMapRepository userDataMapRepository;
@@ -33,7 +33,7 @@ public class RecommendedService {
 	public ExtendedDataBlock addRecommend(String userId, DataBlock dataBlock) {
 		ExtendedDataBlock resultBlock = null;
 		UserDataBlockMap map = new UserDataBlockMap(userId, dataBlock.getId(), TYPE_MAP_RECOMMEND);
-		if (!userDataMapRepository.existsById(new UserDataBlockMapId(userId, dataBlock.getId()))) {
+		if (!userDataMapRepository.existsById(new UserDataBlockMapId(userId, dataBlock.getId(), TYPE_MAP_RECOMMEND))) {
 			try {
 				// incrementing recommended count by 1
 				ExtendedDataBlock block = dataRepository.findById(dataBlock.getId()).get();
@@ -56,7 +56,7 @@ public class RecommendedService {
 	public ExtendedDataBlock removeRecommend(String userId, DataBlock dataBlock) {
 		ExtendedDataBlock resultBlock = null;
 		UserDataBlockMap map = new UserDataBlockMap(userId, dataBlock.getId(), TYPE_MAP_RECOMMEND);
-		if (userDataMapRepository.existsById(new UserDataBlockMapId(userId, dataBlock.getId()))) {
+		if (userDataMapRepository.existsById(new UserDataBlockMapId(userId, dataBlock.getId(), TYPE_MAP_RECOMMEND))) {
 			try {
 				// decrementing recommended count by 1
 				ExtendedDataBlock block = dataRepository.findById(dataBlock.getId()).get();
@@ -73,7 +73,7 @@ public class RecommendedService {
 	}
 
 	public List<ExtendedDataBlock> getRecommends(String userId) {
-		List<UserDataBlockMap> userDataBlockMaps = userDataMapRepository.findByUserId(userId);
+		List<UserDataBlockMap> userDataBlockMaps = userDataMapRepository.findByUserIdType(userId, TYPE_MAP_RECOMMEND);
 		List<String> gifIds = new ArrayList<>();
 		for (UserDataBlockMap map : userDataBlockMaps)
 			gifIds.add(map.getGifId());
