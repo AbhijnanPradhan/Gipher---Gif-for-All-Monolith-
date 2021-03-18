@@ -1,6 +1,5 @@
 package com.ibm.fourhorsemen.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,16 +29,21 @@ public class CommentService {
 	public int removeComment(String commentID, String userID) {
 		Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(commentID);
 		if (reqComment.isPresent()) {
-			if(reqComment.get().getUserID() == userID) {
+
+			if(reqComment.get().getUserID().equals(userID)) {
+				System.out.println(reqComment.get().getUserID());
+				System.out.println("userID match");
 				commentDataRepository.deleteById(commentID); // try not required as condition tested in before if
 				//successful removal
 				return 1;
 			}else {
+				System.out.println(reqComment.get().getUserID());
+				System.out.println("userID not match");
 				//userID does not match
 				return 0;
 			}
 		}
-		
+		System.out.println("comment id not exist");
 		//Comment by such commentID does not exist.
 		return -1;
 	}
@@ -49,7 +53,7 @@ public class CommentService {
 Optional<ExtendedCommentBlock> reqComment = commentDataRepository.findById(commentID);
 		
 		if (reqComment.isPresent()) {
-			if(reqComment.get().getUserID() == userID) {
+			if(reqComment.get().getUserID().equals(userID)) {
 				commentDataRepository.deleteById(commentID); // try not required as condition tested in before if
 				reqComment.get().setComment(newComment);
 				reqComment.get().setEdited();
