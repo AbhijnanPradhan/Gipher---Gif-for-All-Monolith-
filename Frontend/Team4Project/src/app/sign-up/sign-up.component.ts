@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserInterface } from '../interfaces/UserInterface';
 import { LoginService } from '../services/database/login/login.service';
 import { RouterService } from '../services/router.service';
@@ -10,7 +11,7 @@ import { RouterService } from '../services/router.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  headerFalseSetter:boolean = false;
+  headerFalseSetter: boolean = false;
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
   confirmPassword = new FormControl('', [Validators.required]);
@@ -24,7 +25,7 @@ export class SignUpComponent implements OnInit {
 
   user: any;
   errorText: string;
-  constructor(private loginService: LoginService, private routerService: RouterService) {
+  constructor(private loginService: LoginService, private routerService: RouterService, private snackbar: MatSnackBar) {
     this.errorText = "";
   }
 
@@ -34,40 +35,45 @@ export class SignUpComponent implements OnInit {
 
   register() {
     if (this.username.value === "")
-      this.errorText = "Username cannot be blank";
+      this.showErrorMessage("Username cannot be blank");
     else if (this.password.value === '')
-      this.errorText = "Password cannot be blank";
+      this.showErrorMessage("Password cannot be blank");
     else if (this.name.value === '')
-      this.errorText = "Name cannot be blank";
+      this.showErrorMessage("Name cannot be blank");
     else if (this.dob.value === '')
-      this.errorText = "Date of Birth cannot be blank";
+      this.showErrorMessage("Date of Birth cannot be blank");
     else if (this.password.value !== this.confirmPassword.value)
-      this.errorText = "Password and Confirm Password not matching.";
+      this.showErrorMessage("Password and Confirm Password not matching.");
     else if (this.email.value === '')
-      this.errorText = "Email cannot be blank";
+      this.showErrorMessage("Email cannot be blank");
     else if (this.phone.value === '')
-      this.errorText = "Phone number cannot be blank";
+      this.showErrorMessage("Phone number cannot be blank");
     else if (this.gender.value === 'Gender' || this.gender.value === '' || !this.gender.value)
-      this.errorText = "Please select your gender"
+      this.showErrorMessage("Please select your gender");
     else {
-      this.errorText = "Registered Successfully!";
       let today = new Date(Date.now());
       this.user = new UserInterface();
       this.user.maker(this.username.value, this.name.value, this.email.value, this.gender.value, this.phone.value, this.dob.value, today, this.password.value);
       this.loginService.signUp(this.user).subscribe(
         data => {
           if (data.message == 'Success') {
-            window.alert("Registration is successful");
+            this.showErrorMessage("Registration is successful");
             this.routerService.routeToLogin();
           } else {
-            window.alert(data.message);
+            this.showErrorMessage("Something went wrong");
             this.errorText = data.message;
           }
         }, error => {
-          window.alert("Please check your internet connection");
+          this.showErrorMessage("Please check your internet connection");
           this.errorText = error;
         }
       );
     }
+  }
+
+  showErrorMessage(message: string) {
+    this.snackbar.open(message, undefined, {
+      duration: 2000,
+    });
   }
 }
