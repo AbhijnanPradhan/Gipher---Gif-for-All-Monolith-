@@ -38,6 +38,8 @@ import { CommentsComponent } from './comments/comments.component';
 import { RecommendedService } from './services/database/recommended/recommended.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { CommentDetailsComponent } from './comment-details/comment-details.component';
+import { GifDetailsService } from './services/database/gif_details/gif-details.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,12 +79,13 @@ import { CommentDetailsComponent } from './comment-details/comment-details.compo
     MatToolbarModule,
     HttpClientModule,
     MatInputModule,
-    MatFormFieldModule
   ],
   providers: [
     RouterService,
     CanActivateRouteGuard,
     RecommendedService,
+    GifDetailsService,
+    MatSnackBar,
   ],
   bootstrap: [AppComponent]
 })
