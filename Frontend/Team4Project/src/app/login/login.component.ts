@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { LoginService } from '../services/database/login/login.service';
+import { RouterService } from '../services/router.service';
 
 @Component({
   selector: 'app-login',
@@ -8,31 +9,34 @@ import { LoginService } from '../services/database/login/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  headerFalseSetter:boolean = false;
-  login={
-    username:'',
-    password:''
+  headerFalseSetter: boolean = false;
+  login = {
+    username: '',
+    password: ''
   }
-  constructor(private loginService :LoginService) { }
+  constructor(private loginService: LoginService, private routerService: RouterService) { }
 
   ngOnInit(): void {
+    this.loginService.getMessageSubject().subscribe(message => {
+      if (message == "Success")
+        this.routerService.routeToHome();
+    })
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log("login");
-    if(this.login.username!='' && this.login.password!=''){
-      this.loginService.tokenGenerator(this.login).subscribe(
-        (response:any)=>{
-          this.loginService.loginUser(response.token);
-        },error=>{
-          console.log('error '+error);
-        }
-      )
+    if (this.login.username != '' && this.login.password != '') {
+      this.loginService.loginUser(this.login.username, this.login.password);
+      // .subscribe(
+      //   (response:any)=>{
+      //     this.loginService.loginUser(response.token);
+      //   },error=>{
+      //     console.log('error '+error);
+      //   }
+      // )
     }
-    else{
+    else {
       console.log('error ');
     }
-
   }
-
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { faSearch,faUser,faHeart,faStar } from '@fortawesome/free-solid-svg-icons';
+import { LoginService } from '../services/database/login/login.service';
 import { RouterService } from '../services/router.service';
 
 @Component({
@@ -25,13 +26,14 @@ export class HeaderComponent implements OnInit {
     console.log('header boi:'+this.searchString);
     this.eventSearchButtonClicked.emit(this.searchString);
   }
-  constructor(private router:RouterService) { }
+  constructor(private router:RouterService, private loginService: LoginService) { }
 
   ngOnInit(): void {
   }
   nextPage(param:string){
     switch (param) {
       case 'logout':
+        this.loginService.logOut();
         this.router.routeToLogin();
         break;
       case 'user':

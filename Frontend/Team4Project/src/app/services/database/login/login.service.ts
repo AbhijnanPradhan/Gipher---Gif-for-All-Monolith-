@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UserInterface } from 'src/app/interfaces/UserInterface';
 
 @Injectable({
@@ -9,19 +9,35 @@ import { UserInterface } from 'src/app/interfaces/UserInterface';
 export class LoginService {
 
   url = "http://localhost:8080";
+  private messageSubject: BehaviorSubject<String> = new BehaviorSubject(new String());
+
   constructor(private httpClient: HttpClient) { }
 
   signUp(user: UserInterface): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/register', user, {
+    return this.httpClient.post('http://localhost:8080/user/register', user, {
       headers: {
         'Content-Type': 'application/json',
       }
     })
   }
 
-  loginUser(token: string) {
-    localStorage.setItem("token", token);
+  loginUser(userId: string, password: string) {
+    this.httpClient.post<any>('http://localhost:8080/authenticate', {
+      'userId': userId,
+      'password': password
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).subscribe(data => {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
+      this.messageSubject.next(data.message);
+    }, error => {
+      window.alert("Please check your internet");
+    })
   }
+
   loginStatus() {
     let token = localStorage.getItem("token");
     if (token != null && token !== undefined)
@@ -34,12 +50,16 @@ export class LoginService {
     return localStorage.getItem("token");
   }
 
-  tokenGenerator(login: any) {
-    return this.httpClient.post(`${this.url}/token`, login);
+  fetchUserId() {
+    return localStorage.getItem("userId");
   }
 
   logOut() {
     localStorage.removeItem("token");
     return true;
+  }
+
+  getMessageSubject(): BehaviorSubject<String> {
+    return this.messageSubject;
   }
 }
