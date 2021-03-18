@@ -23,7 +23,7 @@ private headers = new HttpHeaders()
   constructor(private httpClient:HttpClient,private loginService:LoginService) { }
 
   getFavourites(){
-    this.httpClient.get<Array<any>>(`http://localhost:8080/favourite/get?userId=${this.userId}`, { headers: this.headers })
+    this.httpClient.get<Array<any>>(`http://localhost:8080/favorites/get?userId=${this.userId}`, { headers: this.headers })
     .subscribe(data=>{
       this.favourites=data;
       this.favouriteSubject.next(this.favourites);
@@ -34,7 +34,7 @@ private headers = new HttpHeaders()
     const headers={
       headers:new HttpHeaders().set('Authorization', `Bearer ${this.bearerToken}`)
     };
-    this.httpClient.post<any>(`http://localhost:8080/favorite?userId=${this.userId}`, data, { headers: this.headers })
+    this.httpClient.post<any>(`http://localhost:8080/favorites/add?userId=${this.userId}`, data, { headers: this.headers })
     .subscribe(data=>{
       this.messageSubject.next(data.message);
       if(data.message=="Success"){
@@ -43,6 +43,23 @@ private headers = new HttpHeaders()
       }
     });
   }
+
+  deleteFavourite(data:DataBlock){
+    const headers={
+      headers:new HttpHeaders().set('Authorization', `Bearer ${this.bearerToken}`)
+    };
+    this.httpClient.post<any>(`http://localhost:8080/favorites/remove?userId=${this.userId}`, data, { headers: this.headers })
+    .subscribe(data=>{
+      // this.messageSubject.next(data.message);
+      // if(data.message=="Success"){
+      //   this.favourites.push(data);
+      //   this.favouriteSubject.next(this.favourites);
+      // }
+    });
+  }
+
+  
+  
     getBehaviourSubject():BehaviorSubject<Array<DataBlock>>{
       return this.favouriteSubject;
     }

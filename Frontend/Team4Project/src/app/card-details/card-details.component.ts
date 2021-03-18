@@ -67,7 +67,7 @@ export class CardDetailsComponent implements OnInit {
     this.favouriteService.addFavourite(this.gifDetails.data);
   }
   removeFavorite(){
-    
+    this.favouriteService.deleteFavourite(this.gifDetails.data);
   }
 
   addRecommended() {
@@ -75,6 +75,7 @@ export class CardDetailsComponent implements OnInit {
   }
   removeRecommended(){
     // TODO remove
+    this.recommendedService.deleteRecommended(this.gifDetails.data);
   }
   addComment(){
     if(this.commentString===''){

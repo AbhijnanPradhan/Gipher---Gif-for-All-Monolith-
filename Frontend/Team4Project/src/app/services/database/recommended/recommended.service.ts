@@ -29,6 +29,17 @@ export class RecommendedService {
       });
   }
 
+  deleteRecommended(data:DataBlock){
+    //you can try this code
+    // this.http.post<any>(`http://localhost:8080/recommended/remove?userId=${this.userId}`, data, { headers: this.headers })
+    // .subscribe(data=>{
+      // this.messageSubject.next(data.message);
+      // if(data.message=="Success"){
+      //   this.favourites.push(data);
+      //   this.favouriteSubject.next(this.favourites);
+      //}
+    //);
+  }
   addRecommended(data: DataBlock) {
     const headers = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.bearerToken}`)
