@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.fourhorsemen.controller.response.MessageResponse;
@@ -37,6 +38,23 @@ public class UserController {
 				return ResponseEntity.ok(response);
 			} else
 				return ResponseEntity.ok(new MessageResponse(ResponseMessages.USER_EXISTS));
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+
+	@PostMapping("/get")
+	public ResponseEntity<?> getUser(@RequestParam String userId) {
+		try {
+			User user = userService.getUserById(userId);
+			if (user == null) {
+				return ResponseEntity.ok(new MessageResponse(ResponseMessages.USER_NOT_EXISTS));
+			} else {
+				UserResponse response = new UserResponse();
+				BeanUtils.copyProperties(user, response);
+				response.setMessage(ResponseMessages.SUCCESS);
+				return ResponseEntity.ok(response);
+			}
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
