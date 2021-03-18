@@ -1,5 +1,6 @@
 package com.ibm.fourhorsemen.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +8,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ibm.fourhorsemen.model.DataBlock;
+import com.ibm.fourhorsemen.model.ExtendedDataBlock;
 import com.ibm.fourhorsemen.model.UserDataBlockMap;
 import com.ibm.fourhorsemen.model.UserDataBlockMapId;
+import com.ibm.fourhorsemen.repository.DataRepository;
 import com.ibm.fourhorsemen.repository.UserDataMapRepository;
 
 @Service
 public class FavoritesService {
 	public static final String TYPE_MAP_FAVORITE = "favorite";
 
+	private DataRepository dataRepository;
 	private UserDataMapRepository userDataMapRepository;
 
 	@Autowired
-	public FavoritesService(UserDataMapRepository userDataMapRepository) {
+	public FavoritesService(DataRepository dataRepository, UserDataMapRepository userDataMapRepository) {
+		this.dataRepository = dataRepository;
 		this.userDataMapRepository = userDataMapRepository;
 	}
 
@@ -50,9 +55,15 @@ public class FavoritesService {
 		return -1;
 	}
 
-	public List<UserDataBlockMap> getAllFavoritesOfUser(String userId) {
+	public List<ExtendedDataBlock> getAllFavoritesOfUser(String userId) {
 		List<UserDataBlockMap> userDataBlockMaps = userDataMapRepository.findByUserIdType(userId, TYPE_MAP_FAVORITE);
-		return userDataBlockMaps;
+		List<String> gifIds = new ArrayList<>();
+		for (UserDataBlockMap map : userDataBlockMaps)
+			gifIds.add(map.getGifId());
+		Iterable<ExtendedDataBlock> blockIterable = dataRepository.findAllById(gifIds);
+		List<ExtendedDataBlock> result = new ArrayList<ExtendedDataBlock>();
+		blockIterable.forEach(result::add);
+		return result;
 	}
 
 }

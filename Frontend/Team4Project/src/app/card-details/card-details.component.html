@@ -1,16 +1,18 @@
 <app-header [searchEnabler]='canShowSearchBar'></app-header>
-<br/>
+<br />
 <div class="imageBoi">
     <img [src]="gifDetails.data.images.downsized.url" />
 
     <table>
         <tr>
             <td>
-                <button mat-raised-button color="accent">Add to Favorites</button>
+                <button mat-raised-button color="accent" [disabled]="favourite" (click)="addFavourite()">Add to
+                    Favorites</button>
 
             </td>
             <td>
-                <button mat-raised-button color="primary">Add to Recommended</button>
+                <button mat-raised-button color="primary" [disabled]="recommended" (click)="addRecommended()">Add to
+                    Recommended</button>
             </td>
         </tr>
     </table>
@@ -19,14 +21,15 @@
     <h2>Created by:</h2>
     <h3>{{gifDetails.data.user.username}}</h3>
     <a [href]="gifDetails.data.user.profile_url" target="_blank"><img [src]="gifDetails.data.user.avatar_url" width="100px" height="100px"></a>
-    <br/><hr/>
+    <br />
+    <hr />
     <mat-form-field class="fullWidth">
         <mat-label><b>Leave a Comment</b></mat-label>
         <textarea matInput placeholder="What ever you feel like!"></textarea>
-    </mat-form-field><br/>
+    </mat-form-field><br />
     <button mat-raised-button color="basic">Post</button>
-    <hr/>
-    
+    <hr />
+
     <app-comments></app-comments>
 
 </div>
