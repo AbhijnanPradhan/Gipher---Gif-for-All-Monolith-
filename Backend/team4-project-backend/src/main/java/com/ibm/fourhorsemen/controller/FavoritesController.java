@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ibm.fourhorsemen.controller.response.ResponseMessages;
 import com.ibm.fourhorsemen.model.DataBlock;
 import com.ibm.fourhorsemen.model.ExtendedDataBlock;
-import com.ibm.fourhorsemen.model.UserDataBlockMap;
 import com.ibm.fourhorsemen.service.FavoritesService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -32,9 +31,9 @@ public class FavoritesController {
 	}
 	
 	@GetMapping("/get")
-	public ResponseEntity<List<UserDataBlockMap>> getAllFavorites(@RequestParam String userId) {
+	public ResponseEntity<List<ExtendedDataBlock>> getAllFavorites(@RequestParam String userId) {
 		try {
-			List<UserDataBlockMap> list = favoriteService.getAllFavoritesOfUser(userId);
+			List<ExtendedDataBlock> list = favoriteService.getAllFavoritesOfUser(userId);
 			return ResponseEntity.ok(list);
 			
 		}catch(IllegalArgumentException e) {

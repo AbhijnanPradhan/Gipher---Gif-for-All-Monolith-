@@ -10,7 +10,7 @@ export class RecommendedService {
   private messageSubject: BehaviorSubject<String> = new BehaviorSubject(new String());
   private recommends: Array<DataBlock> = [];
 
-  private bearerToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYXlhbjE2IiwiaXNBZG1pbiI6dHJ1ZSwiZXhwIjoxNjE2MDM0NDU5LCJpYXQiOjE2MTYwMTY0NTl9.TrwTsnc9fh6iOps4Y0hMJ2If2qMuDbgPNs-CfxhJjL4r21wqy4KRoXUJdMTQpj4BvaB9TEM4K-YX4dN3vCo5hg';
+  private bearerToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzYXlhbjE2IiwiaXNBZG1pbiI6dHJ1ZSwiZXhwIjoxNjE2MDY2NDA2LCJpYXQiOjE2MTYwNDg0MDZ9.Z7-4jYjZNG5mM80D1ZEvhyVZrhGlWhhTAaqHOURVk9SoBkpUsdM5HIBxqLxBwQmdzlBWoN9tiAB2NYRXF4hFXQ';
   private userId:string = 'Abhijnan3';
   private headers = new HttpHeaders()
     .set('content-type', 'application/json')
