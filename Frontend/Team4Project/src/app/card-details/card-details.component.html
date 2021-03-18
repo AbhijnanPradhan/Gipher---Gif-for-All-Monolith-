@@ -8,8 +8,7 @@
             <td>
                 <button mat-raised-button color="accent" [disabled]="favourite" (click)="addFavourite()">Add to
                     Favorites</button>
-                    <!-- <button mat-raised-button color="warn" *ngIf="!favorite" (click)="removeFavorite()">Remove From -->
-                        <!-- Recommended</button> -->
+                    <button mat-raised-button color="warn" *ngIf="!favorite" (click)="removeFavorite()">Remove From Recommended</button>
             </td>
             <td>
                 <button mat-raised-button color="primary" *ngIf="recommended" (click)="addRecommended()">Add to
