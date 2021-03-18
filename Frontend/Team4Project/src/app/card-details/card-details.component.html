@@ -8,7 +8,8 @@
             <td>
                 <button mat-raised-button color="accent" [disabled]="favourite" (click)="addFavourite()">Add to
                     Favorites</button>
-
+                    <!-- <button mat-raised-button color="warn" *ngIf="!favorite" (click)="removeFavorite()">Remove From -->
+                        <!-- Recommended</button> -->
             </td>
             <td>
                 <button mat-raised-button color="primary" *ngIf="recommended" (click)="addRecommended()">Add to
@@ -37,7 +38,7 @@
     <p style="color: rgba(230, 7, 63, 0.801); background-color: wheat;">{{commentMsg}}</p>
     <hr />
 
-    <app-comments [gifId]='gifDetails.data.id'></app-comments>
+    <app-comments [gifId]='gifId'></app-comments>
 
 </div>
 <div class="bottomDiv">&nbsp;</div>

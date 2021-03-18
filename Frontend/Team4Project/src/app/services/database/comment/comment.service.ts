@@ -76,7 +76,7 @@ export class CommentService {
         let item: Array<CommentDataInterface> = [];
         item.push(data);
         for(let i=0;i<items.length;i++){
-          if(items[i].commentId === item[0].commentId){
+          if(items[i].commentID === item[0].commentID){
             this.comments.splice(i,1);
             break;
           }
@@ -102,7 +102,7 @@ export class CommentService {
         let item: Array<CommentDataInterface> = [];
         item.push(data);
         for(let i=0;i<items.length;i++){
-          if(items[i].commentId === item[0].commentId){
+          if(items[i].commentID === item[0].commentID){
             this.comments.splice(i,1);
             this.comments.push(data);
             break;
@@ -129,7 +129,7 @@ export class CommentService {
         let item: Array<CommentDataInterface> = [];
         item.push(data);
         for(let i=0;i<items.length;i++){
-          if(items[i].commentId === item[0].commentId){
+          if(items[i].commentID === item[0].commentID){
             this.comments[i].likes = item[0].likes;
             break;
           }
@@ -155,7 +155,7 @@ export class CommentService {
         let item: Array<CommentDataInterface> = [];
         item.push(data);
         for(let i=0;i<items.length;i++){
-          if(items[i].commentId === item[0].commentId){
+          if(items[i].commentID === item[0].commentID){
             this.comments[i].likes = item[0].likes;
             break;
           }

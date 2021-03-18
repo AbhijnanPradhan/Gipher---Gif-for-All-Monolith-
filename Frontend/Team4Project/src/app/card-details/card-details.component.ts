@@ -64,6 +64,9 @@ export class CardDetailsComponent implements OnInit {
   addFavourite() {
     //TODO Sufiyan
   }
+  removeFavorite(){
+    
+  }
 
   addRecommended() {
     this.recommendedService.addRecommended(this.gifDetails.data);
@@ -73,7 +76,7 @@ export class CardDetailsComponent implements OnInit {
   }
   addComment(){
     if(this.commentString===''){
-      this.commentMsg = "Please type something before clicking on post!";
+      this.commentMsg = "Please type something before posting!";
     }else{
       let data : CommentDataInterface = new CommentDataInterface;
         data.comment = this.commentString;
