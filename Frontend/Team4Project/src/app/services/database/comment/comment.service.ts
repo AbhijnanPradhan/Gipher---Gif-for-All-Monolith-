@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CommentDataInterface } from '../../../interfaces/CommentDataInterface';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +13,21 @@ export class CommentService {
   // private likedSubject:BehaviorSubject<Boolean>= new BehaviorSubject(new Boolean());
   private comments: Array<CommentDataInterface> = [];
 
-  // private bearerToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBYmhpam5hbjMiLCJpc0FkbWluIjp0cnVlLCJleHAiOjE2MTYwMDYxNDMsImlhdCI6MTYxNTk4ODE0M30.HSWW67JyynnNuyQlZDNuuHbs_rTpWxt_yADnh6NWDExiOnBsfHnCaJFUoWYiIuy5k8zIsUa02FCIHbwS0NZq2A';
-  // private userId:string = 'Abhijnan3';
-  // private gifId: string = '';
-  // private headers = new HttpHeaders()
-  // .set('content-type', 'application/json')
-  // .set('Access-Control-Allow-Origin', 'http://localhost:8080')
-  // .set('Authorization', `Bearer ${bearerToken}`);
+  private bearerToken = this.loginService.fetchToken();
+  private userId: string | null = this.loginService.fetchUserId();
+  private headers = new HttpHeaders()
+    .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', 'http://localhost:8080')
+    .set('Authorization', `Bearer ${this.bearerToken}`);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private loginService: LoginService) { }
 
   // @RequestMapping("/comment")
 
   //@GetMapping("/getByGifID")
-  getCommentsByGif(token:string,gifId:string){
+  getCommentsByGif(gifId:string){
     // @RequestParam String gifId
-    this.http.get<Array<any>>(`http://localhost:8080/comment/getByGifID?gifId=${gifId}`, { headers: this.setHeaders(token) })
+    this.http.get<Array<any>>(`http://localhost:8080/comment/getByGifID?gifId=${gifId}`, { headers: this.headers })
       .subscribe(data => {
         console.log('GetComments response', data);
         this.comments = data;
@@ -36,9 +36,9 @@ export class CommentService {
   }
 
   //@GetMapping("/getByUser")
-  getCommentsByUser(token:string,userId:string){
+  getCommentsByUser(){
     // @RequestParam String userId
-    this.http.get<Array<any>>(`http://localhost:8080/comment/getByUser?userId=${userId}`, { headers: this.setHeaders(token) })
+    this.http.get<Array<any>>(`http://localhost:8080/comment/getByUser?userId=${this.userId}`, { headers: this.headers })
       .subscribe(data => {
         console.log('GetComments response', data);
         this.comments = data;
@@ -47,9 +47,9 @@ export class CommentService {
   }
 
   //@PostMapping("/add")
-  addComment(token:string,dataParam : CommentDataInterface){
+  addComment(dataParam : CommentDataInterface){
     // @RequestBody CommentBlock data ()
-    this.http.post<any>('http://localhost:8080/comment/add', dataParam, { headers: this.setHeaders(token) })
+    this.http.post<any>('http://localhost:8080/comment/add', dataParam, { headers: this.headers })
       .subscribe(data => {
         console.log('AddComments response', data);
         this.messageSubject.next(data.message);
@@ -63,9 +63,9 @@ export class CommentService {
   }
 
   //@PostMapping("/remove")
-  removeComment(token:string,userId:string,commentId:string){
+  removeComment(commentId:string){
     // @RequestParam String commentId,@RequestParam String userId
-    this.http.post<any>(`http://localhost:8080/comment/remove?commentId=${commentId}&userId=${userId}`, { headers: this.setHeaders(token) })
+    this.http.post<any>(`http://localhost:8080/comment/remove?commentId=${commentId}&userId=${this.userId}`, { headers: this.headers })
     .subscribe(data => {
       console.log('Remove Comments response', data);
       this.messageSubject.next(data.message);
@@ -89,9 +89,9 @@ export class CommentService {
   }
 
   //@PostMapping("/edit")
-  editComment(token:string,userId:string,commentId:string,comment:string){
+  editComment(commentId:string,comment:string){
     // @RequestParam String commentId,@RequestParam String userId,@RequestParam String comment
-    this.http.post<any>(`http://localhost:8080/comment/edit?commentId=${commentId}&userId=${userId}&comment=${comment}`, { headers: this.setHeaders(token) })
+    this.http.post<any>(`http://localhost:8080/comment/edit?commentId=${commentId}&userId=${this.userId}&comment=${comment}`, { headers: this.headers })
     .subscribe(data => {
       console.log('Edit Comments response', data);
       this.messageSubject.next(data.message);
@@ -116,9 +116,9 @@ export class CommentService {
   }
 
   // @PostMapping("/addLike")
-  addLikeToComment(token:string,commentId:string,userId:string){
+  addLikeToComment(commentId:string){
     // @RequestParam String commentId,@RequestParam String likerId
-    this.http.post<any>(`http://localhost:8080/comment/addLike?commentId=${commentId}&likerId=${userId}`, { headers: this.setHeaders(token) })
+    this.http.post<any>(`http://localhost:8080/comment/addLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers })
     .subscribe(data => {
       console.log('Add like to Comments response', data);
       this.messageSubject.next(data.message);
@@ -142,9 +142,9 @@ export class CommentService {
   }
 
   // @PostMapping("/removeLike")
-  removeLikeFromComment(token:string,commentId:string,likerId:string){
+  removeLikeFromComment(commentId:string){
     // @RequestParam String commentId,@RequestParam String likerId
-    this.http.post<any>(`http://localhost:8080/comment/removeLike?commentId=${commentId}&likerId=${likerId}`, { headers: this.setHeaders(token) })
+    this.http.post<any>(`http://localhost:8080/comment/removeLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers })
     .subscribe(data => {
       console.log('Add like to Comments response', data);
       this.messageSubject.next(data.message);
@@ -176,10 +176,5 @@ export class CommentService {
     return this.messageSubject;
   }
 
-  setHeaders(bearerToken:string){
-    return new HttpHeaders()
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', 'http://localhost:8080')
-    .set('Authorization', `Bearer ${bearerToken}`);
-  }
+  
 }

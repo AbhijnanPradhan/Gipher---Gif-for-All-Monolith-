@@ -8,10 +8,11 @@ import { CommentService } from '../services/database/comment/comment.service'
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-  
+  @Input() gifId: string = '';
+
   public comments:Array<CommentDataInterface>= [];
   constructor(private commentService: CommentService) { }
-
+  
   ngOnInit(): void {
     this.commentService.getBehaviourSubject()
     .subscribe(commentBlocks =>{
@@ -19,15 +20,8 @@ export class CommentsComponent implements OnInit {
       this.comments = commentBlocks;
       console.log('Comment Data:', this.comments);
     });
-    this.commentService.getCommentsByUser(this.getToken(),this.getUserId())
+    this.commentService.getCommentsByGif(this.gifId);
   }
 
-  
-  getToken(){
-    return 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBYmhpam5hbjMiLCJpc0FkbWluIjp0cnVlLCJleHAiOjE2MTYwMDYxNDMsImlhdCI6MTYxNTk4ODE0M30.HSWW67JyynnNuyQlZDNuuHbs_rTpWxt_yADnh6NWDExiOnBsfHnCaJFUoWYiIuy5k8zIsUa02FCIHbwS0NZq2A';
-  }
-  getUserId(){
-    return 'Abhijnan3';
-  }
 }
 

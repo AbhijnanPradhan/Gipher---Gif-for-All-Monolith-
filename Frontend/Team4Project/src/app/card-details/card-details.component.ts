@@ -62,4 +62,7 @@ export class CardDetailsComponent implements OnInit {
   addRecommended() {
     this.recommendedService.addRecommended(this.gifDetails.data);
   }
+  removeRecommended(){
+    // TODO remove
+  }
 }

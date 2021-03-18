@@ -11,8 +11,10 @@
 
             </td>
             <td>
-                <button mat-raised-button color="primary" [disabled]="recommended" (click)="addRecommended()">Add to
+                <button mat-raised-button color="primary" *ngIf="recommended" (click)="addRecommended()">Add to
                     Recommended</button>
+                    <button mat-raised-button color="warn" *ngIf="!recommended" (click)="removeRecommended()">Remove From
+                        Recommended</button>
             </td>
         </tr>
     </table>
@@ -31,7 +33,7 @@
     <button mat-raised-button color="basic">Post</button>
     <hr />
 
-    <app-comments></app-comments>
+    <app-comments [gifId]='gifDetails.data.id'></app-comments>
 
 </div>
 <div class="bottomDiv">&nbsp;</div>
