@@ -26,6 +26,12 @@
                         <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Login</button>
                         <button type="signUp" mat-raised-button color="accent" (click)="onSignUp()">Sign Up</button>
                     </div>
+
+                    <div class="center " style="margin-top: 40px; margin-bottom: 60px;" *ngIf="errorText ">
+                        <p style="color:red ">
+                            {{errorText}}
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>
