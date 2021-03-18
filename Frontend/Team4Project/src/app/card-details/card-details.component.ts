@@ -6,6 +6,7 @@ import { GifDetailsService } from '../services/database/gif_details/gif-details.
 import { RecommendedService } from '../services/database/recommended/recommended.service';
 import { CommentService } from '../services/database/comment/comment.service';
 import { CommentDataInterface } from '../interfaces/CommentDataInterface';
+import { FavouriteService } from '../services/database/favourites/favourite.service';
 import { RouterService } from '../services/router.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class CardDetailsComponent implements OnInit {
   commentString: string = '';
   commentMsg: string = '';
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService,
+  constructor(private favouriteService:FavouriteService,private route: ActivatedRoute, private searchService: SearchService,
     private gifDetailsService: GifDetailsService, private recommendedService: RecommendedService,
     private commentService: CommentService, private routerService: RouterService) { }
 
@@ -73,10 +74,11 @@ export class CardDetailsComponent implements OnInit {
   }
 
   addFavourite() {
-    //TODO Sufiyan
+   
+    this.favouriteService.addFavourite(this.gifDetails.data);
   }
-  removeFavorite() {
-
+  removeFavorite(){
+    //this.favouriteService.deleteFavourite(this.gifDetails.data);
   }
 
   addRecommended() {

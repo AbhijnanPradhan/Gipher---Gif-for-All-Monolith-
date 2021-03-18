@@ -6,16 +6,16 @@
     <table>
         <tr>
             <td>
-                <button mat-raised-button color="accent" [disabled]="favourite" (click)="addFavourite()">Add to
+                <button mat-raised-button color="accent" *ngIf="!favourite" (click)="addFavourite()">Add to
                     Favorites</button>
-                <!-- <button mat-raised-button color="warn" *ngIf="!favorite" (click)="removeFavorite()">Remove From -->
-                <!-- Recommended</button> -->
+                <button mat-raised-button color="warn" *ngIf="favourite" (click)="removeFavorite()">Remove From
+                    Favorites</button>
             </td>
             <td>
                 <button mat-raised-button color="primary" *ngIf="!recommended" (click)="addRecommended()">Add to
                     Recommended</button>
                 <button mat-raised-button color="warn" *ngIf="recommended" (click)="removeRecommended()">Remove From
-                        Recommended</button>
+                    Recommended</button>
             </td>
         </tr>
     </table>
