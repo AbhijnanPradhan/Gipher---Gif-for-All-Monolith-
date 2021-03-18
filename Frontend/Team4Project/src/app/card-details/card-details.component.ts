@@ -17,6 +17,7 @@ export class CardDetailsComponent implements OnInit {
   gifDetails: DataBlocker = new DataBlocker();
   favourite: boolean = false;
   recommended: boolean = false;
+  recommendedCount: number = 0;
 
   constructor(private route: ActivatedRoute, private searchService: SearchService,
     private gifDetailsService: GifDetailsService, private recommendedService: RecommendedService) { }
@@ -31,12 +32,13 @@ export class CardDetailsComponent implements OnInit {
       .subscribe(data => {
         this.favourite = data.favourite;
         this.recommended = data.recommended;
+        this.recommendedCount = data.recommendCount;
       }, error => {
 
       })
-    this.recommendedService.getMessageSubject().subscribe(message => {
-      if (message == "Success")
-        this.recommended = true;
+    this.recommendedService.getBehaviourSubject().subscribe(data => {
+      this.recommendedCount++;
+      this.recommended = true;
     })
   }
 
