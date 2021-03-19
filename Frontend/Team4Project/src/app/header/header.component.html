@@ -23,6 +23,12 @@
       <fa-icon [icon]="faStar"></fa-icon>
     </a>
   </li>
+  <li style="float:right" *ngIf='profileEnabler'>
+    <div class='helloUser' (click)="nextPage('user')" matTooltip="Your Profile page">
+      <h4>Hello {{userName}} !&nbsp;</h4>
+    </div>
+    
+  </li>
 </ul>
 <div class="input-group mb-3" *ngIf='searchEnabler'>
   <input type="text" class="form-control" placeholder="Search for gif here" aria-label="Search"
