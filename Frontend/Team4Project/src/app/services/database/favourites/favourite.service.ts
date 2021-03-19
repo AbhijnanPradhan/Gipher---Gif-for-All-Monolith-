@@ -33,7 +33,7 @@ private headers = new HttpHeaders()
 
   addFavourite(data:DataBlock){
     const headers={
-      headers:new HttpHeaders().set('Authorization', `Bearer ${this.bearerToken}`)
+      headers:new HttpHeaders().set('Authorization',`Bearer ${this.bearerToken}`)
     };
     this.httpClient.post<any>(`http://localhost:8080/favorites/add?userId=${this.userId}`, data, { headers: this.headers })
     .subscribe(data=>{
