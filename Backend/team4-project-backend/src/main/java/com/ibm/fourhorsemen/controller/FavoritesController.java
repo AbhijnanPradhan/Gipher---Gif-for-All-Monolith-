@@ -33,6 +33,7 @@ public class FavoritesController {
 	@GetMapping("/get")
 	public ResponseEntity<List<ExtendedDataBlock>> getAllFavorites(@RequestParam String userId) {
 		try {
+			System.out.println("get method");
 			List<ExtendedDataBlock> list = favoriteService.getAllFavoritesOfUser(userId);
 			return ResponseEntity.ok(list);
 			

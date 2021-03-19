@@ -26,6 +26,7 @@ private headers = new HttpHeaders()
     this.httpClient.get<Array<any>>(`http://localhost:8080/favorites/get?userId=${this.userId}`, { headers: this.headers })
     .subscribe(data=>{
       this.favourites=data;
+      console.log("getFavourite");
       this.favouriteSubject.next(this.favourites);
     });
   }

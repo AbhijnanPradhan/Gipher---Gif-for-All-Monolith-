@@ -15,6 +15,7 @@ export class FavoriteComponent implements OnInit {
   ngOnInit(): void {
     this.favouriteService.getBehaviourSubject()
     .subscribe(dataBlocks=>{
+      console.log("fav comp");
       this.dataParts=dataBlocks;
     })
     this.favouriteService.getFavourites();

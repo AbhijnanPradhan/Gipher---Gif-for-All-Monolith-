@@ -40,7 +40,9 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter  {
 				
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
 				
-			 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+			
+				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+				System.out.println("------------------->"+userDetails);
 			}else {
 				System.out.println("Cannot set security context");
 			}
