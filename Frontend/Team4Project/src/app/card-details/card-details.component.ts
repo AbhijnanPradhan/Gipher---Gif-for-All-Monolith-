@@ -58,6 +58,13 @@ export class CardDetailsComponent implements OnInit {
         this.recommended = false;
       }
     })
+    this.favouriteService.getFavouriteModifySubject().subscribe(data => {
+      if (data === "added") {
+        this.favourite = true;
+      } else if (data === "removed") {
+        this.favourite = false;
+      }
+    })
   }
 
   datafiller(urlParam: string) {
@@ -74,11 +81,10 @@ export class CardDetailsComponent implements OnInit {
   }
 
   addFavourite() {
-   
     this.favouriteService.addFavourite(this.gifDetails.data);
   }
   removeFavorite(){
-    //this.favouriteService.deleteFavourite(this.gifDetails.data);
+    this.favouriteService.deleteFavourite(this.gifDetails.data);
   }
 
   addRecommended() {

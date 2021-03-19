@@ -3,6 +3,7 @@ package com.ibm.fourhorsemen.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,10 +33,12 @@ public class FavoritesService {
 
 		if (!userDataMapRepository.existsById(new UserDataBlockMapId(userId, dataBlock.getId(), TYPE_MAP_FAVORITE))) {
 			UserDataBlockMap map = new UserDataBlockMap(userId, dataBlock.getId(), TYPE_MAP_FAVORITE);
-
+			System.out.println("Adding favourite");
 			// adding the mapping of gifId and userId with type as favorite
 			userDataMapRepository.save(map);
-
+			ExtendedDataBlock block = new ExtendedDataBlock();
+			BeanUtils.copyProperties(dataBlock, block);
+			dataRepository.save(block);
 			return map;
 
 		}
@@ -63,6 +66,7 @@ public class FavoritesService {
 		Iterable<ExtendedDataBlock> blockIterable = dataRepository.findAllById(gifIds);
 		List<ExtendedDataBlock> result = new ArrayList<ExtendedDataBlock>();
 		blockIterable.forEach(result::add);
+		System.out.println("Size of getFavourite" + result.size());
 		return result;
 	}
 
