@@ -119,6 +119,8 @@ export class CommentService {
   // @PostMapping("/addLike")
   addLikeToComment(commentId:string){
     // @RequestParam String commentId,@RequestParam String likerId
+    console.log("Bearer token", this.bearerToken);
+    
     this.http.post<any>(`http://localhost:8080/comment/addLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers })
     .subscribe(data => {
       console.log('Add like to Comments response', data);
