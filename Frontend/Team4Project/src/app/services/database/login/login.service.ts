@@ -34,8 +34,7 @@ export class LoginService {
       localStorage.setItem("userId", data.userId);
       this.messageSubject.next(data.message);
     }, error => {
-      this.messageSubject.next(error.message);
-    
+      window.alert("Please check your internet");
     })
   }
 

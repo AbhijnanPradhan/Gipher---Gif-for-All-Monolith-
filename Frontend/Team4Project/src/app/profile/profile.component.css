@@ -4,29 +4,45 @@
     top: 0px;
     z-index: -1;
 }
-.profileImg{
-    position: absolute;
+.profileText{
+    position: fixed;
     top: 15%;
-    left: 5%;
-    width: 10%;
+    left: 25%;
+    width: 50%;
+    min-width: 300px;
     height: 15%;
-    border-radius: 50%;
+    font-size: 300%;
+    background-color: whitesmoke;
+    text-align: center;
+    word-wrap: break-word;
 }
 .profileContent{
-    position: absolute;
+    position: fixed;
     top: 30%;
-    left: 5%;
-    right: 5%;
-    width: 90%;
+    left: 25%;
+    right: 25%;
+    width: 50%;
+    min-width: 300px;
+    background-color: whitesmoke;
+    word-wrap: break-word;
+
 }
 .profileTable{
-    border: 2px solid red;
+    border: 2px solid rgba(31, 28, 28, 0.089);
     width: 100%;
 }
 .profileTable table{
     text-align: center;
     width: 100%;
+    word-wrap: break-word;
 }
 .profileTable table tr td,th{
     padding: 10px;
+}
+.activityLog{
+    position: absolute;
+    top: 70%;
+    left: 5%;
+    width: 90%;
+    /* background-color: rgb(238, 202, 202); */
 }

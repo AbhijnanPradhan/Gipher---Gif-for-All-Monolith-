@@ -9,11 +9,11 @@ import { LoginService } from '../services/database/login/login.service';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-  @Input() gifId: string = '';
+  @Input() gifID: string = '';
   
   public comments:Array<CommentDataInterface>= [];
-  likedCommentIds:Array<string>=[];
-  userId = this.loginService.fetchUserId();
+  // likedCommentIDs:Array<string>=[];
+  // userId = this.loginService.fetchUserId();
   constructor(private commentService: CommentService,private loginService:LoginService) { }
   
   ngOnInit(): void {
@@ -22,12 +22,12 @@ export class CommentsComponent implements OnInit {
       // console.log('Get comment data service:', commentBlocks);
       this.comments = commentBlocks;
       console.log('Comment Data abcd:', this.comments);
-      this.comments.forEach( (value) => {
-        this.likeChecker(value);
-      });
-      console.log("commentids",this.likedCommentIds);
+      // this.comments.forEach( (value) => {
+      //   this.likeChecker(value);
+      // });
+      // console.log("commentids",this.likedCommentIDs);
     });
-    this.commentService.getCommentsByGif(this.gifId);
+    this.commentService.getCommentsByGif(this.gifID);
 
    
     
@@ -45,18 +45,18 @@ export class CommentsComponent implements OnInit {
   //   }
   // }
 
-  likeChecker(comment:CommentDataInterface){
-    console.log("cooment liker id",comment.likerIDs);
-    console.log("comment obj", comment);
+  // likeChecker(comment:CommentDataInterface){
+  //   console.log("cooment liker id",comment.likerIDs);
+  //   console.log("comment obj", comment);
     
-    for(let i =0;i<comment.likerIDs.length;i++){
-      if(comment.likerIDs[i] === this.userId){
-        this.likedCommentIds.push(comment.commentID);
-      }
-      console.log(comment.likerIDs,this.userId,comment.commentID);
-    }
-    console.log("likeDIds",this.likedCommentIds);
+  //   for(let i =0;i<comment.likerIDs.length;i++){
+  //     if(comment.likerIDs[i] === this.userId){
+  //       this.likedCommentIds.push(comment.commentID);
+  //     }
+  //     console.log(comment.likerIDs,this.userId,comment.commentID);
+  //   }
+  //   console.log("likeDIds",this.likedCommentIds);
     
-  }
+  // }
 }
 
