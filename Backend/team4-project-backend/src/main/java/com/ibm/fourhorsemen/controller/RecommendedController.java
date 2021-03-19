@@ -61,4 +61,24 @@ public class RecommendedController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
+	
+	@PostMapping("/remove")
+	public ResponseEntity<?> removeRecommended(@RequestParam String userId, @RequestBody DataBlock data) {
+		System.out.println(data);
+		try {
+			ExtendedDataBlockResponse response = new ExtendedDataBlockResponse();
+			ExtendedDataBlock resultBlock = recommendedService.removeRecommend(userId, data);
+
+			if (resultBlock != null) {
+				BeanUtils.copyProperties(resultBlock, response);
+				response.setMessage(ResponseMessages.SUCCESS);
+			} else {
+				response.setMessage(ResponseMessages.RECOMMENDATION_NOT_EXISTS);
+			}
+			return ResponseEntity.ok(response);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
 }

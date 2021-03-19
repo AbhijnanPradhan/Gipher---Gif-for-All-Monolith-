@@ -1,31 +1,24 @@
-<app-header 
-[searchEnabler]='headerFalseSetter'
-[profileEnabler]='headerFalseSetter'
-[favoriteEnabler]='headerFalseSetter'
-[recommendEnabler]='headerFalseSetter'
-[homeEnabler]='headerFalseSetter'></app-header>
+<app-header [searchEnabler]='headerFalseSetter' [profileEnabler]='headerFalseSetter' [favoriteEnabler]='headerFalseSetter' [recommendEnabler]='headerFalseSetter' [homeEnabler]='headerFalseSetter'></app-header>
 <div class="bootstrap-wrapper">
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="container text-center">
-                <img src="/assets/Images/login.jpg"
-                class="img-fluid" alt="login icon"
-                style="width:100px"/>
-                <h1>Login Form</h1>
-                <form (ngSubmit)="onSubmit()">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Username</mat-label>
-                        <input [(ngModel)]="login.username" required name="username" type="text" matInput/>
-                    </mat-form-field><br>
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Password</mat-label>
-                        <input [(ngModel)]="login.password" required name="password" type="password" matInput/>
-                    </mat-form-field>
-                    <div class="container text-center">
-                        <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Login</button>
-                        <button type="signUp" mat-raised-button color="accent" (click)="onSignUp()">Sign Up</button>
-                    </div>
+                    <img src="/assets/Images/login.jpg" class="img-fluid" alt="login icon" style="width:100px" />
+                    <h1>Login Form</h1>
+                    <form (ngSubmit)="onSubmit()">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input [(ngModel)]="login.username" required name="username" type="text" matInput/>
+                        </mat-form-field><br>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input [(ngModel)]="login.password" required name="password" type="password" matInput/>
+                        </mat-form-field>
+                        <div class="container text-center">
+                            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Login</button>
+                            <button type="signUp" mat-raised-button color="accent" (click)="onSignUp()">Sign Up</button>
+                        </div>
 
                     <div class="center " style="margin-top: 40px; margin-bottom: 60px;" *ngIf="errorText">
                         <p style="color:red ">
@@ -35,6 +28,5 @@
                 </form>
             </div>
         </div>
-    </div>
     </div>
 </div>
