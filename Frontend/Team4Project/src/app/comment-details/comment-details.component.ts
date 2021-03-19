@@ -13,32 +13,34 @@ export class CommentDetailsComponent implements OnInit {
   
   likeStatus: boolean = false;//this.likeChecker(this.comment.likerIDs);
   userId: string = this.loginService.fetchUserId()+'';
-  commentId: string = '';
+  commentID: string = '';
   constructor(private commentService:CommentService, private loginService:LoginService) { }
 
   ngOnInit(): void {
+    this.likeStatus = this.likeChecker(this.comment.likerIDs);
     console.log("commentId",this.comment.commentID);
     this.likeStatus = this.likeChecker(this.comment.likerIDs);
-    this.commentId=this.comment.commentID;
+    this.commentID=this.comment.commentID;
     console.log("likeStatus",this.likeStatus);
     
   }
 
-  liked(commentId:string){
+  liked(){
     console.log("Clicked on like!");
     this.likeStatus = !this.likeStatus;
     if(this.likeStatus){
-      console.log("like added",this.commentId);
-      this.commentService.addLikeToComment(this.commentId);
+      console.log("like added",this.commentID);
+      this.commentService.addLikeToComment(this.commentID);
     }else{
-      console.log("like removed",this.commentId);
-      this.commentService.removeLikeFromComment(this.commentId);
+      console.log("like removed",this.commentID);
+      this.commentService.removeLikeFromComment(this.commentID);
     }
   }
 
   likeChecker(likers:Array<string>):boolean{
-    for(let liker in likers){
-      if(liker === this.userId){
+    console.log("likerIds",likers,this.userId)
+    for(let i = 0; i < likers.length ; i++){
+      if(likers[i] === this.userId){
         return true;
       }
     }
