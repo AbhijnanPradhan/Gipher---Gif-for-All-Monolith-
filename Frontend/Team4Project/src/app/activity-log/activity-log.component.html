@@ -1,0 +1,5 @@
+<mat-card width="90%">
+    <br/>
+    <h3><b>Your Activity Log</b></h3> <br/>
+    <app-activity-log-details *ngFor='let comment of userComments' [comment]='comment'></app-activity-log-details>
+</mat-card>

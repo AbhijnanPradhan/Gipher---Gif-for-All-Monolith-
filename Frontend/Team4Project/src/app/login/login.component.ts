@@ -10,6 +10,7 @@ import { RouterService } from '../services/router.service';
 })
 export class LoginComponent implements OnInit {
   headerFalseSetter: boolean = false;
+  errorText: boolean =false;
   errorMessage:string='';
   login = {
     username: '',
@@ -21,8 +22,11 @@ export class LoginComponent implements OnInit {
     this.loginService.getMessageSubject().subscribe(message => {
       if (message == "Success")
         this.routerService.routeToHome();
-      else
+      else{
           this.errorMessage=message.toString();
+          this.errorText = true;
+        }
+
     })
   }
 

@@ -40,6 +40,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { CommentDetailsComponent } from './comment-details/comment-details.component';
 import { GifDetailsService } from './services/database/gif_details/gif-details.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivityLogComponent } from './activity-log/activity-log.component';
+import { ActivityLogDetailsComponent } from './activity-log-details/activity-log-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CardDetailsComponent,
     CardComponent,
     CommentsComponent,
-    CommentDetailsComponent
+    CommentDetailsComponent,
+    ActivityLogComponent,
+    ActivityLogDetailsComponent
   ],
   imports: [
     BrowserModule,

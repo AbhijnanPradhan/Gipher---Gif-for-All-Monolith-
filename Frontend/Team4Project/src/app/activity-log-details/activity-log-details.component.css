@@ -1,0 +1,16 @@
+.showGif{
+    position: absolute;
+    top: 10%;
+    left: 80%;
+
+}
+.showGif a img{
+    width:40%; 
+    height:40%;
+    min-width: 100px;
+    min-height: 100px;
+}
+.activityText{
+    width: 70%;
+    word-wrap: break-word;
+}
