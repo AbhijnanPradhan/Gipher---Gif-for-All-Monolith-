@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SearchResultComponent } from './search-result.component';
 
 describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
   let fixture: ComponentFixture<SearchResultComponent>;
-
+  let h2:HTMLElement;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchResultComponent ]
+      declarations: [ SearchResultComponent ],
+      imports:[ HttpClientTestingModule, HttpTestingController]
     })
     .compileComponents();
   });
@@ -19,7 +20,10 @@ describe('SearchResultComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+  it('create paragraph',()=>{
+    expect(h2.textContent).toContain(`${component.searchString}`);
+  })
 });
