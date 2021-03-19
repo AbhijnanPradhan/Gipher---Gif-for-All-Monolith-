@@ -1,16 +1,30 @@
 <mat-card  class="commentMain">
     <div class="activityText">
-    <h4>You commented:<i>{{comment.comment}}</i></h4>
+    <h4><i>{{comment.comment}}</i></h4>
     <br/>
     <br />
-    <table>
+    <table class="commentCardTable">
         <tr>
             <td>{{comment.likes}} people liked you comment.</td>
+            <td>&nbsp;<a (click)='inputShower()' matTooltip="Click to edit comment">Edit Comment</a>&nbsp;</td>
+            <td>&nbsp;<a (click)='removeComment()' matTooltip="Click to remove comment">Remove Comment</a>&nbsp;</td>
+        </tr>
+        <tr *ngIf='showInput'>
+            <td colspan="3">
+                <br/>
+                <mat-form-field class="fullWidth">
+                    <mat-label>Give new comment</mat-label>
+                    <textarea matInput placeholder="What ever you feel like!" aria-label="editComment" name='editCommentString' [(ngModel)]='editCommentString' matTooltip="Click and start typing!"></textarea>
+                </mat-form-field><br />
+                <button mat-raised-button color="basic" (click)="editComment()">Edit</button>&nbsp;
+                <button mat-raised-button color="basic" (click)="inputHider()">Hide</button>
+                <p style="color: rgba(230, 7, 63, 0.801); background-color: wheat;">{{commentMsg}}</p>
+            </td>
         </tr>
     </table>
     </div>
     <div class="showGif">
-        <a [href]="gifData.data.url" target="_blank"><img [src]="gifData.data.images.downsized.url"></a>
+        <a (click)='cardDetailsShower()'><img [src]="gifData.data.images.downsized.url"></a>
     </div>
 </mat-card>
 &nbsp;
