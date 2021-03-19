@@ -12,13 +12,13 @@ import { RouterService } from '../services/router.service';
 })
 export class SignUpComponent implements OnInit {
   headerFalseSetter: boolean = false;
-  username = new FormControl('', [Validators.required]);
-  password = new FormControl('', [Validators.required]);
-  confirmPassword = new FormControl('', [Validators.required]);
-  name = new FormControl('', [Validators.required]);
+  username = new FormControl('sayan18', [Validators.required]);
+  password = new FormControl('helloworld', [Validators.required]);
+  confirmPassword = new FormControl('helloworld', [Validators.required]);
+  name = new FormControl('Sayan', [Validators.required]);
   dob = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required]);
-  phone = new FormControl('', [Validators.required]);
+  email = new FormControl('sayan@ab.com', [Validators.required]);
+  phone = new FormControl('9874613129', [Validators.required]);
   gender = new FormControl();
 
   genderList: string[] = ['Female', 'Male', 'None', 'Rather not say'];
@@ -53,8 +53,9 @@ export class SignUpComponent implements OnInit {
     else {
       let today = new Date(Date.now());
       this.user = new UserInterface();
-      this.user.maker(this.username.value, this.name.value, this.email.value, this.gender.value, this.phone.value, this.dob.value, today, this.password.value);
-      this.loginService.signUp(this.user).subscribe(
+      this.user.maker(this.username.value, this.name.value, this.email.value, this.gender.value, this.phone.value, this.dob.value, today);
+      console.log('Creating user', this.user);
+      this.loginService.signUp(this.user, this.password.value).subscribe(
         data => {
           if (data.message == 'Success') {
             this.showErrorMessage("Registration is successful");

@@ -13,8 +13,8 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
-  signUp(user: UserInterface): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/user/register', user, {
+  signUp(user: UserInterface, password: string): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/user/register?password=' + password, user, {
       headers: {
         'Content-Type': 'application/json',
       }
