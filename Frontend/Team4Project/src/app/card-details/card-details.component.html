@@ -22,9 +22,9 @@
     <p style="margin-top: 30px;">Recommended by {{recommendedCount}} users</p>
 </div>
 <div class="commentBoi">
-    <h2>Created by:</h2>
-    <h3>{{gifDetails.data.user.username}}</h3>
-    <a [href]="gifDetails.data.user.profile_url" target="_blank"><img [src]="gifDetails.data.user.avatar_url" width="100px" height="100px"></a>
+    <h2 *ngIf="gifDetails.data.user!=null">Created by:</h2>
+    <h3 *ngIf="gifDetails.data.user!=null">{{gifDetails.data.user.username}}</h3>
+    <a *ngIf="gifDetails.data.user!=null" [href]="gifDetails.data.user.profile_url" target="_blank"><img [src]="gifDetails.data.user.avatar_url" width="100px" height="100px"></a>
     <br />
 
     <hr />

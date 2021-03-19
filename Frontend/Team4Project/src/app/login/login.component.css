@@ -15,3 +15,7 @@
 button{
     margin:5px;
 }
+
+error-div{
+    border:2px solid red;
+}
