@@ -23,7 +23,7 @@ describe('SearchResultComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('create paragraph',()=>{
-    expect(h2.textContent).toContain(`${component.searchString}`);
+  it('create header2 ',()=>{
+    expect(h2.title).toContain(`${component.searchString}`);
   })
 });
