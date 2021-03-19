@@ -19,6 +19,8 @@ export class CommentService {
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', 'http://localhost:8080')
     .set('Authorization', `Bearer ${this.bearerToken}`);
+  // private headers2 = new HttpHeaders()
+  // .set('Authorization', `Bearer ${this.bearerToken}`);
 
   constructor(private http: HttpClient,private loginService: LoginService) { }
 
@@ -64,9 +66,9 @@ export class CommentService {
   }
 
   //@PostMapping("/remove")
-  removeComment(commentId:string){
+  removeComment(removeCommentBlock: CommentDataInterface){
     // @RequestParam String commentId,@RequestParam String userId
-    this.http.post<any>(`http://localhost:8080/comment/remove?commentId=${commentId}&userId=${this.userId}`, { headers: this.headers })
+    this.http.post<any>(`http://localhost:8080/comment/remove`, removeCommentBlock ,{ headers: this.headers })
     .subscribe(data => {
       console.log('Remove Comments response', data);
       this.messageSubject.next(data.message);
@@ -90,12 +92,12 @@ export class CommentService {
   }
 
   //@PostMapping("/edit")
-  editComment(commentId:string,comment:string){
+  editComment(editCommentBlock: CommentDataInterface){
     // @RequestParam String commentId,@RequestParam String userId,@RequestParam String comment
-    console.log("comment",comment);
+    console.log("comment",editCommentBlock.comment);
     console.log(this.bearerToken);
     
-    this.http.post<any>(`http://localhost:8080/comment/edit?commentId=${commentId}&userId=${this.userId}&comment=`+comment, { headers: this.headers })
+    this.http.post<any>(`http://localhost:8080/comment/edit`, editCommentBlock , { headers: this.headers })
     .subscribe(data => {
       console.log('Edit Comments response', data);
       this.messageSubject.next(data.message);
@@ -120,11 +122,11 @@ export class CommentService {
   }
 
   // @PostMapping("/addLike")
-  addLikeToComment(commentId:string){
+  addLikeToComment(likedCommentBlock: CommentDataInterface){
     // @RequestParam String commentId,@RequestParam String likerId
     console.log("Bearer token", this.bearerToken);
     
-    this.http.post<any>(`http://localhost:8080/comment/addLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers })
+    this.http.post<any>(`http://localhost:8080/comment/addLike?likerId=${this.userId}`, likedCommentBlock ,{ headers: this.headers })
     .subscribe(data => {
       console.log('Add like to Comments response', data);
       this.messageSubject.next(data.message);
@@ -148,9 +150,9 @@ export class CommentService {
   }
 
   // @PostMapping("/removeLike")
-  removeLikeFromComment(commentId:string){
+  removeLikeFromComment(unlikedCommentBlock: CommentDataInterface){
     // @RequestParam String commentId,@RequestParam String likerId
-    this.http.post<any>(`http://localhost:8080/comment/removeLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers })
+    this.http.post<any>(`http://localhost:8080/comment/removeLike?likerId=${this.userId}`,unlikedCommentBlock, { headers: this.headers })
     .subscribe(data => {
       console.log('Add like to Comments response', data);
       this.messageSubject.next(data.message);
