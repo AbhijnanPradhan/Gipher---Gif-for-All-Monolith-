@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { DataBlock } from '../interfaces/ApiDataInterface';
+import { FavouriteService } from '../services/database/favourites/favourite.service';
 import { RecommendedService } from '../services/database/recommended/recommended.service';
 import { RouterService } from "../services/router.service"
 
@@ -16,7 +17,7 @@ export class CardComponent implements OnInit, OnChanges {
   @Input() dataArray: Array<DataBlock> = [];
   @Input() columnCount: Number = 3;
 
-  constructor(private recommendedService: RecommendedService, private router: RouterService) { }
+  constructor(private favouriteService:FavouriteService,private recommendedService: RecommendedService, private router: RouterService) { }
 
   ngOnChanges(): void {
     console.log('change in card');
@@ -37,7 +38,7 @@ export class CardComponent implements OnInit, OnChanges {
 
   addFavourite(data: DataBlock) {
     console.log("add favourite", data);
-
+    this.favouriteService.addFavourite(data);
   }
 
   addRecommended(data: DataBlock) {
