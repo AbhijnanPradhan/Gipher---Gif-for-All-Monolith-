@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { RecommendedComponent } from './recommended.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { RecommendedService } from '../services/database/recommended/recommended.service';
 
 describe('RecommendedComponent', () => {
   let component: RecommendedComponent;
@@ -8,7 +10,9 @@ describe('RecommendedComponent', () => {
   let h2:HTMLElement;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecommendedComponent,HttpClientTestingModule, HttpTestingController ]
+      declarations: [ RecommendedComponent ],
+      imports:[HttpClientTestingModule,RouterTestingModule ],
+      providers:[RecommendedService]
     })
     .compileComponents();
   });
@@ -23,6 +27,6 @@ describe('RecommendedComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should have header2', () => {
-    expect(h2.textContent).toContain(String);
+    expect(h2.title).toContain('Recommended');
   });
 });

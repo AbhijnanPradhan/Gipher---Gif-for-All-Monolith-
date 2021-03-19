@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { SearchResultComponent } from './search-result.component';
 
 describe('SearchResultComponent', () => {
@@ -9,7 +9,7 @@ describe('SearchResultComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ SearchResultComponent ],
-      imports:[ HttpClientTestingModule, HttpTestingController]
+      imports:[ HttpClientTestingModule]
     })
     .compileComponents();
   });
