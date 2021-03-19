@@ -35,6 +35,7 @@ public class UserService {
 				return true;
 			}
 		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
