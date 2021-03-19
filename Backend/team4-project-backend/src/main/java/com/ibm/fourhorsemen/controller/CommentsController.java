@@ -96,9 +96,10 @@ public class CommentsController {
 	}
 	
 	@PostMapping("/remove")
-	public ResponseEntity<?> removeComment(@RequestParam String commentId,@RequestParam String userId){
+	public ResponseEntity<?> removeComment(@RequestBody ExtendedCommentBlock data){
 		try {
-			int response = commentService.removeComment(commentId,userId);
+			String commentId = data.getCommentID();
+			int response = commentService.removeComment(commentId,data.getUserID());
 			/** 
 			 * response 0 - userId not match
 			 * response 1 - successful
@@ -121,10 +122,10 @@ public class CommentsController {
 	}
 	
 	@PostMapping("/edit")
-	public ResponseEntity<?> editComment(@RequestParam String commentId,@RequestParam String userId,@RequestParam String comment){
+	public ResponseEntity<?> editComment(@RequestBody ExtendedCommentBlock data){
 		try {
-			String commentA = String.join(" ",comment.split("~"));
-			int response = commentService.editComment(commentId,userId,commentA);
+			String commentId = data.getCommentID();
+			int response = commentService.editComment(commentId,data.getUserID(),data.getComment());
 			/** 
 			 * response 0 - userId not match
 			 * response 1 - successful
@@ -147,9 +148,10 @@ public class CommentsController {
 	}
 	
 	@PostMapping("/addLike")
-	public ResponseEntity<?> addLikeToComment(@RequestParam String commentId,@RequestParam String likerId){
+	public ResponseEntity<?> addLikeToComment(@RequestBody ExtendedCommentBlock data,@RequestParam String likerId){
 		try {
-			int response = commentService.addLikeToComment(commentId, likerId);
+			String commentId = data.getCommentID();
+			int response = commentService.addLikeToComment(commentId,likerId);
 			/** 
 			 * response 0 - Liker Id already present
 			 * response 1 - successful
@@ -172,8 +174,9 @@ public class CommentsController {
 	}
 	
 	@PostMapping("/removeLike")
-	public ResponseEntity<?> removeLikeFromComment(@RequestParam String commentId,@RequestParam String likerId){
+	public ResponseEntity<?> removeLikeFromComment(@RequestBody ExtendedCommentBlock data,@RequestParam String likerId){
 		try {
+			String commentId = data.getCommentID();
 			int response = commentService.removeLikeFromComment(commentId, likerId);
 			/** 
 			 * response 0 - Liker Id already present
@@ -195,7 +198,6 @@ public class CommentsController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
 	
 
 }

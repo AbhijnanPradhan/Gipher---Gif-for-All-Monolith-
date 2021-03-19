@@ -30,13 +30,15 @@ export class ActivityLogDetailsComponent implements OnInit {
       this.commentMsg = "Please type new comment before posting!";
     } else {
       //userId being given inside the service
-      this.commentService.editComment(this.comment.commentID,this.editCommentString.split(" ").join("~"));
+      let editedComment=this.comment;
+      editedComment.comment = this.editCommentString;
+      this.commentService.editComment(editedComment);
       this.commentMsg = "";
     }
   }
   removeComment(){
     if(confirm("Are you sure you want to delete the comment?"))
-      this.commentService.removeComment(this.comment.commentID);
+      this.commentService.removeComment(this.comment);
   }
   inputShower(){
     this.showInput=true;
