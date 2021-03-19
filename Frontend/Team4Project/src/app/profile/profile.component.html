@@ -1,30 +1,47 @@
 <app-header [searchEnabler]='showSearchBar' [profileEnabler]='showProfileLink'></app-header>
 <div>
     <img [src]='coverImgUrl' class="coverImg" />
-    <div>
-        <img [src]='profileAvatar' class="profileImg" />
-    </div>
+    <!-- <div class="profileText">
+        <br/><br/>Welcome!<br/><br/><br/>
+        <i style="color: darkblue;">{{user.userId}}</i>
+    </div> -->
 </div>
 <div class="profileContent">
-    <h2>{{user.userId}}</h2>
+    <div class="profileText">
+        <br/><br/>Welcome!<br/><br/><br/>
+        <i style="color: darkblue;">{{user.userId}}</i>
+    </div>
     <div class="profileTable">
         <table>
+            <h3><u><b>Your Profile Information:</b></u></h3>
             <tr>
-                <th>Name</th>
-                <td>{{user.name}}</td>
+                <th>Name</th><td>{{user.name}}</td>
             </tr>
             <tr>
-                <th>Date of Birth</th>
-                <td>{{user.dateOfBirth.getDate()}}-{{months[user.dateOfBirth.getMonth()]}}-{{user.dateOfBirth.getFullYear()}}</td>
+                <th>Date of Birth</th><td>{{user.dateOfBirth.getDate()}}-{{months[user.dateOfBirth.getMonth()]}}-{{user.dateOfBirth.getFullYear()}}</td>
             </tr>
             <tr>
-                <th>Age</th>
-                <td>{{userAge}}</td>
+                <th>Age</th><td>{{userAge}}</td>
+            </tr>
+            <tr>
+                <th>Email</th><td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <th>Gender</th><td>{{user.gender}}</td>
+            </tr>
+            <tr>
+                <th>Phone</th><td>{{user.phone}}</td>
+            </tr>
+            <tr>
+                <th>Joined us on</th><td>{{user.dateAdded.getDate()}}-{{months[user.dateAdded.getMonth()]}}-{{user.dateAdded.getFullYear()}}</td>
             </tr>
         </table>
     </div>
 </div>
-
+<div class="activityLog">
+    <app-activity-log></app-activity-log>
+    <br/><hr/>
+</div>
 <div class="bottomDiv">
     <p style="display: none;">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
 </div>
