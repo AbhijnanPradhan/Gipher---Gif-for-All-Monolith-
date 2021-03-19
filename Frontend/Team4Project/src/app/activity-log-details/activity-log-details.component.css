@@ -14,3 +14,14 @@
     width: 70%;
     word-wrap: break-word;
 }
+.commentCardTable{
+    text-align: center;
+    padding: 1px;
+    width: 100%;
+}
+.fullWidth{
+    width: 90%;
+}
+.commentMain:hover{
+    background-color: rgba(179, 187, 202, 0.514);
+}
