@@ -19,6 +19,8 @@ export class CommentService {
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', 'http://localhost:8080')
     .set('Authorization', `Bearer ${this.bearerToken}`);
+  private headers2 = new HttpHeaders()
+  .set('Authorization', `Bearer ${this.bearerToken}`);
 
   constructor(private http: HttpClient,private loginService: LoginService) { }
 
@@ -124,7 +126,7 @@ export class CommentService {
     // @RequestParam String commentId,@RequestParam String likerId
     console.log("Bearer token", this.bearerToken);
     
-    this.http.post<any>(`http://localhost:8080/comment/addLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers })
+    this.http.post<any>(`http://localhost:8080/comment/addLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers2 })
     .subscribe(data => {
       console.log('Add like to Comments response', data);
       this.messageSubject.next(data.message);
@@ -150,7 +152,7 @@ export class CommentService {
   // @PostMapping("/removeLike")
   removeLikeFromComment(commentId:string){
     // @RequestParam String commentId,@RequestParam String likerId
-    this.http.post<any>(`http://localhost:8080/comment/removeLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers })
+    this.http.post<any>(`http://localhost:8080/comment/removeLike?commentId=${commentId}&likerId=${this.userId}`, { headers: this.headers2 })
     .subscribe(data => {
       console.log('Add like to Comments response', data);
       this.messageSubject.next(data.message);
