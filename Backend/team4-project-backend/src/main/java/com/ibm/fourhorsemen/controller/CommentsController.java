@@ -123,7 +123,8 @@ public class CommentsController {
 	@PostMapping("/edit")
 	public ResponseEntity<?> editComment(@RequestParam String commentId,@RequestParam String userId,@RequestParam String comment){
 		try {
-			int response = commentService.editComment(commentId,userId,comment);
+			String commentA = String.join(" ",comment.split("~"));
+			int response = commentService.editComment(commentId,userId,commentA);
 			/** 
 			 * response 0 - userId not match
 			 * response 1 - successful

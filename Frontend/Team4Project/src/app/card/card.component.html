@@ -10,10 +10,10 @@
                             <!-- <a (click)="goToCardDetails(data.id)">
                                 <fa-icon [icon]="faInfo" class='fab fa-angular fa-2x'></fa-icon>
                             </a>&nbsp;&nbsp;&nbsp; -->
-                            <a class="favorite" (click)="addFavourite(data)">
+                            <a class="favorite" (click)="addFavourite(data)" matTooltip="Add to favorites">
                                 <fa-icon [icon]="faFav" class='fab fa-angular fa-2x'></fa-icon>
                             </a>&nbsp;&nbsp;&nbsp;
-                            <a class="recommend" (click)="addRecommended(data)">
+                            <a class="recommend" (click)="addRecommended(data)" matTooltip="Add to Recommended">
                                 <fa-icon [icon]="faRecommend" class='fab fa-angular fa-2x'></fa-icon>
                             </a>
                         </td>

@@ -92,7 +92,10 @@ export class CommentService {
   //@PostMapping("/edit")
   editComment(commentId:string,comment:string){
     // @RequestParam String commentId,@RequestParam String userId,@RequestParam String comment
-    this.http.post<any>(`http://localhost:8080/comment/edit?commentId=${commentId}&userId=${this.userId}&comment=${comment}`, { headers: this.headers })
+    console.log("comment",comment);
+    console.log(this.bearerToken);
+    
+    this.http.post<any>(`http://localhost:8080/comment/edit?commentId=${commentId}&userId=${this.userId}&comment=`+comment, { headers: this.headers })
     .subscribe(data => {
       console.log('Edit Comments response', data);
       this.messageSubject.next(data.message);
