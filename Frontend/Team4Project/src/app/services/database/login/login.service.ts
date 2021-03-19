@@ -56,6 +56,7 @@ export class LoginService {
 
   logOut() {
     localStorage.removeItem("token");
+    console.log("token remove");
     return true;
   }
 
