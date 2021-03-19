@@ -43,3 +43,17 @@ ul {
 .logo:hover{
   background-color: rgb(129, 127, 127);
 }
+
+.helloUser{
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+  /* background-color: palevioletred; */
+}
+.helloUser:hover{
+  background-color: rgb(129, 127, 127);
+}
+.helloUser h4{
+  top: 40%;
+  color: whitesmoke;
+}
