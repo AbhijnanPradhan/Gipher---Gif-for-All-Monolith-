@@ -9,7 +9,7 @@ export class UserInterface {
     dateAdded: Date = new Date();
     role:string = 'ROLE_ADMIN';
 
-    maker(userId: string, name: string, email: string, gender: string, phone: string, dateOfBirth: Date, dateAdded: Date, password: string) {
+    maker(userId: string, name: string, email: string, gender: string, phone: string, dateOfBirth: Date, dateAdded: Date) {
         this.userId = userId;
         this.name = name;
         this.email = email;

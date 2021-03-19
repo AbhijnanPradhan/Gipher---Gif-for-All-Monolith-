@@ -30,8 +30,9 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@RequestBody User user) {
+	public ResponseEntity<?> registerUser(@RequestBody User user, @RequestParam String password) {
 		try {
+			user.setPassword(password);
 			if (userService.registerUser(user)) {
 				UserResponse response = new UserResponse();
 				BeanUtils.copyProperties(user, response);
