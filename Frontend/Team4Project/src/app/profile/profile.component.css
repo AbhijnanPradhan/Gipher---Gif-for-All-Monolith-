@@ -6,19 +6,20 @@
 }
 .profileText{
     position: fixed;
-    top: 15%;
+    top: 10%;
     left: 25%;
     width: 50%;
     min-width: 300px;
     height: 15%;
-    font-size: 300%;
+    font-size: 200%;
     background-color: whitesmoke;
     text-align: center;
     word-wrap: break-word;
+    vertical-align: middle;
 }
 .profileContent{
     position: fixed;
-    top: 30%;
+    top: 25%;
     left: 25%;
     right: 25%;
     width: 50%;
@@ -28,7 +29,7 @@
 
 }
 .profileTable{
-    border: 2px solid rgba(31, 28, 28, 0.089);
+    /* border: 2px solid rgba(31, 28, 28, 0.089); */
     width: 100%;
 }
 .profileTable table{
