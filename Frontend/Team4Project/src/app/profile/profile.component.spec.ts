@@ -23,7 +23,7 @@ describe('ProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should create', () => {
-    expect(i.style).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(b.textContent).toEqual("Welcome!");
+  // });
 });
