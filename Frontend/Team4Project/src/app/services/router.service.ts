@@ -33,4 +33,7 @@ export class RouterService {
     this.router.navigate(['signup']);
 
   }
+  routeToHomeRefresh(){
+    this.router.navigate(['home', {refresh: true}]);
+  }
 }

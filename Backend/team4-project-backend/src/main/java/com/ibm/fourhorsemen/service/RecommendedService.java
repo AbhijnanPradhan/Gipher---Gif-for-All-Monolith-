@@ -58,13 +58,13 @@ public class RecommendedService {
 		UserDataBlockMap map = new UserDataBlockMap(userId, dataBlock.getId(), TYPE_MAP_RECOMMEND);
 		if (userDataMapRepository.existsById(new UserDataBlockMapId(userId, dataBlock.getId(), TYPE_MAP_RECOMMEND))) {
 			try {
+				// removing the mapping of gifId and userId
+				userDataMapRepository.delete(map);
+				
 				// decrementing recommended count by 1
 				ExtendedDataBlock block = dataRepository.findById(dataBlock.getId()).get();
 				block.setRecommendCount(block.getRecommendCount() - 1);
 				resultBlock = dataRepository.save(block);
-
-				// removing the mapping of gifId and userId
-				userDataMapRepository.delete(map);
 			} catch (NoSuchElementException e) {
 				System.out.println("No such element");
 			}
@@ -73,10 +73,7 @@ public class RecommendedService {
 	}
 
 	public List<ExtendedDataBlock> getRecommends(String userId) {
-		List<UserDataBlockMap> userDataBlockMaps = userDataMapRepository.findByUserIdType(userId, TYPE_MAP_RECOMMEND);
-		List<String> gifIds = new ArrayList<>();
-		for (UserDataBlockMap map : userDataBlockMaps)
-			gifIds.add(map.getGifId());
+		List<String> gifIds = userDataMapRepository.findGifIdsByType(TYPE_MAP_RECOMMEND);
 		Iterable<ExtendedDataBlock> blockIterable = dataRepository.findAllById(gifIds);
 		List<ExtendedDataBlock> result = new ArrayList<ExtendedDataBlock>();
 		blockIterable.forEach(result::add);

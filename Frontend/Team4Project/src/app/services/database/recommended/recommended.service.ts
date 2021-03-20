@@ -11,7 +11,7 @@ export class RecommendedService {
   private recommendedSubject: BehaviorSubject<Array<DataBlock>> = new BehaviorSubject(new Array<DataBlock>());
   private messageSubject: BehaviorSubject<String> = new BehaviorSubject(new String());
   private recommendModifySubject: BehaviorSubject<String> = new BehaviorSubject(new String());
-  private recommends: Array<DataBlock> = [];
+  private recommends: Array<any> = [];
 
 
   private bearerToken = this.loginService.fetchToken();
@@ -28,7 +28,8 @@ export class RecommendedService {
       .subscribe(data => {
         console.log('GetRecommended response', data);
         this.recommends = data;
-        this.recommendedSubject.next(this.recommends.sort());
+        this.recommends.sort((a, b) => b.recommendCount - a.recommendCount)
+        this.recommendedSubject.next(this.recommends);
       }, error => {
         if (error.status == 401) {
           this.routerService.routeToLogin();
@@ -36,15 +37,15 @@ export class RecommendedService {
       });
   }
 
-  deleteRecommended(data:DataBlock){
+  deleteRecommended(data: DataBlock) {
     //you can try this code
     // this.http.post<any>(`http://localhost:8080/recommended/remove?userId=${this.userId}`, data, { headers: this.headers })
     // .subscribe(data=>{
-      // this.messageSubject.next(data.message);
-      // if(data.message=="Success"){
-      //   this.favourites.push(data);
-      //   this.favouriteSubject.next(this.favourites);
-      //}
+    // this.messageSubject.next(data.message);
+    // if(data.message=="Success"){
+    //   this.favourites.push(data);
+    //   this.favouriteSubject.next(this.favourites);
+    //}
     //);
   }
   addRecommended(data: DataBlock) {
@@ -56,7 +57,12 @@ export class RecommendedService {
         console.log('AddRecommended response', data);
         this.messageSubject.next(data.message);
         if (data.message == "Success") {
-          this.recommends.push(data);
+          let pos = this.recommends.findIndex(x => x.id === data.id);
+          if (pos > 0)
+            this.recommends[pos].recommendCount++;
+          else
+            this.recommends.push(data)
+          this.recommends.sort((a, b) => b.recommendCount - a.recommendCount)
           this.recommendedSubject.next(this.recommends);
           this.recommendModifySubject.next("added");
         }
@@ -77,7 +83,10 @@ export class RecommendedService {
         console.log('RemoveRecommended response', data);
         this.messageSubject.next(data.message);
         if (data.message == "Success") {
-          this.recommends.splice(this.recommends.indexOf(data), 1);
+          if (data.recommendCount == 0) {
+            this.recommends = this.recommends.filter(item => item.id != data.id);
+            this.recommends.sort((a, b) => b.recommendCount - a.recommendCount)
+          }
           this.recommendedSubject.next(this.recommends);
           this.recommendModifySubject.next("removed");
         }

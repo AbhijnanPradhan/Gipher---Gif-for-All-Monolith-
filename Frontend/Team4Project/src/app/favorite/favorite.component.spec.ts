@@ -1,14 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { FavoriteComponent } from './favorite.component';
 
 describe('FavoriteComponent', () => {
   let component: FavoriteComponent;
   let fixture: ComponentFixture<FavoriteComponent>;
+  let h2:HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FavoriteComponent ]
+      declarations: [ FavoriteComponent ],
+      imports: [
+        HttpClientTestingModule,
+      ]
     })
     .compileComponents();
   });
@@ -19,7 +24,19 @@ describe('FavoriteComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(FavoriteComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    h2 = fixture.nativeElement.querySelector('h2');
+  });
+
+  it('check favourites header', () => {
+    expect(h2.textContent).toEqual("Your Favorites");
+  });
+
 });
