@@ -21,4 +21,7 @@ public interface UserDataMapRepository extends CrudRepository<UserDataBlockMap, 
 
 	@Query("select udp from UserDataBlockMap udp where udp.userId = :user_id and udp.type = :type")
 	List<UserDataBlockMap> findByUserIdType(@Param("user_id") String userId, @Param("type") String type);
+
+	@Query("select udp.gifId from UserDataBlockMap udp where udp.type = :type")
+	List<String> findGifIdsByType(@Param("type") String type);
 }

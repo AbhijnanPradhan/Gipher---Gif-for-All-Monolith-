@@ -47,15 +47,15 @@ public class FavoritesService {
 	}
 
 	@Transactional
-	public int removeFavoriteFromUser(String userId, DataBlock dataBlock) {
+	public ExtendedDataBlock removeFavoriteFromUser(String userId, DataBlock dataBlock) {
 		if (userDataMapRepository.existsById(new UserDataBlockMapId(userId, dataBlock.getId(), TYPE_MAP_FAVORITE))) {
 
 			userDataMapRepository.deleteById(new UserDataBlockMapId(userId, dataBlock.getId(), TYPE_MAP_FAVORITE));
 			// Removed From Favorites
-			return 1;
+			return dataRepository.findById(dataBlock.getId()).get();
 		}
 		// Does not exist in Favorites
-		return -1;
+		return null;
 	}
 
 	public List<ExtendedDataBlock> getAllFavoritesOfUser(String userId) {
