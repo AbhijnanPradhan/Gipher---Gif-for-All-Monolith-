@@ -12,13 +12,13 @@ import { RouterService } from '../services/router.service';
 })
 export class SignUpComponent implements OnInit {
   headerFalseSetter: boolean = false;
-  username = new FormControl('sayan18', [Validators.required]);
-  password = new FormControl('helloworld', [Validators.required]);
-  confirmPassword = new FormControl('helloworld', [Validators.required]);
-  name = new FormControl('Sayan', [Validators.required]);
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+  confirmPassword = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
   dob = new FormControl('', [Validators.required]);
-  email = new FormControl('sayan@ab.com', [Validators.required]);
-  phone = new FormControl('9874613129', [Validators.required]);
+  email = new FormControl('', [Validators.required]);
+  phone = new FormControl('', [Validators.required]);
   gender = new FormControl();
 
   genderList: string[] = ['Female', 'Male', 'None', 'Rather not say'];
