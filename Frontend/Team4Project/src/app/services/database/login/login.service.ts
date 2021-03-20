@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserInterface } from 'src/app/interfaces/UserInterface';
+import { RouterService } from '../../router.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class LoginService {
   url = "http://localhost:8080";
   private messageSubject: BehaviorSubject<String> = new BehaviorSubject(new String());
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private routerService:RouterService,private httpClient: HttpClient) { }
 
   signUp(user: UserInterface, password: string): Observable<any> {
     return this.httpClient.post('http://localhost:8080/user/register?password=' + password, user, {
@@ -22,20 +23,25 @@ export class LoginService {
   }
 
   loginUser(userId: string, password: string) {
-    this.httpClient.post<any>('http://localhost:8080/authenticate', {
+   return  this.httpClient.post<any>('http://localhost:8080/authenticate', {
       'userId': userId,
       'password': password
     }, {
       headers: {
         'Content-Type': 'application/json',
       }
-    }).subscribe(data => {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.userId);
-      this.messageSubject.next(data.message);
-    }, error => {
-      window.alert("Please check your internet");
     })
+    //================================
+    // .subscribe(data => {
+    //   localStorage.setItem("token", data.token);
+    //   localStorage.setItem("userId", data.userId);
+    //   this.messageSubject.next(data.message);
+    // }, error => {
+     
+    //     window.alert('Invalid credential');
+    //   this.messageSubject.next(error.message.toString());
+    // })
+    //====================================
   }
 
   loginStatus() {

@@ -23,8 +23,9 @@ export class LoginComponent implements OnInit {
       if (message == "Success")
         this.routerService.routeToHome();
       else{
+          //this.errorMessage=message.toString();
           this.errorMessage=message.toString();
-          this.errorText = true;
+         // this.errorText = true;
         }
 
     })
@@ -33,18 +34,25 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.log("login");
     if (this.login.username != '' && this.login.password != '') {
-      this.loginService.loginUser(this.login.username, this.login.password);
-    
-      // .subscribe(
-      //   (response:any)=>{
-      //     this.loginService.loginUser(response.token);
-      //   },error=>{
-      //     console.log('error '+error);
-      //   }
-      // )
+      this.loginService.loginUser(this.login.username, this.login.password)
+      //===============================
+      .subscribe(data => {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+        this.routerService.routeToHome();
+      //  this.messageSubject.next(data.message);
+      }, error => {
+       this.errorMessage="Invalid Credential"
+       console.log('eerror');
+        //  window.alert('Invalid credential');
+       // this.messageSubject.next(error.message.toString());
+      })
+     //=============================
     }
     else {
       console.log('error ');
+      this.errorText = true;
+      this.errorMessage="Kindly input email and password ";
     }
   }
   onSignUp(){
