@@ -30,10 +30,10 @@ export class CommentDetailsComponent implements OnInit {
     this.likeStatus = !this.likeStatus;
     if(this.likeStatus){
       console.log("like added",this.commentID);
-      this.commentService.addLikeToComment(this.commentID);
+      this.commentService.addLikeToComment(this.comment);
     }else{
       console.log("like removed",this.commentID);
-      this.commentService.removeLikeFromComment(this.commentID);
+      this.commentService.removeLikeFromComment(this.comment);
     }
   }
 

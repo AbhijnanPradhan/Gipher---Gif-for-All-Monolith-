@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
   }
   nextPage(param:string){
     switch (param) {
+      
       case 'logout':
         this.loginService.logOut();
         this.router.routeToLogin();

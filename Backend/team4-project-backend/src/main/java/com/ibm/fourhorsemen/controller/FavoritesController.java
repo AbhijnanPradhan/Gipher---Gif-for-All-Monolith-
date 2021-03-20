@@ -2,6 +2,7 @@ package com.ibm.fourhorsemen.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.fourhorsemen.controller.response.ExtendedDataBlockResponse;
+import com.ibm.fourhorsemen.controller.response.MessageResponse;
 import com.ibm.fourhorsemen.controller.response.ResponseMessages;
 import com.ibm.fourhorsemen.model.DataBlock;
 import com.ibm.fourhorsemen.model.ExtendedDataBlock;
@@ -33,6 +36,7 @@ public class FavoritesController {
 	@GetMapping("/get")
 	public ResponseEntity<List<ExtendedDataBlock>> getAllFavorites(@RequestParam String userId) {
 		try {
+			System.out.println("get method");
 			List<ExtendedDataBlock> list = favoriteService.getAllFavoritesOfUser(userId);
 			return ResponseEntity.ok(list);
 			
@@ -46,12 +50,16 @@ public class FavoritesController {
 		try {
 			if(favoriteService.addFavoriteToUser(userId, data)== null) {
 				// favorites already exists then returns string
-				return ResponseEntity.ok(ResponseMessages.FAVORITES_EXISTS);
+				return ResponseEntity.ok(new MessageResponse(ResponseMessages.FAVORITES_EXISTS));
 			}
 			// favorites added and returns status '202'
-			return ResponseEntity.ok(ResponseMessages.SUCCESS);
+			ExtendedDataBlockResponse response = new ExtendedDataBlockResponse();
+			BeanUtils.copyProperties(data, response);
+			response.setMessage(ResponseMessages.SUCCESS);
+			return ResponseEntity.ok(response);
 			
 		}catch(IllegalArgumentException e) {
+			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -61,10 +69,10 @@ public class FavoritesController {
 		try {
 			if(favoriteService.removeFavoriteFromUser(userId, data) == 1) {
 				// favorites removed
-				return ResponseEntity.ok(ResponseMessages.SUCCESS);
+				return ResponseEntity.ok(new MessageResponse(ResponseMessages.SUCCESS));
 			}
 			// favorites does not exist
-			return ResponseEntity.ok(ResponseMessages.FAVORITES_NOT_EXISTS);
+			return ResponseEntity.ok(new MessageResponse(ResponseMessages.FAVORITES_NOT_EXISTS));
 		}catch(IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}

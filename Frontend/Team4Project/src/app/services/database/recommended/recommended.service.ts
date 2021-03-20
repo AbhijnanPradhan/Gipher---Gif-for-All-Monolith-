@@ -13,6 +13,7 @@ export class RecommendedService {
   private recommendModifySubject: BehaviorSubject<String> = new BehaviorSubject(new String());
   private recommends: Array<DataBlock> = [];
 
+
   private bearerToken = this.loginService.fetchToken();
   private userId: string | null = this.loginService.fetchUserId();
   private headers = new HttpHeaders()
@@ -27,7 +28,7 @@ export class RecommendedService {
       .subscribe(data => {
         console.log('GetRecommended response', data);
         this.recommends = data;
-        this.recommendedSubject.next(this.recommends);
+        this.recommendedSubject.next(this.recommends.sort());
       }, error => {
         if (error.status == 401) {
           this.routerService.routeToLogin();

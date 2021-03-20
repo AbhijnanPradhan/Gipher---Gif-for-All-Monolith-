@@ -7,8 +7,9 @@ import { HeaderComponent } from './header.component';
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  let h4: string = ''
-
+  // choose any html tag that may be unique to your html page
+  // make a variable out of it.
+  let h4: HTMLElement;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
@@ -35,7 +36,4 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });
