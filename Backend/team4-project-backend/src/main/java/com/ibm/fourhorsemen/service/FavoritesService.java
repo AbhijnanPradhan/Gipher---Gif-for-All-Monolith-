@@ -38,7 +38,8 @@ public class FavoritesService {
 			userDataMapRepository.save(map);
 			ExtendedDataBlock block = new ExtendedDataBlock();
 			BeanUtils.copyProperties(dataBlock, block);
-			dataRepository.save(block);
+			if (!dataRepository.existsById(block.getId()))
+				dataRepository.save(block);
 			return map;
 
 		}
