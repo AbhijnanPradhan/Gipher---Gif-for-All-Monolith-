@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginService.getMessageSubject().subscribe(message => {
       if (message == "Success")
-        this.routerService.routeToHome();
+        this.routerService.routeToHomeRefresh();
       else{
           this.errorMessage=message.toString();
           this.errorText = true;
