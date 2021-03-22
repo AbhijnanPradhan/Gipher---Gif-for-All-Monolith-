@@ -55,7 +55,7 @@ export class FavouriteService {
     this.httpClient.post<any>(`http://localhost:8080/favorites/remove?userId=${this.userId}`, data, { headers: this.headers })
       .subscribe(data => {
         if (data.message == "Success") {
-          this.favourites.splice(this.favourites.indexOf(data), 1);
+          this.favourites = this.favourites.filter(item => item.id != data.id);
           this.favouriteSubject.next(this.favourites);
           console.log("Going to push removed");
           this.favouriteModifySubject.next("removed");

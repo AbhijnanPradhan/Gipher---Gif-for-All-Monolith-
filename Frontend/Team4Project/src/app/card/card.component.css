@@ -1,35 +1,54 @@
-.card{
-    width: 100%; 
+.card {
+    width: 100%;
     border: 2px solid rgba(179, 187, 202, 0.514);
     height: 90%;
 }
-.cardTable{
+
+.cardTable {
     width: 100%;
 }
-.card:hover{
-    -ms-transform: scale(1.1); /* IE 9 */
-    -webkit-transform: scale(1.1); /* Safari 3-8 */
-    transform: scale(1.1); 
+
+.card:hover {
+    -ms-transform: scale(1.1);
+    /* IE 9 */
+    -webkit-transform: scale(1.1);
+    /* Safari 3-8 */
+    transform: scale(1.1);
     background-color: rgba(31, 32, 34, 0.329);
 }
-.cardTable td{
-    text-align: center; 
+
+.cardTable td {
+    text-align: center;
     padding: 5px;
     position: absolute;
     bottom: 8px;
     right: 16px;
 }
-.cardTable a{
-    color: black;  
+
+.cardTable a {
+    color: black;
 }
 
-.cardTable .recommend{
+.cardTable .recommend {}
 
+.cardtable .favorite {}
+
+.cardTable .favorite:hover {
+    color: rgba(236, 11, 49, 0.829)
 }
-.cardtable .favorite{}
-.cardTable .favorite:hover{
-    color:rgba(236, 11, 49, 0.829)
+
+.cardTable .recommend:hover {
+    color: rgba(11, 146, 236, 0.842)
 }
-.cardTable .recommend:hover{
-    color:rgba(11, 146, 236, 0.842)
+
+.cardTable .recommend-added {
+    color: rgba(27, 105, 158, 0.842)
 }
+
+.cardtable .favorite-added {
+    color: rgba(236, 11, 49, 0.829)
+}
+
+.cardTable .favorite-added:hover {}
+
+.cardTable .recommend-added:hover {}
