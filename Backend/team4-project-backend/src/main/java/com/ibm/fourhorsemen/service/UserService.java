@@ -30,7 +30,6 @@ public class UserService {
 			if (userRepository.findById(user.getUserId()).isPresent())
 				return false;
 			else {
-				System.out.println("failed");
 				userRepository.save(user);
 				return true;
 			}
