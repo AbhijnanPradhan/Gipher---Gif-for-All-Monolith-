@@ -10,7 +10,7 @@ import { faHeart,faStar } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent implements OnInit,OnChanges {
-  @Input() searchString : string='winne';
+  @Input() searchString : string='';
   searchData = new ApiDataInterface();
   dataParts: Array<DataBlock>=[];
   limit: number = 4;
