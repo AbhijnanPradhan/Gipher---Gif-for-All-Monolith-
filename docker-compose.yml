@@ -13,6 +13,11 @@ services:
     ports:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: always
+    environment:
+      MONGO_HOST: db2
+      MYSQL_URL: jdbc:mysql://db1:3306/team4project?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      MYSQL_USERNAME: team4
+      MYSQL_PASSWORD: password
     depends_on: 
       - db1 # This service depends on mysql. Start that first.   
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
@@ -40,8 +45,10 @@ services:
       - "3306:3306"
     restart: always
     environment:
-      MYSQL_DATABASE: team4project
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: team4
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: team4project
     volumes:
       - db-data:/var/lib/mysql
     depends_on:
