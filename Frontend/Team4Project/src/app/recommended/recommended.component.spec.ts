@@ -27,7 +27,8 @@ describe('RecommendedComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  // it('should have header2', () => {
-  //   expect(h2).toMatch('Recommended');
-  // });
+  it('should have header2', () => {
+   
+    expect(h2.textContent).toEqual("Recommended");
+  });
 });

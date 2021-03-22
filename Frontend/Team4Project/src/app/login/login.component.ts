@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
-        this.routerService.routeToHome();
+        this.routerService.routeToHomeRefresh();
       //  this.messageSubject.next(data.message);
       }, error => {
        this.errorMessage="Invalid Credential"
