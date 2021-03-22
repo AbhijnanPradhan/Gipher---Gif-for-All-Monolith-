@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
     let needsRefresh = this.route.snapshot.paramMap.get('refresh');
     console.log('NEEDS REFRESH', needsRefresh)
     if (needsRefresh != null)
-      window.location.href = 'http://localhost:4200/home';
+      window.location.href = '/home';
   }
 
 
