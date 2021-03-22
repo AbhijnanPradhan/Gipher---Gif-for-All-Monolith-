@@ -14,7 +14,7 @@
                                 <fa-icon [icon]="faFav" class='fab fa-angular fa-2x'></fa-icon>
                             </a>
                             <a *ngIf="favouriteIds.indexOf(data.id)>=0" class="favorite-added" (click)="removeFavourite(data)" matTooltip="Remove from favorites">
-                                <fa-icon [icon]="faFav" class='fab fa-angular fa-2x'></fa-icon>
+                                <fa-icon [icon]="faFav" class='fab fa-angular fa-2x' style="color: rgba(236, 11, 49, 0.829);"></fa-icon>
                             </a>&nbsp;&nbsp;&nbsp;
                             <a *ngIf="recommendIds.indexOf(data.id)==-1" class="recommend" (click)="addRecommended(data)" matTooltip="Add to Recommended">
                                 <fa-icon [icon]="faRecommend" class='fab fa-angular fa-2x'></fa-icon>
