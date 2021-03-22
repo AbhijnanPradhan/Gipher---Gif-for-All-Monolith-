@@ -1,0 +1,79 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+
+version: '3.7'
+
+# Define services
+services:
+  # App backend service
+  app-server:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: Backend/team4-project-backend # Use an image built from the specified dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: always
+    environment:
+      MONGO_HOST: db2
+      MYSQL_URL: jdbc:mysql://db1:3306/team4project?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      MYSQL_USERNAME: team4
+      MYSQL_PASSWORD: password
+    depends_on: 
+      - db1 # This service depends on mysql. Start that first.   
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+      - frontend
+
+  # Frontend Service 
+  app-client:
+    build:
+      context: Frontend\Team4Project # Use an image built from the specified dockerfile 
+      dockerfile: Dockerfile
+      
+    ports:
+      - "80:80" # Map the exposed port 80 on the container to port 9090 on the host machine
+    restart: always
+    depends_on:
+      - app-server
+    networks:
+      - frontend  
+
+  # Database Service (Mysql)
+  db1:
+    image: mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: team4
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: team4project
+    volumes:
+      - db-data:/var/lib/mysql
+    depends_on:
+      - db2
+    networks:
+      - backend
+
+  db2:
+    image: mongo
+    ports:
+      - "27017-27019:27017-27019"
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: team4project
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
+      - ./mongo-volume:/data/db
+    networks:
+      - backend      
+  
+# Volumes
+volumes:
+  db-data:
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
+  frontend:    
