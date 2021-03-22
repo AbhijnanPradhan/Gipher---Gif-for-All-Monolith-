@@ -25,6 +25,7 @@ describe('HeaderComponent', () => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    h4=fixture.nativeElement.querySelector('h4');
   });
   // // use fixture.changes() if you need to detect changes after reload.
   it('should contain correct title after changes', () => {

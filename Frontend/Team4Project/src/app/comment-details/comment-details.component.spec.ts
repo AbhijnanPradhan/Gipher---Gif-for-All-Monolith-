@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommentDetailsComponent } from './comment-details.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CommentDetailsComponent', () => {
   let component: CommentDetailsComponent;
@@ -10,7 +11,7 @@ describe('CommentDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CommentDetailsComponent ],
-      imports:[HttpClientTestingModule]
+      imports:[HttpClientTestingModule,RouterTestingModule]
     })
     .compileComponents();
   });
