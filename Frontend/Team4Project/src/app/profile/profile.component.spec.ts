@@ -18,6 +18,7 @@ describe('ProfileComponent', () => {
     fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    i = fixture.nativeElement.querySelector('i');
   });
 
   it('should create', () => {
