@@ -1,23 +1,25 @@
 Sufiyan:
-	Login
-	Favorite section
+	Login - including JWT
+	Favorite section -including springboot
+	Presentation on Prezi
 
 Sayan:
 	SignUp
-	Recommendation Section
+	Recommendation Section - including springboot
+	Model designer of Backend
+	docker impl
+	backend test
 
 Abhijnan:
 	Header Page
 	Search Result Section
-	Card Details
-	Comment Section
+	Card and Card Details
+	Comments and Comment Deltails Section - including springboot
+	Activity Log(comments)
+	Profile
 
-Abhijnan and Sayan(common part):
-	
-	
 
 Team Common:
-	Activity Log
+	frontend unit tests
 	
 
-Profile
